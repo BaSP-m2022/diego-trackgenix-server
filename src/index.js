@@ -6,11 +6,12 @@ const admins = require("./data/admins.json");
 
 const app = express();
 const port = process.env.PORT || 3000;
+ 
 
 app.use(express.json());
 
 app.get("/", async (req, res) => {
-  res.send("Hello World!");
+  res.send("Bye World!");
 });
 
 app.get("/admins", (req, res) => {
