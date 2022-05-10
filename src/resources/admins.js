@@ -1,8 +1,8 @@
 import express from 'express';
 import fs from 'fs';
+import adminsList from '../data/admins.json';
 
 const router = express.Router();
-const adminsList = require('../data/admins.json');
 
 router.get('/', (req, res) => {
   const objectOfFilters = req.query;
