@@ -1,6 +1,6 @@
 const express = require('express');
-const fs = require('fs');
-const admins = require('../data/admins.json');
+const fs = require ('fs');
+const admins = require ('../data/admins.json');
 
 const router = express.Router();
 
@@ -46,4 +46,4 @@ router.delete('/delete/:id', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
