@@ -7,12 +7,11 @@ const adminsList = require('../data/admins.json');
 router.get('/', (req, res) => {
   const objectOfFilters = req.query;
   const arrayOfFiltersKeyNames = Object.getOwnPropertyNames(req.query);
-  const arrayOfFiltersValue = Object.keys(req.query);
   if (arrayOfFiltersKeyNames.length > 0) {
     const filteredAdmins = adminsList.filter((admin) => {
       let isValid = true;
-      arrayOfFiltersValue.forEach((key) => {
-        if (req.query.active) {
+      arrayOfFiltersKeyNames.forEach((key) => {
+        if (key === 'active') {
           isValid = (JSON.stringify(admin[key])).toLowerCase()
                         === objectOfFilters[key].toLowerCase();
         } else {
