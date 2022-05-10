@@ -30,14 +30,16 @@ router.get('/', (req, res) => {
 router.put('/:id', (req, res) => {
   const adminId = req.params.id;
   const adminData = req.body;
-  const adminRequired = adminsList.find((admin) => adminId === admin.id);
-  if (adminRequired) {
-    adminRequired.first_name = adminData.first_name;
-    adminRequired.last_name = adminData.last_name;
-    adminRequired.email = adminData.email;
-    adminRequired.gender = adminData.gender;
-    adminRequired.active = adminData.active;
-    fs.writeFile('src/data/admins.json', JSON.stringify(adminsList), (err) => {
+  let adminFound = false;
+  const adminListUpdated = adminsList.map((persona) => {
+    if (adminId === persona.id) {
+      adminFound = true;
+      return adminData;
+    }
+    return persona;
+  });
+  if (adminFound) {
+    fs.writeFile('src/data/admins.json', JSON.stringify(adminListUpdated), (err) => {
       if (err) {
         res.send(err);
       } else {
@@ -45,7 +47,7 @@ router.put('/:id', (req, res) => {
       }
     });
   } else {
-    res.send('The id of the admin is invalid');
+    res.send('Admin not found');
   }
 });
 
