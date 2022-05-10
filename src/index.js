@@ -5,12 +5,15 @@ import express from 'express';
 const admins = require('./data/admins.json');
 
 const app = express();
+const adminRouter = require('./resources/admins');
+
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use('/admins', adminRouter);
 
 app.get('/', async (req, res) => {
-  res.send('Bye World!');
+  res.send('Hello World!');
 });
 
 app.get('/admins', (req, res) => {
