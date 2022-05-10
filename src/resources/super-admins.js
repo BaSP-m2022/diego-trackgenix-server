@@ -5,7 +5,7 @@ import users from '../data/super-admins.json';
 const router = express.Router(); // crear un router con express
 
 // get the list with all the superadmins
-router.get('/getAll', (req, res) => {
+router.get('/', (req, res) => {
   res.send(users);
 });
 // get one superadmin by Id
@@ -52,4 +52,6 @@ router.delete('/:id', (req, res) => {
     });
   }
 });
+
 module.exports = router;
+// export default router; //cuando lo escribo asi, me tira error en consola
