@@ -1,16 +1,14 @@
 const express = require('express');
+// const fileSystem = require('fs');
 const employees = require('../data/employees.json');
 
 const router = express.Router();
-
-router.get('/getById/:id', (req, res) => {
-  const employeeId = req.params.id;
-  const employee = employees.find((p) => p.id === employeeId);
-  if (employee) {
-    res.send(employee);
-  } else {
-    res.send('Project not found');
-  }
+router.get('/getAll', (req, res) => {
+  employees.map();
+  res.send(employees);
 });
 
+// router.get('/:deleteEmploy', (req, res) => {
+//   const user = req.params.deleteEmploy;
+// });
 module.exports = router;
