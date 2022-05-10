@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 
-const fs = require('fs');
-const employees = require('../data/employees.json');
+import fs from 'fs';
+import employees from '../data/employees.json';
 
 const router = express.Router();
 
@@ -26,15 +26,28 @@ router.post('/', (req, res) => {
   });
 });
 router.put('/:id', (req, res) => {
-  const employeeData = req.params.body;
-  employees.map(employeeData);
-  fs.appendFile('src/data/employees.json', JSON.stringify(employees), (err) => {
-    if (err) {
-      res.send(err);
+  const employeeUpdateData = req.body;
+  let employeeNotFound = false;
+  const employeeUpdated = employees.map((p) => {
+    if (p.id === req.params.id) {
+      employeeNotFound = true;
+      return employeeUpdateData;
+    // eslint-disable-next-line no-else-return
     } else {
-      res.send('Employee Updated');
+      return p;
     }
   });
+  if (employeeNotFound) {
+    fs.writeFile('src/data/employees.json', JSON.stringify(employeeUpdated), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Employee Updated Succesfully');
+      }
+    });
+  } else {
+    res.send('Employee Not Found');
+  }
 });
 
-module.exports = router;
+export default router;
