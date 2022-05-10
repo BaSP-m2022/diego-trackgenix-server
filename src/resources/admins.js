@@ -1,5 +1,5 @@
-const express = require('express');
-const fs = require('fs');
+import express from 'express';
+import fs from 'fs';
 
 const router = express.Router();
 const adminsList = require('../data/admins.json');
@@ -50,4 +50,4 @@ router.put('/:id', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
