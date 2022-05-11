@@ -1,18 +1,21 @@
-const express = require('express');
-const fileSystem = require('fs');
-const projects = require('../data/projects.json');
+import express from 'express';
+import fileSystem from 'fs';
+import projects from '../data/projects.json';
 
 const router = express.Router();
 
-router.get('/getAllProjects', (req, res) => {
-  if (req.query) {
-    const filter = req.query;
-    const filters = Object.keys(req.query);
-    const filteredProjects = projects.filter((project) => {
+router.get('/', (req, res) => {
+  const filters = req.query;
+  const filter = Object.keys(req.query);
+  if (filter.length > 0) {
+    const filteredProjects = projects.filter((p) => {
       let isValid = true;
-      filters.forEach((key) => {
-        console.log(key, project[key], filter[key]);
-        isValid = isValid && project[key] === filter[key];
+      filter.forEach((key) => {
+        if (key === 'active' || key === 'qaRate' || key === 'devRate' || key === 'pmRate' || key === 'tlRate') {
+          isValid = (JSON.stringify(p[key])).toLowerCase() === filters[key].toLowerCase();
+        } else {
+          isValid = p[key] === filters[key];
+        }
       });
       return isValid;
     });
@@ -22,7 +25,7 @@ router.get('/getAllProjects', (req, res) => {
   }
 });
 
-router.delete('/deleteProject/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const projectId = req.params.id;
   const filteredProjects = projects.filter((p) => p.id !== projectId);
   if (projects.length === filteredProjects.length) {
@@ -38,4 +41,4 @@ router.delete('/deleteProject/:id', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
