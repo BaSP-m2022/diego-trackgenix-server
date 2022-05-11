@@ -6,14 +6,14 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   const objectOfFilters = req.query;
-  const arrayOfFiltersKeyNames = Object.getOwnPropertyNames(req.query);
+  const arrayOfFiltersKeyNames = Object.keys(req.query);
   if (arrayOfFiltersKeyNames.length > 0) {
     const filteredAdmins = adminsList.filter((admin) => {
       let isValid = true;
       arrayOfFiltersKeyNames.forEach((key) => {
         if (key === 'active') {
           isValid = (JSON.stringify(admin[key])).toLowerCase()
-                        === objectOfFilters[key].toLowerCase();
+            === objectOfFilters[key].toLowerCase();
         } else {
           isValid = admin[key] === objectOfFilters[key];
         }
@@ -30,12 +30,12 @@ router.put('/:id', (req, res) => {
   const adminId = req.params.id;
   const adminData = req.body;
   let adminFound = false;
-  const adminListUpdated = adminsList.map((persona) => {
-    if (adminId === persona.id) {
+  const adminListUpdated = adminsList.map((person) => {
+    if (adminId === person.id) {
       adminFound = true;
       return adminData;
     }
-    return persona;
+    return person;
   });
   if (adminFound) {
     fs.writeFile('src/data/admins.json', JSON.stringify(adminListUpdated), (err) => {
