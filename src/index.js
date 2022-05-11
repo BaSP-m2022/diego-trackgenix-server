@@ -3,7 +3,7 @@ import express from 'express';
 import adminRouter from './resources/admins';
 
 // use "require" to import JSON files
-const admins = require('./data/admins.json');
+// const admins = require('./data/admins.json');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,12 +13,6 @@ app.use('/admins', adminRouter);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
-});
-
-app.get('/admins', (req, res) => {
-  res.status(200).json({
-    data: admins,
-  });
 });
 
 app.listen(port, () => {

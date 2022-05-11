@@ -1,12 +1,17 @@
-const express = require('express');
-const fs = require ('fs');
-const admins = require ('../data/admins.json');
+import express from 'express';
+import fs from 'fs';
+import admins from '../data/admins.json';
 
 const router = express.Router();
 
-router.get('/getById/:id', (req, res) => {
+router.get('/', (req, res) => {
+    const allAdmins = admins;
+    res.send(allAdmins)
+});
+
+router.get('/:id', (req, res) => {
   const adminId = req.params.id;
-  const admin = admins.find((admin1) => admin1.id === adminId);
+  const admin = admins.find((a) => a.id === adminId);
   if (admin) {
     res.send(admin);
   } else {
@@ -14,7 +19,7 @@ router.get('/getById/:id', (req, res) => {
   }
 });
 
-router.post('/add', (req, res) => {
+router.post('/', (req, res) => {
   const adminData = req.body;
   admins.push(adminData);
   fs.writeFile('src/data/admins.json', JSON.stringify(admins), (err) => {
@@ -26,7 +31,7 @@ router.post('/add', (req, res) => {
   });
 });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const adminId = req.params.id;
   const filteredAdmins = admins.filter((admin) => admin.id !== adminId);
   if (admins.length === filteredAdmins.length) {
