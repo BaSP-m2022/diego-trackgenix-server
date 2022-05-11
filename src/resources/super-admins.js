@@ -20,4 +20,21 @@ router.get('/', (req, res) => {
   }
 });
 
+router.put('/:id', (req, res) => {
+  const userUpdateData = req.body;
+  const userUpdated = users.map((user) => {
+    if (user.id === req.params.id) {
+      return userUpdateData;
+    }
+    return users;
+  });
+  userUpdateData.writeFile('src/data/super-admin.json', JSON.stringify(userUpdated), (error) => {
+    if (error) {
+      res.send(error);
+    } else {
+      res.send(' User Updated');
+    }
+  });
+});
+
 export default router;
