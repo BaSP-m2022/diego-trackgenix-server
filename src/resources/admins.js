@@ -5,8 +5,8 @@ import admins from '../data/admins.json';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const allAdmins = admins;
-    res.send(allAdmins)
+  const allAdmins = admins;
+  res.send(allAdmins);
 });
 
 router.get('/:id', (req, res) => {
