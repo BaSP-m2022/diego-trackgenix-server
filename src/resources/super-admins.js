@@ -8,16 +8,18 @@ const router = express.Router(); // crear un router con express
 router.get('/', (req, res) => {
   res.send(users);
 });
+
 // get one superadmin by Id
 router.get('/:id', (req, res) => {
   const superadminId = req.params.id;
-  const user = users.find((users) => users.id === superadminId);
+  const user = users.find((u) => u.id === superadminId);
   if (user) {
     res.send(user);
   } else {
     res.send('User not found');
   }
 });
+
 // add a member to the list of superadmins
 router.post('/add', (req, res) => {
   const superadminData = req.body;
@@ -36,6 +38,7 @@ router.post('/add', (req, res) => {
     console.log('All fields must be completed');
   }
 });
+
 // delete a superadmin
 router.delete('/:id', (req, res) => {
   const superadminId = req.params.id;
@@ -53,5 +56,4 @@ router.delete('/:id', (req, res) => {
   }
 });
 
-module.exports = router;
-// export default router; //cuando lo escribo asi, me tira error en consola
+export default router;
