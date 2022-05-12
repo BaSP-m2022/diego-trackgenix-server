@@ -1,0 +1,126 @@
+[
+    {
+        "id":"7d4611be-fd3c-4bb1-83c9-80dff19e769a",
+        "name":"Lemke LLC",
+        "description":"Pellentesque at nulla.",
+        "startDate":"12/08/2021",
+        "endDate":"03/08/2021",
+        "clientName":"Cyndi Roo",
+        "active":true,
+        "devRate":95.7,
+        "qaRate":28.6,
+        "pmRate":25.3,
+        "tlRate":34.3,
+        "devs":[{
+            "id" : "390bdfc7-cfb6-4cd1-83f7-5194f9290f9f",
+            "name" : "Paula"
+        }],
+        "qas":[{
+            "id": "7e94d131-9634-4288-8e5f-6a0f9ada38fb",
+            "name": "Marcia"
+        }],
+        "projectManager":"72767ea3-5d2d-4a2f-bf0e-2ff128535a00",
+        "techLeader":"91aaf9d2-e31e-4414-b913-ec35a97ae46a",
+        "admin":"3d1eaf97-70f7-4543-b986-cdd18c2352f4"
+    },
+
+    {
+        "id":"b7e64ef1-819d-4792-926d-a460e8d06f4b",
+        "name":"Corwin, Upton and Dach",
+        "description":"Sed ante.",
+        "startDate":"04/06/2022",
+        "endDate":"09/18/2021",
+        "clientName":"Donovan Skechley",
+        "active":false,
+        "devRate":38.4,
+        "qaRate":91.5,
+        "pmRate":75.1,
+        "tlRate":53.6,
+        "devs":[{
+            "id" : "390bdfc7-cfb6-4cd1-83f7-5194f9290f9f",
+            "name" : "Paula"
+        }],
+        "qas":[{
+            "id": "7e94d131-9634-4288-8e5f-6a0f9ada38fb",
+            "name": "Marcia"
+        }],
+        "projectManager":"a2669b3a-8513-439c-8a77-be0b2dc039ee",
+        "techLeader":"2dc6a068-b0dd-4557-ac9c-09031009145e",
+        "admin":"36c43f8a-44c9-4ab0-b97c-1d4c196e467d"
+    },
+
+    {
+        "id":"8b64b87a-6e19-4a84-bd05-70bec2cc7bc2",
+        "name":"Hilpert, Senger and Franecki",
+        "description":"Aliquam non mauris.",
+        "startDate":"01/28/2021",
+        "endDate":"06/08/2021",
+        "clientName":"Averyl Kingman",
+        "active":true,
+        "devRate":31.6,
+        "qaRate":87.2,
+        "pmRate":80.6,
+        "tlRate":54.3,
+        "devs":[{
+            "id" : "390bdfc7-cfb6-4cd1-83f7-5194f9290f9f",
+            "name" : "Paula"
+        }],
+        "qas":[{
+            "id": "7e94d131-9634-4288-8e5f-6a0f9ada38fb",
+            "name": "Marcia"
+        }],
+        "projectManager":"34300572-0ea6-4d2a-ab35-a1ab86d55f45",
+        "techLeader":"77fdfdbd-27bf-46c8-aed5-526cdb910170",
+        "admin":"2479aea3-2f22-4789-a6ae-0775396d8e24"
+    },
+
+    {
+        "id":"c09b26a1-a26d-4929-be82-602a8bdc8e0d",
+        "name":"Anderson, Bradtke and Stehr",
+        "description":"Cras in purus eu magna vulputate luctus.",
+        "startDate":"01/07/2021",
+        "endDate":"12/14/2021",
+        "clientName":"Amalia Bruhn",
+        "active":false,
+        "devRate":12.8,
+        "qaRate":1.3,
+        "pmRate":51.5,
+        "tlRate":78.2,
+        "devs":[{
+            "id" : "390bdfc7-cfb6-4cd1-83f7-5194f9290f9f",
+            "name" : "Paula"
+        }],
+        "qas":[{
+            "id": "7e94d131-9634-4288-8e5f-6a0f9ada38fb",
+            "name": "Marcia"
+        }],
+        "projectManager":"561e6866-1371-4126-8872-66d77c44a35a",
+        "techLeader":"50ed9ca1-aa05-4675-9423-83b2041e9645",
+        "admin":"cf8d2ea7-7e60-45d0-9f70-896c911de64f"
+    },
+
+    {
+        "id":"f606572f-274d-4a08-b0a8-9313542ce4af",
+        "name":"Casper and Sons",
+        "description":"In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+        "startDate":"10/16/2021",
+        "endDate":"01/07/2021",
+        "clientName":"Colan Mooreed",
+        "active":false,
+        "devRate":89.5,
+        "qaRate":41.6,
+        "pmRate":12.7,
+        "tlRate":11.3,
+        "devs":[{
+            "id" : "390bdfc7-cfb6-4cd1-83f7-5194f9290f9f",
+            "name" : "Paula"
+        }],
+        "qas":[{
+            "id": "7e94d131-9634-4288-8e5f-6a0f9ada38fb",
+            "name": "Marcia"
+        }],
+        "projectManager":"aa52c3a1-ac9b-4565-9fc8-3f7502f3d541",
+        "techLeader":"00443cb9-0574-4c4e-84e2-7857644cfb4a",
+        "admin":"52287b37-26c8-41f1-87bb-a6f209e8fe07"
+    }
+]
