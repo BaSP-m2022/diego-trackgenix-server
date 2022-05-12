@@ -33,9 +33,8 @@ router.post('/add', (req, res) => {
         res.send('User created');
       }
     });
-    console.log('users', users);
   } else {
-    console.log('All fields must be completed');
+    res.send('All fields must be completed');
   }
 });
 
