@@ -1,6 +1,6 @@
 import express from 'express';
-import users from '../data/super-admins.json';
 import fs from 'fs';
+import users from '../data/super-admins.json';
 
 const router = express.Router();
 
@@ -22,31 +22,31 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    const superadminId = req.params.id;
-    const user = users.find((u) => u.id === superadminId);
-    if (user) {
-      res.send(user);
-    } else {
-      res.send('User not found');
-    }
-  });
+  const superadminId = req.params.id;
+  const user = users.find((u) => u.id === superadminId);
+  if (user) {
+    res.send(user);
+  } else {
+    res.send('User not found');
+  }
+});
 
-  router.post('/add', (req, res) => {
-    const superadminData = req.body;
-    if (superadminData.id && superadminData.first_name && superadminData.last_name
+router.post('/add', (req, res) => {
+  const superadminData = req.body;
+  if (superadminData.id && superadminData.first_name && superadminData.last_name
       && superadminData.email && superadminData.pasword && superadminData.active) {
-      users.push(superadminData);
-      fs.writeFile('src/data/super-admins.json', JSON.stringify(users), (err) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.send('User created');
-        }
-      });
-    } else {
-      res.send('All fields must be completed');
-    }
-  });
+    users.push(superadminData);
+    fs.writeFile('src/data/super-admins.json', JSON.stringify(users), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('User created');
+      }
+    });
+  } else {
+    res.send('All fields must be completed');
+  }
+});
 
 router.put('/:id', (req, res) => {
   const userUpdateData = req.body;
