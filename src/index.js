@@ -11,12 +11,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
 app.use('/projects', projectsRouter);
-app.use('/timesheets', timesheetRouter);
 app.use('/employees', employeeRouter);
 app.use('/superadmins', superadminsRouter);
 app.use('/projects', projectsRouter);
 app.use('/admins', adminsRouter);
+app.use('/timesheets', timesheetRouter);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
