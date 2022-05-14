@@ -1,11 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
-import employeeRouter from './resources/employees';
-import superadminsRouter from './resources/super-admins';
-import projectsRouter from './resources/projects';
-import adminsRouter from './resources/admins';
-import timesheetRouter from './resources/time-sheets';
+import employeeRouter from './controllers/employees';
+import superadminsRouter from './controllers/super-admins';
+import projectsRouter from './controllers/projects';
+import adminsRouter from './controllers/admins';
+import timesheetRouter from './controllers/time-sheets';
 
 const MONGO_URL = 'mongodb+srv://BaSP-2022:ZZXZy7c0QaLlWbYR@basp-database.tp3ys.mongodb.net/BaSP-database?retryWrites=true&w=majority';
 
