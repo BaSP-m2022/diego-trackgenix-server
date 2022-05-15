@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
   .get('/', timesheetController.getAllTimesheet)
-  .put('/', timesheetController.createTimesheet);
+  .get('/:id', timesheetController.getTimesheetById)
+  .post('/', timesheetController.createTimesheet);
 
 export default router;

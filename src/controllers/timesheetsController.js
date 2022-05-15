@@ -11,6 +11,22 @@ const getAllTimesheet = async (req, res) => {
   }
 };
 
+const getTimesheetById = async (req, res) => {
+  try {
+    if (req.params.id) {
+      const timesheet = await TimesheetModel.findById(req.params.id);
+      return res.status(200).json(timesheet);
+    }
+    return res.status(400).json({
+      msg: 'The id parameter is wrong',
+    });
+  } catch (error) {
+    return res.json({
+      msg: error,
+    });
+  }
+};
+
 const createTimesheet = async (req, res) => {
   try {
     const newTimesheet = new TimesheetModel({
@@ -28,7 +44,7 @@ const createTimesheet = async (req, res) => {
     return res.status(201).json(result);
   } catch (error) {
     return res.json({
-      msg: 'An error was ocurred',
+      msg: 'Some error was ocurred, check the body of the request.',
     });
   }
 };
@@ -36,5 +52,5 @@ const createTimesheet = async (req, res) => {
 export default {
   createTimesheet,
   getAllTimesheet,
-
+  getTimesheetById,
 };
