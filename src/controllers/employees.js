@@ -1,101 +1,123 @@
-import express from 'express';
+import Employee from '../models/Employees';
 
-import fs from 'fs';
-import employees from '../data/employees.json';
-
-const router = express.Router();
-
-router.get('/', (req, res) => {
-  const objectOfFilters = req.query;
-  const arrayOfFiltersKeyNames = Object.keys(req.query);
-  if (arrayOfFiltersKeyNames.length > 0) {
-    const filteredEmploy = employees.filter((employ) => {
-      let isValid = true;
-      arrayOfFiltersKeyNames.forEach((key) => {
-        if (key === 'active') {
-          isValid = JSON.stringify(employ[key]).toLocaleLowerCase
-            === objectOfFilters[key].toLocaleLowerCase;
-        } else {
-          isValid = employ[key] === objectOfFilters[key];
-        }
-      });
-      return isValid;
+const getAllEmployees = async (req, res) => {
+  try {
+    const allEmployees = await Employee.find({});
+    return res.status(200).json({
+      allEmployees,
+      msg: 'Employee found',
     });
-    res.send(filteredEmploy);
-  } else {
-    res.send(employees);
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'There has been an error',
+    });
   }
-});
+};
 
-router.get('/:id', (req, res) => {
-  const employeeId = req.params.id;
-  const employee = employees.find((p) => p.id === employeeId);
-  if (employee) {
-    res.send(employee);
-  } else {
-    res.send('Employee not found');
-  }
-});
-
-router.post('/', (req, res) => {
-  const employeeData = req.body;
-  employees.push(employeeData);
-  fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send('New Employee Created');
+const getEmployeesById = async (req, res) => {
+  try {
+    if (req.params.id) {
+      const employee = await Employee.findById(req.params.id);
+      return res.status(200).json(employee);
     }
-  });
-});
+    return res.status(400).json({
+      msg: 'Missing id parameter',
+    });
+  } catch (error) {
+    return res.json({
+      msg: error,
+    });
+  }
+};
 
-router.put('/:id', (req, res) => {
-  const employeeUpdateData = req.body;
-  let employeeNotFound = false;
-  const employeeUpdated = employees.map((p) => {
-    if (p.id === req.params.id) {
-      employeeNotFound = true;
-      return employeeUpdateData;
-      // eslint-disable-next-line no-else-return
-    } else {
-      return p;
+const getEmployeesByFilter = async (req, res) => {
+  try {
+    if (req.body.key) {
+      const employee = await Employee.find(req.body.key);
+      return res.status(200).json(employee);
     }
-  });
-  if (employeeNotFound) {
-    fs.writeFile(
-      'src/data/employees.json',
-      JSON.stringify(employeeUpdated),
-      (err) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.send('Employee Updated Succesfully');
-        }
-      },
-    );
-  } else {
-    res.send('Employee Not Found');
+    return res.status(400).json({
+      msg: 'Missing id parameter',
+    });
+  } catch (error) {
+    return res.json({
+      msg: error,
+    });
   }
-});
+};
 
-router.delete('/:id', (req, res) => {
-  const employeeId = req.params.id;
-  const filteredEmployee = employees.filter((e) => e.id !== employeeId);
-  if (employees.length === filteredEmployee.length) {
-    res.send('Employee not found.');
-  } else {
-    fs.writeFile(
-      'src/data/employees.json',
-      JSON.stringify(filteredEmployee),
-      (err) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.send('Employee deleted');
-        }
-      },
-    );
+const createEmployee = async (req, res) => {
+  try {
+    const employee = new Employee({
+      first_Name: req.body.first_Name,
+      last_Name: req.body.last_Name,
+      phone: req.body.phone,
+      email: req.body.email,
+      password: req.body.password,
+      active: req.body.active,
+    });
+    const result = await employee.save();
+    return res.status(201).json({
+      result,
+      msg: 'Employee created',
+    });
+  } catch (error) {
+    return res.json({
+      msg: 'There has been an error', error,
+    });
   }
-});
+};
 
-export default router;
+const updateEmployee = async (req, res) => {
+  try {
+    if (!req.params) {
+      res.status(400).json({
+        msg: 'Missing id parameter',
+      });
+    }
+    const result = await Employee.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        msg: 'Employee not found',
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.json({
+      msg: 'There has been an error',
+      error: error.details[0].message,
+    });
+  }
+};
+
+const deleteEmployee = async (req, res) => {
+  try {
+    const result = await Employee.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        msg: 'Employee not found',
+      });
+    }
+    return res.status(200).json({
+      msg: 'The employee has been deleted',
+    });
+  } catch (error) {
+    return res.json({
+      msg: 'There has been an error',
+      error: error.details[0].message,
+    });
+  }
+};
+
+export default {
+  getAllEmployees,
+  getEmployeesById,
+  createEmployee,
+  deleteEmployee,
+  updateEmployee,
+  getEmployeesByFilter,
+};
