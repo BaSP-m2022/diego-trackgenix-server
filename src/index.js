@@ -1,11 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
-import employeeRouter from './controllers/employees';
-import superadminsRouter from './controllers/super-admins';
-import projectsRouter from './controllers/projects';
-import adminsRouter from './controllers/admins';
-import timesheetRouter from './controllers/time-sheets';
+import bodyParser from 'body-parser';
+import router from './routes';
 
 const MONGO_URL = 'mongodb+srv://BaSP-2022:ZZXZy7c0QaLlWbYR@basp-database.tp3ys.mongodb.net/BaSP-database?retryWrites=true&w=majority';
 
@@ -13,13 +9,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use('/timesheets', timesheetRouter);
-app.use('/projects', projectsRouter);
-app.use('/employees', employeeRouter);
-app.use('/superadmins', superadminsRouter);
-app.use('/projects', projectsRouter);
-app.use('/admins', adminsRouter);
-app.use('/timesheets', timesheetRouter);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
+app.use(router);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
