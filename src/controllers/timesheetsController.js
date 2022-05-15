@@ -49,8 +49,33 @@ const createTimesheet = async (req, res) => {
   }
 };
 
+const updateTimesheet = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        msg: "You've tu specify an id",
+      });
+    }
+
+    const result = await TimesheetModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!result) {
+      return res.status(404).json({
+        msg: 'Timesheet not found',
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.json({
+      msg: 'An error was ocurried',
+      error: error.details[0].message,
+    });
+  }
+};
 export default {
   createTimesheet,
   getAllTimesheet,
   getTimesheetById,
+  updateTimesheet,
 };
