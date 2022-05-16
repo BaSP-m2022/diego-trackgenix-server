@@ -1,51 +1,5 @@
 import Employee from '../models/Employees';
 
-const getAllEmployees = async (req, res) => {
-  try {
-    const allEmployees = await Employee.find({});
-    return res.status(200).json({
-      allEmployees,
-      msg: 'Employee found',
-    });
-  } catch (error) {
-    return res.status(500).json({
-      msg: 'There has been an error',
-    });
-  }
-};
-
-const getEmployeesById = async (req, res) => {
-  try {
-    if (req.params.id) {
-      const employee = await Employee.findById(req.params.id);
-      return res.status(200).json(employee);
-    }
-    return res.status(400).json({
-      msg: 'Missing id parameter',
-    });
-  } catch (error) {
-    return res.json({
-      msg: error,
-    });
-  }
-};
-
-const getEmployeesByFilter = async (req, res) => {
-  try {
-    if (req.body.key) {
-      const employee = await Employee.find(req.body.key);
-      return res.status(200).json(employee);
-    }
-    return res.status(400).json({
-      msg: 'Missing id parameter',
-    });
-  } catch (error) {
-    return res.json({
-      msg: error,
-    });
-  }
-};
-
 const createEmployee = async (req, res) => {
   try {
     const employee = new Employee({
@@ -58,12 +12,13 @@ const createEmployee = async (req, res) => {
     });
     const result = await employee.save();
     return res.status(201).json({
-      result,
       msg: 'Employee created',
+      result,
     });
   } catch (error) {
     return res.json({
-      msg: 'There has been an error', error,
+      msg: 'There has been an error',
+      error,
     });
   }
 };
@@ -89,35 +44,12 @@ const updateEmployee = async (req, res) => {
   } catch (error) {
     return res.json({
       msg: 'There has been an error',
-      error: error.details[0].message,
-    });
-  }
-};
-
-const deleteEmployee = async (req, res) => {
-  try {
-    const result = await Employee.findByIdAndDelete(req.params.id);
-    if (!result) {
-      return res.status(404).json({
-        msg: 'Employee not found',
-      });
-    }
-    return res.status(200).json({
-      msg: 'The employee has been deleted',
-    });
-  } catch (error) {
-    return res.json({
-      msg: 'There has been an error',
-      error: error.details[0].message,
+      error: error.message,
     });
   }
 };
 
 export default {
-  getAllEmployees,
-  getEmployeesById,
   createEmployee,
-  deleteEmployee,
   updateEmployee,
-  getEmployeesByFilter,
 };
