@@ -27,8 +27,8 @@ const employeeSchema = new Schema(
     active: {
       type: Boolean,
       required: true,
-    },
-  },
+    }
+  }
 );
 
 export default mongoose.model('Employee', employeeSchema);
