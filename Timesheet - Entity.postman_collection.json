@@ -101,8 +101,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"validated\":true\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:3000/timesheet/?validated=true",
+							"raw": "localhost:3000/timesheet/",
 							"host": [
 								"localhost"
 							],
@@ -110,12 +119,6 @@
 							"path": [
 								"timesheet",
 								""
-							],
-							"query": [
-								{
-									"key": "validated",
-									"value": "true"
-								}
 							]
 						}
 					},
@@ -133,15 +136,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "1183"
+							"value": "1584"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"49f-wEmW88QL17BNn7HLwOEIsiftFs0\""
+							"value": "W/\"630-Opt3VGM0izr7QH8CccDq0O40HFM\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 16 May 2022 01:14:46 GMT"
+							"value": "Mon, 16 May 2022 22:13:59 GMT"
 						},
 						{
 							"key": "Connection",
@@ -153,7 +156,69 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"message\": \"Request done\",\n    \"data\": [\n        {\n            \"_id\": \"62816a018a54a629fd61ec60\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"Subcontractor\",\n            \"hours\": 64,\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62819732ab945278fc11b310\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"DEV\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T00:13:38.756Z\",\n            \"updatedAt\": \"2022-05-16T00:13:38.756Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62819c3a2dba92a7b8f427fb\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"QA\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T00:35:06.267Z\",\n            \"updatedAt\": \"2022-05-16T00:46:09.112Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+					"body": "{\n    \"message\": \"Request done\",\n    \"data\": [\n        {\n            \"_id\": \"62816a018a54a629fd61ec60\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"Subcontractor\",\n            \"hours\": 64,\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62819732ab945278fc11b310\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"DEV\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T00:13:38.756Z\",\n            \"updatedAt\": \"2022-05-16T00:13:38.756Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62819c3a2dba92a7b8f427fb\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"QA\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T00:35:06.267Z\",\n            \"updatedAt\": \"2022-05-16T00:46:09.112Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6281b1f1d4ae9dbcc59dd666\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"DEV\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T02:07:45.156Z\",\n            \"updatedAt\": \"2022-05-16T02:07:45.156Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+				},
+				{
+					"name": "GetTimesheetWithFilters - Error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"description\":\"12a3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-tSHkYPkj90y01ZpcIGVuDrr+iFs\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 22:16:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Error on the search's criteria\",\n    \"data\": null,\n    \"error\": true\n}"
 				}
 			]
 		},

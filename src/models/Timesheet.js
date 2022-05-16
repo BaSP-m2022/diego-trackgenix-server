@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
-
-const {
-  Schema,
-} = mongoose;
+// eslint-disable-next-line
+const Schema = mongoose.Schema;
 
 const timesheet = new Schema(
   {

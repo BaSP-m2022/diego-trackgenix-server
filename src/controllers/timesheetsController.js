@@ -2,36 +2,22 @@ import TimesheetModel from '../models/Timesheet';
 
 const getAllTimesheet = async (req, res) => {
   try {
-    const allTimesheet = await TimesheetModel.find({});
-    if (req.query) {
-      const filter = req.query;
-      const filters = Object.keys(req.query);
-      const filteredTimesheets = allTimesheet.filter((timesheet) => {
-        let isValid = true;
-        filters.forEach((key) => {
-          if (key === 'validated' || key === 'hours') {
-            isValid = (JSON.stringify(timesheet[key])).toLowerCase()
-                            === filter[key].toLowerCase();
-          } else {
-            isValid = timesheet[key] === filter[key];
-          }
-        });
-        return isValid;
-      });
-      return res.status(200).json({
-        message: 'Request done',
-        data: filteredTimesheets,
-        error: false,
+    const filteredTimesheets = await TimesheetModel.find(req.body);
+    if (filteredTimesheets.length === 0) {
+      return res.status(400).json({
+        message: 'Error on the search\'s criteria',
+        data: null,
+        error: true,
       });
     }
     return res.status(200).json({
       message: 'Request done',
-      data: allTimesheet,
+      data: filteredTimesheets,
       error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      message: error.details.message,
+      message: error.message,
       data: null,
       error: true,
     });
@@ -162,65 +148,3 @@ export default {
   updateTimesheet,
   deleteTimesheet,
 };
-
-// router.get('/', (req, res) => {
-//     if (req.query) {
-//       const filter = req.query;
-//       const filters = Object.keys(req.query);
-//       const filteredTimesheets = timesheets.filter((timesheet) => {
-//         let isValid = true;
-//         filters.forEach((key) => {
-//           isValid = isValid && timesheet[key] === filter[key];
-//         });
-//         return isValid;
-//       });
-//       res.send(filteredTimesheets);
-//     } else {
-//       res.send(timesheets);
-//     }
-//   });
-
-//   router.post('/', (req, res) => {
-//     const timesheetData = req.body;
-//     timesheets.push(timesheetData);
-//     fs.writeFile('src/data/time-sheets.json', JSON.stringify(timesheets), (err) => {
-//       if (err) {
-//         res.send(err);
-//       } else {
-//         res.send('Timesheet created');
-//       }
-//     });
-//   });
-
-//   router.put('/:id', (req, res) => {
-//     const timesheetUpdatedData = req.body;
-//     const timesheetsUpdated = timesheets.map((t) => {
-//       if (t.id === req.params.id) {
-//         return timesheetUpdatedData;
-//       }
-//       return t;
-//     });
-//     fs.writeFile('src/data/time-sheets.json', JSON.stringify(timesheetsUpdated), (err) => {
-//       if (err) {
-//         res.send(err);
-//       } else {
-//         res.send('Timesheet updated');
-//       }
-//     });
-//   });
-
-//   router.delete('/:id', (req, res) => {
-//     const timesheetId = req.params.id;
-//     const filteredTimesheets = timesheets.filter((t) => t.id !== timesheetId);
-//     if (timesheets.length === filteredTimesheets.length) {
-//       res.send('Could not delete timesheet, not found');
-//     } else {
-//       fs.writeFile('src/data/time-sheets.json', JSON.stringify(filteredTimesheets), (err) => {
-//         if (err) {
-//           res.send(err);
-//         } else {
-//           res.send('Timesheets deleted');
-//         }
-//       });
-//     }
-//   });
