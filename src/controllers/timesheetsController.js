@@ -18,12 +18,22 @@ const getAllTimesheet = async (req, res) => {
         });
         return isValid;
       });
-      return res.status(200).json(filteredTimesheets);
+      return res.status(200).json({
+        message: 'Request done',
+        data: filteredTimesheets,
+        error: false,
+      });
     }
-    return res.status(200).json(allTimesheet);
+    return res.status(200).json({
+      message: 'Request done',
+      data: allTimesheet,
+      error: false,
+    });
   } catch (error) {
-    return res.status(500).json({
-      msg: 'Something went wrong, review your request.',
+    return res.status(400).json({
+      message: error.details.message,
+      data: null,
+      error: true,
     });
   }
 };
@@ -32,14 +42,22 @@ const getTimesheetById = async (req, res) => {
   try {
     if (req.params.id) {
       const timesheet = await TimesheetModel.findById(req.params.id);
-      return res.status(200).json(timesheet);
+      return res.status(200).json({
+        message: 'Request done',
+        data: timesheet,
+        error: false,
+      });
     }
     return res.status(400).json({
-      msg: 'The id parameter is wrong',
+      message: 'The id is wrong',
+      data: null,
+      error: true,
     });
   } catch (error) {
     return res.json({
-      msg: error,
+      message: error.message,
+      data: null,
+      error: true,
     });
   }
 };
@@ -58,7 +76,11 @@ const createTimesheet = async (req, res) => {
       hours: req.body.hours,
     });
     const result = await newTimesheet.save();
-    return res.status(201).json(result);
+    return res.status(201).json({
+      message: 'Request done',
+      data: result,
+      error: false,
+    });
   } catch (error) {
     return res.json({
       msg: 'Some error was ocurred, check the body of the request.',
@@ -70,7 +92,9 @@ const updateTimesheet = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        msg: "You've to specify an id",
+        message: 'You\'ve to specify an id',
+        data: null,
+        error: true,
       });
     }
 
@@ -79,14 +103,21 @@ const updateTimesheet = async (req, res) => {
     });
     if (!result) {
       return res.status(404).json({
-        msg: 'Timesheet not found',
+        message: 'Timesheet not found',
+        data: null,
+        error: true,
       });
     }
-    return res.status(200).json(result);
+    return res.status(200).json({
+      message: 'Request done',
+      data: result,
+      error: false,
+    });
   } catch (error) {
     return res.json({
-      msg: 'An error was ocurried',
-      error: error.details[0].message,
+      message: error.message,
+      data: null,
+      error: true,
     });
   }
 };
@@ -95,21 +126,31 @@ const deleteTimesheet = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        msg: "You've to specify an id",
+        message: "You've to specify an id.",
+        data: null,
+        error: true,
+
       });
     }
 
     const result = await TimesheetModel.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        msg: 'Timesheet not found',
+        message: 'Timesheet not found',
+        data: null,
+        error: true,
       });
     }
-    return res.status(200).json(result);
+    return res.status(200).json({
+      message: 'request done',
+      data: result,
+      error: false,
+    });
   } catch (error) {
     return res.json({
-      msg: 'An error was ocurried',
-      error: error.details[0].message,
+      message: error.message,
+      data: null,
+      error: true,
     });
   }
 };
