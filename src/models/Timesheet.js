@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
-// eslint-disable-next-line
-const Schema = mongoose.Schema;
+import { model, Schema } from 'mongoose';
 
 const timesheet = new Schema(
   {
@@ -47,4 +45,4 @@ const timesheet = new Schema(
   },
 );
 
-export default mongoose.model('Timesheet', timesheet);
+export default model('Timesheet', timesheet);
