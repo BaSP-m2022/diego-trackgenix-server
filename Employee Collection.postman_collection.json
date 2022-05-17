@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "29369759-2bad-4e27-b46a-43c010ac9192",
+		"name": "Employee Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/employees/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get filtered employees",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"active\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/employees/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update employee",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"first_Name\": \"Paula\",\r\n    \"last_Name\": \"Rinaldi\",\r\n    \"phone\": \"222222222\",\r\n    \"email\": \"paurinaldi95@gmail.com\",\r\n    \"password\": \"lalalalal\",\r\n    \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/employees/6281860dc32e7c819a91b357",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees",
+						"6281860dc32e7c819a91b357"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/employees/6282c0e7df2c4b43b3c2573f",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees",
+						"6282c0e7df2c4b43b3c2573f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {    \r\n            \"first_Name\": \"Shinji\",\r\n            \"last_Name\": \"Ikari\",\r\n            \"phone\": \"123456789\",\r\n            \"email\": \"shinji@gmail.com\",\r\n            \"password\": \"11224a122aaa\",\r\n            \"active\": false\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/employees/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
