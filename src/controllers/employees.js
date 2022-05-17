@@ -1,25 +1,23 @@
 import Employee from '../models/Employees';
 
 const getAllEmployees = async (req, res) => {
-    try {
-      const allEmployees = await Employee.find(req.body);
-      if (allEmployees.length === 0) {
-        return res.status(404).json({
-            msg: 'Employee not found'
-        });
-        } else {
-            return res.status(200).json({
-                msg:'Employee found',
-                result: allEmployees
-            });
-        };
-    }
-    catch (error) {
-      return res.status(500).json({
-        msg: 'There has been an error',
+  try {
+    const allEmployees = await Employee.find(req.body);
+    if (allEmployees.length === 0) {
+      return res.status(404).json({
+        msg: 'Employee not found',
       });
     }
-  };
+    return res.status(200).json({
+      msg: 'Employee found',
+      result: allEmployees,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'There has been an error',
+    });
+  }
+};
 
 const getEmployeesById = async (req, res) => {
   try {
@@ -32,7 +30,7 @@ const getEmployeesById = async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      msg: error
+      msg: error,
     });
   }
 };
@@ -42,16 +40,16 @@ const deleteEmployee = async (req, res) => {
     const result = await Employee.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        msg: 'Employee not found'
+        msg: 'Employee not found',
       });
     }
     return res.status(200).json({
-      msg: 'The employee has been deleted'
+      msg: 'The employee has been deleted',
     });
   } catch (error) {
     return res.json({
       msg: 'There has been an error',
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -59,6 +57,5 @@ const deleteEmployee = async (req, res) => {
 export default {
   getAllEmployees,
   getEmployeesById,
-  deleteEmployee
+  deleteEmployee,
 };
-

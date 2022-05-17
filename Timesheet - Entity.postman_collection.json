@@ -1,0 +1,870 @@
+{
+	"info": {
+		"_postman_id": "4d450c46-1043-4abd-b2fe-4b9bd7ba602f",
+		"name": "Timesheet - Entity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllTimesheet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/timesheet/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"timesheet",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetAllTimesheet - Done",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/timesheet/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2272"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8e0-xLmal9W+y70gsIghg60q4FZHanE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 02:09:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request done\",\n    \"data\": [\n        {\n            \"_id\": \"628169c88a54a629fd61ec5c\",\n            \"description\": \"Toxic effect of other mycotoxin food contaminants\",\n            \"date\": \"10/1/2021\",\n            \"task\": \"Total ostectomy, femur\",\n            \"validated\": false,\n            \"employee\": \"Ralina\",\n            \"projectId\": \"03e6a7de-2a93-44e7-833b-225bfd694ccc\",\n            \"projectManager\": \"ba1ebb23-4ec4-4c19-b983-02dc4902dacc\",\n            \"role\": \"Surveyor\",\n            \"hours\": 5,\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"628169eb8a54a629fd61ec5e\",\n            \"description\": \"Wear of artic bearing surface of int prosth l knee jt, init\",\n            \"date\": \"6/19/2021\",\n            \"task\": \"Excision of perirectal tissue\",\n            \"validated\": false,\n            \"employee\": \"Priscella\",\n            \"projectId\": \"069927e6-bf32-42c9-98e6-b67e3f975f3b\",\n            \"projectManager\": \"7d06fc2f-215a-4365-b8bd-a3cd6007e92d\",\n            \"role\": \"Architect\",\n            \"hours\": 53,\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62816a018a54a629fd61ec60\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"Subcontractor\",\n            \"hours\": 64,\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62819732ab945278fc11b310\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"DEV\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T00:13:38.756Z\",\n            \"updatedAt\": \"2022-05-16T00:13:38.756Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62819c3a2dba92a7b8f427fb\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"QA\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T00:35:06.267Z\",\n            \"updatedAt\": \"2022-05-16T00:46:09.112Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6281b1f1d4ae9dbcc59dd666\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"DEV\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T02:07:45.156Z\",\n            \"updatedAt\": \"2022-05-16T02:07:45.156Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "GetTimesheetWithFilters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/timesheet/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"timesheet",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetTimesheetWithFilters - Done",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"validated\":true\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1584"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"630-Opt3VGM0izr7QH8CccDq0O40HFM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 22:13:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request done\",\n    \"data\": [\n        {\n            \"_id\": \"62816a018a54a629fd61ec60\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"Subcontractor\",\n            \"hours\": 64,\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62819732ab945278fc11b310\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"DEV\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T00:13:38.756Z\",\n            \"updatedAt\": \"2022-05-16T00:13:38.756Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62819c3a2dba92a7b8f427fb\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"QA\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T00:35:06.267Z\",\n            \"updatedAt\": \"2022-05-16T00:46:09.112Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6281b1f1d4ae9dbcc59dd666\",\n            \"description\": \"Pressure ulcer of head, unstageable\",\n            \"date\": \"11/30/2021\",\n            \"task\": \"Resection of quadrant of breast\",\n            \"validated\": true,\n            \"employee\": \"Riley\",\n            \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n            \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n            \"role\": \"DEV\",\n            \"hours\": 64,\n            \"createdAt\": \"2022-05-16T02:07:45.156Z\",\n            \"updatedAt\": \"2022-05-16T02:07:45.156Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": false\n}"
+				},
+				{
+					"name": "GetTimesheetWithFilters - Error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"description\":\"12a3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-tSHkYPkj90y01ZpcIGVuDrr+iFs\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 22:16:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Error on the search's criteria\",\n    \"data\": null,\n    \"error\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "GetTimesheetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/timesheet/62816a018a54a629fd61ec60",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"timesheet",
+						"62816a018a54a629fd61ec60"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetTimesheetById - Error id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/timesheet/62816a018a54a629fd61ec6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								"62816a018a54a629fd61ec6"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "154"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"9a-AZA8gKm6noYtC72aE8gIfy8eTis\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 01:20:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Cast to ObjectId failed for value \\\"62816a018a54a629fd61ec6\\\" (type string) at path \\\"_id\\\" for model \\\"Timesheet\\\"\",\n    \"data\": null,\n    \"error\": true\n}"
+				},
+				{
+					"name": "GetTimesheetById - done",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/timesheet/62816a018a54a629fd61ec60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								"62816a018a54a629fd61ec60"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "380"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"17c-UXSsOkgYw1Akr3QvTue6+GR59iw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 01:53:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request done\",\n    \"data\": {\n        \"_id\": \"62816a018a54a629fd61ec60\",\n        \"description\": \"Pressure ulcer of head, unstageable\",\n        \"date\": \"11/30/2021\",\n        \"task\": \"Resection of quadrant of breast\",\n        \"validated\": true,\n        \"employee\": \"Riley\",\n        \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n        \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n        \"role\": \"Subcontractor\",\n        \"hours\": 64,\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "AddTimesheet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/timesheet/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"timesheet",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "AddTimesheet - Without body",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/timesheet/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "103"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"67-bYknTqhWGJ1YmugvU8PEnl6KqAw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 01:20:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"description\\\" is required\"\n}"
+				},
+				{
+					"name": "AddTimesheet - Incomplete Body",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"description\": \"Pressure ulcer of head, unstageable\",\r\n        \"date\": \"11/30/2021\",\r\n        \"task\": \"Resection of quadrant of breast\",\r\n        \"validated\": true,\r\n        \"employee\": \"Riley\",\r\n        \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\r\n        \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\r\n        \"role\": \"Subcontractor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "139"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8b-Gj0KDBBuYv1Ng3+vojwO3bsYaNE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 02:06:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"role\\\" length must be less than or equal to 3 characters long\"\n}"
+				},
+				{
+					"name": "AddTimesheet - Error on validation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"description\": \"Pressure ulcer of head, unstageable\",\r\n        \"date\": \"11/30/2021\",\r\n        \"task\": \"Resection of quadrant of breast\",\r\n        \"validated\": true,\r\n        \"employee\": \"Riley\",\r\n        \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\r\n        \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\r\n        \"role\": \"Subcontractor\",\r\n        \"hours\": 64\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "139"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8b-Gj0KDBBuYv1Ng3+vojwO3bsYaNE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 02:07:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"role\\\" length must be less than or equal to 3 characters long\"\n}"
+				},
+				{
+					"name": "AddTimesheet - Done",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"description\": \"Pressure ulcer of head, unstageable\",\r\n        \"date\": \"11/30/2021\",\r\n        \"task\": \"Resection of quadrant of breast\",\r\n        \"validated\": true,\r\n        \"employee\": \"Riley\",\r\n        \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\r\n        \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\r\n        \"role\": \"DEV\",\r\n        \"hours\": 64\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "448"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c0-z2d6uPIZaMQaXY26mlRCi72/hJo\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 02:07:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request done\",\n    \"data\": {\n        \"description\": \"Pressure ulcer of head, unstageable\",\n        \"date\": \"11/30/2021\",\n        \"task\": \"Resection of quadrant of breast\",\n        \"validated\": true,\n        \"employee\": \"Riley\",\n        \"projectId\": \"f27034ee-4dd0-426a-9269-abd8e1c5f0ca\",\n        \"projectManager\": \"ba8cbfae-0fe8-4df9-8e3f-20a1b54a0b7c\",\n        \"role\": \"DEV\",\n        \"hours\": 64,\n        \"_id\": \"6281b1f1d4ae9dbcc59dd666\",\n        \"createdAt\": \"2022-05-16T02:07:45.156Z\",\n        \"updatedAt\": \"2022-05-16T02:07:45.156Z\",\n        \"__v\": 0\n    },\n    \"error\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "EditTimesheet",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/timesheet/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"timesheet",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "EditTimesheet - Right id without body",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/timesheet/628169c88a54a629fd61ec5c",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								"628169c88a54a629fd61ec5c"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "103"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"67-bYknTqhWGJ1YmugvU8PEnl6KqAw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 02:10:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"description\\\" is required\"\n}"
+				},
+				{
+					"name": "EditTimesheet - Incomplete body",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Toxic effect of other mycotoxin food contaminants\",\r\n    \"date\": \"10/1/2021\",\r\n    \"task\": \"Total ostectomy, femur\",\r\n    \"validated\": false,\r\n    \"employee\": \"Ralina\",\r\n    \"projectId\": \"03e6a7de-2a93-44e7-833b-225bfd694ccc\",\r\n    \"projectManager\": \"ba1ebb23-4ec4-4c19-b983-02dc4902dacc\"\r\n\r\n \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/628169c88a54a629fd61ec5c",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								"628169c88a54a629fd61ec5c"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "96"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"60-+gosraRz027q88akxiH8RAfMPpY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 02:13:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"role\\\" is required\"\n}"
+				},
+				{
+					"name": "EditTimesheet - Error on validations",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Toxic effect of other mycotoxin food contaminants\",\r\n    \"date\": \"10/1/2021\",\r\n    \"task\": \"Total ostectomy, femur\",\r\n    \"validated\": false,\r\n    \"employee\": \"Ralina\",\r\n    \"projectId\": \"03e6a7de-2a93-44e7-833b-225bfd694ccc\",\r\n    \"projectManager\": \"ba1ebb23-4ec4-4c19-b983-02dc4902dacc\",\r\n    \"role\": \"Surveyor\",\r\n    \"hours\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/628169c88a54a629fd61ec5c",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								"628169c88a54a629fd61ec5c"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "139"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8b-Gj0KDBBuYv1Ng3+vojwO3bsYaNE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 02:13:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"role\\\" length must be less than or equal to 3 characters long\"\n}"
+				},
+				{
+					"name": "EditTimesheet - Done",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Toxic effect of other mycotoxin food contaminants\",\r\n    \"date\": \"10/1/2021\",\r\n    \"task\": \"Total ostectomy, femur\",\r\n    \"validated\": false,\r\n    \"employee\": \"Ralina\",\r\n    \"projectId\": \"03e6a7de-2a93-44e7-833b-225bfd694ccc\",\r\n    \"projectManager\": \"ba1ebb23-4ec4-4c19-b983-02dc4902dacc\",\r\n    \"role\": \"DEV\",\r\n    \"hours\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/timesheet/628169c88a54a629fd61ec5c",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheet",
+								"628169c88a54a629fd61ec5c"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "414"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19e-sMrHeNsrbTqezzV2yC94GUZCn/o\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 02:13:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request done\",\n    \"data\": {\n        \"_id\": \"628169c88a54a629fd61ec5c\",\n        \"description\": \"Toxic effect of other mycotoxin food contaminants\",\n        \"date\": \"10/1/2021\",\n        \"task\": \"Total ostectomy, femur\",\n        \"validated\": false,\n        \"employee\": \"Ralina\",\n        \"projectId\": \"03e6a7de-2a93-44e7-833b-225bfd694ccc\",\n        \"projectManager\": \"ba1ebb23-4ec4-4c19-b983-02dc4902dacc\",\n        \"role\": \"DEV\",\n        \"hours\": 5,\n        \"__v\": 0,\n        \"updatedAt\": \"2022-05-16T02:13:58.116Z\"\n    },\n    \"error\": false\n}"
+				}
+			]
+		}
+	]
+}
