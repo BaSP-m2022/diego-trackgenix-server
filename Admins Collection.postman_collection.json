@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "be4d0e3d-ab14-4489-8576-c2328f6cc77c",
+		"name": "Admins",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/admins",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Courtnay\",\r\n    \"lastName\": \"Shawyers\",\r\n    \"email\": \"cshawyers5@reference.com\",\r\n    \"gender\": \"polygender\",\r\n    \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/admins/628430c37635204c176f33d7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"admins",
+						"628430c37635204c176f33d7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
