@@ -1,6 +1,5 @@
 [
     {
-        "id": "63416d2c-9981-493e-b869-d472ec71d050",
         "first_name": "Darcy",
         "last_name": "Suddell",
         "email": "dsuddell0@usatoday.com",
@@ -8,7 +7,6 @@
         "active": false
     },
     {
-        "id": "a6e18ca0-b049-4ae0-83be-b83e475dbfbc",
         "first_name": "Wileen",
         "last_name": "Bowerman",
         "email": "wbowerman1@ycombinator.com",
