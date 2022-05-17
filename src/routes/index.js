@@ -1,11 +1,11 @@
 import express from 'express';
-import employeesRoutes from './employees';
+import employeesRoute from './employees';
 import timeSheetRoutes from './timesheetRoutes';
 
 const router = express.Router();
 
 router
-  .use('/timesheet', timeSheetRoutes)
-  .use('/employees', employeesRoutes);
+  .use('/employees', employeesRoute)
+  .use('/timesheet', timeSheetRoutes);
 
 export default router;
