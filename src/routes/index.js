@@ -1,13 +1,15 @@
 import express from 'express';
-import employeesRoutes from './employees';
-import timeSheetRoutes from './timesheetRoutes';
-import adminsRoutes from './admins';
+import employees from './employees';
+import timesheets from './timesheets';
+import projects from './projects';
+import admins from './admins';
 
 const router = express.Router();
 
 router
-  .use('/timesheet', timeSheetRoutes)
-  .use('/employees', employeesRoutes)
-  .use('/admins', adminsRoutes);
+  .use('/employees', employees)
+  .use('/timesheets', timesheets)
+  .use('/projects', projects)
+  .use('/admins', admins);
 
 export default router;
