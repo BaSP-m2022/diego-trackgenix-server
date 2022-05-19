@@ -1,119 +1,124 @@
-import express from 'express';
-import fileSystem from 'fs';
-import projects from '../data/projects.json';
+import ProjectsModel from '../models/Projects';
 
-const router = express.Router();
-
-router.get('/', (req, res) => {
-  const filters = req.query;
-  const filter = Object.keys(req.query);
-  if (filter.length > 0) {
-    const filteredProjects = projects.filter((p) => {
-      let isValid = true;
-      filter.forEach((key) => {
-        if (key === 'active' || key === 'qaRate' || key === 'devRate' || key === 'pmRate' || key === 'tlRate') {
-          isValid = (JSON.stringify(p[key])).toLowerCase() === filters[key].toLowerCase();
-        } else {
-          isValid = p[key] === filters[key];
-        }
+const getAllProjects = async (req, res) => {
+  try {
+    const allProjects = await ProjectsModel.find(req.body);
+    if (allProjects.length === 0) {
+      return res.status(404).json({
+        msg: 'Project not found',
       });
-      return isValid;
-    });
-    res.send(filteredProjects);
-  } else {
-    res.send(projects);
-  }
-});
-
-router.delete('/:id', (req, res) => {
-  const projectId = req.params.id;
-  const filteredProjects = projects.filter((p) => p.id !== projectId);
-  if (projects.length === filteredProjects.length) {
-    res.send('Could not delete project, project not found');
-  } else {
-    fileSystem.writeFile('src/data/projects.json', JSON.stringify(filteredProjects), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Project deleted');
-      }
-    });
-  }
-});
-
-router.get('/:id', (req, res) => {
-  const projectId = req.params.id;
-  const project = projects.find((p) => p.id === projectId);
-  if (project) {
-    res.send(project);
-  } else {
-    res.send('Project not found');
-  }
-});
-
-router.post('/', (req, res) => {
-  const projectData = req.body;
-  projects.push(projectData);
-  fileSystem.writeFile('src/data/projects.json', JSON.stringify(projects), (err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send('Project created');
     }
-  });
-});
-
-router.put('/:id', (req, res) => {
-  const projectUpdatedData = req.body;
-  let projectFound = false;
-  const projectsUpdated = projects.map((p) => {
-    if (p.id === req.params.id) {
-      projectFound = true;
-      return projectUpdatedData;
-    }
-    return p;
-  });
-  if (projectFound) {
-    fileSystem.writeFile('src/data/projects.json', JSON.stringify(projectsUpdated), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Project updated');
-      }
+    return res.status(200).json({
+      msg: 'Project found',
+      result: allProjects,
     });
-  } else {
-    res.send('Project not found');
-  }
-});
-
-router.put('/addEmployee/:id', (req, res) => {
-  const employeeData = req.body;
-  let projectFound = false;
-  const projectUpdated = projects.map((p) => {
-    if (p.id === req.params.id) {
-      projectFound = true;
-      return {
-        ...p,
-        [employeeData.role]:
-            [...p[employeeData.role], {
-              name: employeeData.name,
-              id: employeeData.id,
-            }],
-      };
-    }
-    return p;
-  });
-  if (projectFound) {
-    fileSystem.writeFile('src/data/projects.json', JSON.stringify(projectUpdated), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Project updated');
-      }
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'There has been an error',
     });
-  } else {
-    res.send('Project not found');
   }
-});
+};
 
-export default router;
+const getProjectsById = async (req, res) => {
+  try {
+    if (req.params.id) {
+      const projects = await ProjectsModel.findById(req.params.id);
+      return res.status(200).json(projects);
+    }
+    return res.status(400).json({
+      msg: 'The id parameter is wrong',
+    });
+  } catch (error) {
+    return res.json({
+      msg: error,
+    });
+  }
+};
+
+const createProjects = async (req, res) => {
+  try {
+    const newProjects = new ProjectsModel({
+      name: req.body.name,
+      description: req.body.description,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      clientName: req.body.clientName,
+      active: req.body.active,
+      devRate: req.body.devRate,
+      qaRate: req.body.qaRate,
+      pmRate: req.body.pmRate,
+      tlRate: req.body.tlRate,
+      devs: req.body.devs,
+      qas: req.body.qas,
+      projectManager: req.body.projectManager,
+      techLeader: req.body.techLeader,
+      admin: req.body.admin,
+    });
+    const result = await newProjects.save();
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.json({
+      msg: 'Some error was ocurred, check the body of the request.',
+    });
+  }
+};
+
+const updateProjects = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        msg: 'You have to specify an id',
+      });
+    }
+
+    const result = await ProjectsModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      },
+    );
+    if (!result) {
+      return res.status(404).json({
+        msg: 'Project not found',
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.json({
+      msg: 'An error was ocurred',
+      error: error.details[0].message,
+    });
+  }
+};
+
+const deleteProjects = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        msg: 'You have to specify an id',
+      });
+    }
+
+    const result = await ProjectsModel.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        msg: 'Project not found',
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.json({
+      msg: 'An error was ocurred',
+      error: error.details[0].message,
+    });
+  }
+};
+
+export default {
+  createProjects,
+  getAllProjects,
+  getProjectsById,
+  updateProjects,
+  deleteProjects,
+};
