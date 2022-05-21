@@ -1,8 +1,8 @@
-import TaskModel from '../models/tasks';
+import Task from '../models/tasks';
 
 const getAllTasks = async (req, res) => {
   try {
-    const allTasks = await TaskModel.find(req.body);
+    const allTasks = await Task.find(req.body);
     if (allTasks.length === 0) {
       return res.status(404).json({
         messages: 'Not found',
@@ -22,108 +22,78 @@ const getAllTasks = async (req, res) => {
 const getTaskById = async (req, res) => {
   try {
     if (req.params.id) {
-      const task = await TaskModel.findById(req.params.id);
-      return res.status(200).json({
-        error: false,
-        message: 'found',
-        data: task,
-      });
-    } return res.status(400).json({
-      error: true,
-      message: 'incorrect id',
-      data: null,
+      const employee = await Task.findById(req.params.id);
+      return res.status(200).json(employee);
+    }
+    return res.status(400).json({
+      msg: 'Missing id parameter',
     });
   } catch (error) {
-    return res.status(400).json({
-      error: true,
-      message: error.message,
-      data: null,
+    return res.json({
+      msg: error,
     });
   }
 };
 
 const createTask = async (req, res) => {
   try {
-    const newTask = new TaskModel({
+    const newTask = new Task({
       description: req.body.description,
     });
     const newTaskDone = await newTask.save();
     return res.status(200).json({
-      error: false,
-      message: 'done',
-      data: newTaskDone,
+      msg: 'done',
+      newTaskDone,
     });
   } catch (error) {
     return res.status(400).json({
-      error: true,
       message: 'not valid',
-      data: null,
+      error,
     });
   }
 };
 
 const updateTask = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        error: true,
-        message: 'please specify id',
-        data: null,
+    if (!req.params) {
+      res.status(400).json({
+        msg: 'Missing id parameter',
       });
     }
-    const updateResult = TaskModel.findByIdAndUpdate(
+    const result = await Task.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true },
     );
-    if (!updateResult) {
+    if (!result) {
       return res.status(404).json({
-        error: true,
-        message: 'not found',
-        data: null,
+        msg: 'Task not found',
       });
     }
-    return res.status(200).json({
-      error: false,
-      message: 'done',
-      data: null,
-    });
+    return res.status(200).json(result);
   } catch (error) {
     return res.json({
-      error: true,
-      message: error.message,
-      data: null,
+      msg: 'There has been an error',
+      error: error.message,
     });
   }
 };
 
 const deleteTask = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        error: true,
-        message: 'please specify id',
-        data: null,
-      });
-    }
-    const taskResult = await TaskModel.findByIdAndDelete(req.params.id);
-    if (!taskResult) {
+    const result = await Task.findByIdAndDelete(req.params.id);
+    if (!result) {
       return res.status(404).json({
-        error: true,
-        message: 'not found',
-        data: null,
+        msg: 'Task not found',
       });
     }
     return res.status(200).json({
-      error: false,
-      message: 'done',
-      date: taskResult,
+      msg: 'Task has been deleted',
     });
   } catch (error) {
     return res.json({
-      error: true,
-      message: error.message,
-      data: null,
+      msg: 'There has been an error',
+      error: error.message,
     });
   }
 };

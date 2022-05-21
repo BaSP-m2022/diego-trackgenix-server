@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
+
 const tasksSchema = new Schema(
   {
     description: {
@@ -10,4 +11,4 @@ const tasksSchema = new Schema(
   },
 );
 
-export default mongoose.model('Tasks', tasksSchema);
+export default mongoose.model('Task', tasksSchema);

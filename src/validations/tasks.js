@@ -8,7 +8,7 @@ const createTaskValid = (req, res, next) => {
   if (validationTask.error) {
     return res.status(400).json({
       message: 'The task description is invalid.',
-      error: validationTask.error.datails[0].message,
+      error: validationTask.error.details[0].message,
     });
   }
   return next();
