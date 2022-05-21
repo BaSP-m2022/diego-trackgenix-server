@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import router from './routes';
 
 const MONGO_URL = 'mongodb+srv://BaSP-2022:ZZXZy7c0QaLlWbYR@basp-database.tp3ys.mongodb.net/BaSP-database?retryWrites=true&w=majority';
-
 const app = express();
 const port = process.env.PORT || 3000;
 
