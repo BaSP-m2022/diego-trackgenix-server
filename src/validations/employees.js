@@ -2,8 +2,8 @@ import Joi from 'joi';
 
 const contentValidation = (req, res, next) => {
   const schemaConditions = Joi.object({
-    first_Name: Joi.string().min(3).required(),
-    last_Name: Joi.string().min(3).required(),
+    first_name: Joi.string().min(3).required(),
+    last_name: Joi.string().min(3).required(),
     phone: Joi.string().min(9).pattern(/^[0-9]+$/).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
