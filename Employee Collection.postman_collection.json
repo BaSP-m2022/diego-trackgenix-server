@@ -62,7 +62,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n    \"first_Name\": \"Paula\",\r\n    \"last_Name\": \"Rinaldi\",\r\n    \"phone\": \"222222222\",\r\n    \"email\": \"paurinaldi95@gmail.com\",\r\n    \"password\": \"lalalalal\",\r\n    \"active\": true\r\n}",
+					"raw": " {\r\n    \"first_name\": \"Paula\",\r\n    \"last_name\": \"Rinaldi\",\r\n    \"phone\": \"222222222\",\r\n    \"email\": \"paurinaldi95@gmail.com\",\r\n    \"password\": \"lalalalal\",\r\n    \"active\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {    \r\n            \"first_Name\": \"Shinji\",\r\n            \"last_Name\": \"Ikari\",\r\n            \"phone\": \"123456789\",\r\n            \"email\": \"shinji@gmail.com\",\r\n            \"password\": \"11224a122aaa\",\r\n            \"active\": false\r\n    }",
+					"raw": "    {    \r\n            \"first_name\": \"Shinji\",\r\n            \"last_name\": \"Ikari\",\r\n            \"phone\": \"123456789\",\r\n            \"email\": \"shinji@gmail.com\",\r\n            \"password\": \"11224a122aaa\",\r\n            \"active\": false\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
