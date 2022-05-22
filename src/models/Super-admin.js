@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 
 const superAdminSchema = new Schema(
   {
-    name: {
+    firstName: {
       type: String,
       required: true,
     },
-    srname: {
+    lastName: {
       type: String,
       required: true,
     },
@@ -19,10 +19,6 @@ const superAdminSchema = new Schema(
     password: {
       type: String,
       required: true,
-    },
-    active: {
-      type: Boolean,
-      requiered: true,
     },
   },
 );

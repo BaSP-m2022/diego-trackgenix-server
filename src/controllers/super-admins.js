@@ -51,11 +51,10 @@ const getSuperAdminById = async (req, res) => {
 const addSuperAdmin = async (req, res) => {
   try {
     const superAdmin = new SuperAdmin({
-      name: req.body.name,
-      srname: req.body.srname,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
-      active: req.body.active,
     });
     const result = await superAdmin.save();
     return res.status(201).json({
