@@ -14,16 +14,16 @@ const projectSchema = new Schema({
   pmRate: { type: Number, required: true },
   tlRate: { type: Number, required: true },
   devs: [{
-    employeeId: { type: String, required: false },
+    employeeId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Employee' },
     name: { type: String, required: false },
   }],
   qas: [{
-    qasId: { type: String, required: false },
+    qasId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Employee' },
     qasName: { type: String, required: false },
   }],
-  projectManager: { type: String, required: false },
-  techLeader: { type: String, required: false },
-  admin: { type: String, required: false },
+  projectManager: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Employee' },
+  techLeader: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Employee' },
+  admin: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Admin' },
 });
 
 export default mongoose.model('Projects', projectSchema);

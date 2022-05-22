@@ -1,43 +1,56 @@
-import ProjectsModel from '../models/Projects';
+import Project from '../models/Projects';
 
-const getAllProjects = async (req, res) => {
+const getProject = async (req, res) => {
   try {
-    const allProjects = await ProjectsModel.find(req.body);
+    const allProjects = await Project.find(req.body).populate('id', 'name');
     if (allProjects.length === 0) {
       return res.status(404).json({
-        msg: 'Project not found',
+        message: 'Not found',
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json({
-      msg: 'Project found',
-      result: allProjects,
+      message: 'Project found',
+      data: allProjects,
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: 'There has been an error',
+      message: 'There has been an error',
+      data: undefined,
+      error: true,
     });
   }
 };
 
-const getProjectsById = async (req, res) => {
+const getProjectById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const projects = await ProjectsModel.findById(req.params.id);
-      return res.status(200).json(projects);
+    const project = await Project.findById(req.params.id);
+    if (project == null) {
+      return res.status(404).json({
+        message: 'Project not found',
+        data: undefined,
+        error: true,
+      });
     }
-    return res.status(400).json({
-      msg: 'The id parameter is wrong',
+    return res.status(200).json({
+      message: 'Project found',
+      data: project,
+      error: false,
     });
   } catch (error) {
     return res.json({
-      msg: error,
+      message: error.message,
+      data: undefined,
+      error: true,
     });
   }
 };
 
-const createProjects = async (req, res) => {
+const addProject = async (req, res) => {
   try {
-    const newProjects = new ProjectsModel({
+    const project = new Project({
       name: req.body.name,
       description: req.body.description,
       startDate: req.body.startDate,
@@ -54,71 +67,86 @@ const createProjects = async (req, res) => {
       techLeader: req.body.techLeader,
       admin: req.body.admin,
     });
-    const result = await newProjects.save();
-    return res.status(201).json(result);
+    const result = await project.save();
+    return res.status(201).json({
+      message: 'Project created',
+      data: result,
+      error: false,
+    });
   } catch (error) {
     return res.json({
-      msg: 'Some error was ocurred, check the body of the request.',
+      message: 'An error has ocurred',
+      data: undefined,
+      error: true,
     });
   }
 };
 
-const updateProjects = async (req, res) => {
+const updateProject = async (req, res) => {
   try {
-    if (!req.params.id) {
+    if (!req.params) {
       return res.status(400).json({
-        msg: 'You have to specify an id',
+        message: 'missing id parameter',
+        data: undefined,
+        error: true,
       });
     }
-
-    const result = await ProjectsModel.findByIdAndUpdate(
+    const result = await Project.findByIdAndUpdate(
       req.params.id,
       req.body,
-      {
-        new: true,
-      },
+      { new: true },
     );
     if (!result) {
       return res.status(404).json({
-        msg: 'Project not found',
+        message: 'Project not found',
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(200).json(result);
+    return res.status(201).json({
+      message: 'Project updated',
+      data: result,
+      error: false,
+    });
   } catch (error) {
     return res.json({
-      msg: 'An error was ocurred',
-      error: error.details[0].message,
+      message: 'An error has ocurred',
+      data: undefined,
+      error: true,
     });
   }
 };
 
-const deleteProjects = async (req, res) => {
+const deleteProject = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        msg: 'You have to specify an id',
-      });
-    }
-
-    const result = await ProjectsModel.findByIdAndDelete(req.params.id);
+    const result = await Project.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        msg: 'Project not found',
+        message: 'Project not found',
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(200).json(result);
+    return res.status(200).json({
+      message: 'Project has been deleted',
+      data: result,
+      error: false,
+
+    });
   } catch (error) {
     return res.json({
-      msg: 'An error was ocurred',
-      error: error.details[0].message,
+      message: error.message,
+      data: undefined,
+      error: true,
+
     });
   }
 };
 
 export default {
-  createProjects,
-  getAllProjects,
-  getProjectsById,
-  updateProjects,
-  deleteProjects,
+  getProject,
+  getProjectById,
+  addProject,
+  updateProject,
+  deleteProject,
 };
