@@ -24,7 +24,7 @@ describe('POST /super-admins', () => {
       email: 'paurinaldi95@gmail.com',
       password: 'a123456789',
     });
-    /* eslint no-underscore-dangle: 0 */
+    // eslint-disable-next-line no-underscore-dangle
     superAdminId = response.body.data._id;
   });
   test('Response body message should indicate super admin was created', async () => {
