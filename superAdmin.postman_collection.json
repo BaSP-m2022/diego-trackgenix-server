@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a81eea74-3ab1-4b95-8ec3-1e6ab9f409d2",
+		"_postman_id": "04220689-5c9f-4698-bafb-d0a8e03c0441",
 		"name": "Week09",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20854823"
 	},
 	"item": [
 		{
@@ -26,11 +27,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/super-admins",
+							"raw": "localhost:4000/super-admins",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"super-admins"
 							]
@@ -44,14 +45,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/super-admins/6281c44cf935eeba5a9b9c2e",
+							"raw": "localhost:4000/super-admins/6289346b10b56228d00bbf31",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"super-admins",
-								"6281c44cf935eeba5a9b9c2e"
+								"6289346b10b56228d00bbf31"
 							]
 						}
 					},
@@ -64,7 +65,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Conrado\",\n    \"srname\": \"Bienteveo\",\n    \"email\": \"pde@conrad.com\",\n    \"password\": \"male\",\n    \"active\": true\n}",
+							"raw": "{\n    \"name\": \"Conrado\",\n    \"srname\": \"Bienteveo\",\n    \"email\": \"pde@conrad.com\",\n    \"password\": \"male1111\",\n    \"active\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,11 +73,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/super-admins",
+							"raw": "localhost:4000/super-admins",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"super-admins"
 							]
@@ -90,14 +91,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/super-admins/6281af146103ca1404aa21dc",
+							"raw": "localhost:4000/super-admins/62891da4d924befbd8f1f682",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"super-admins",
-								"6281af146103ca1404aa21dc"
+								"62891da4d924befbd8f1f682"
 							]
 						}
 					},
@@ -110,7 +111,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\": \"jajajaj\"\n}",
+							"raw": "{\n    \"password\": \"jajajaja\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -118,11 +119,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/super-admins/6281cb3870bab448ac7b6caa",
+							"raw": "localhost:4000/super-admins/6281cb3870bab448ac7b6caa",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"super-admins",
 								"6281cb3870bab448ac7b6caa"
@@ -137,11 +138,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/super-admins",
+							"raw": "localhost:4000/super-admins",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "4000",
 							"path": [
 								"super-admins"
 							]

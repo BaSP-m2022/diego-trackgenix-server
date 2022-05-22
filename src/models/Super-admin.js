@@ -25,7 +25,6 @@ const superAdminSchema = new Schema(
       requiered: true,
     },
   },
-  // {timestamps: true}
 );
 
 export default mongoose.model('Super-admin', superAdminSchema);
