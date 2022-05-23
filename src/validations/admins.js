@@ -13,6 +13,7 @@ const adminValidationCreate = (req, res, next) => {
   if (validation.error) {
     return res.status(400).json({
       message: 'There has been an error during the validation of the creation',
+      data: undefined,
       error: validation.error.details[0].message,
     });
   }
@@ -32,6 +33,7 @@ const adminValidationUpdate = (req, res, next) => {
   if (validation.error) {
     return res.status(400).json({
       message: 'There has been an error during the validation of the update',
+      data: undefined,
       error: validation.error.details[0].message,
     });
   }
