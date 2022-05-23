@@ -9,31 +9,76 @@ beforeAll(async () => {
 
 let employeeId;
 
-describe('Test Employees routes', () => {
-  test('It should create a new employee', async () => {
-    const response = await request(app).post('/employees').send({
-      first_name: 'Esteban',
-      last_name: 'Frare',
-      email: 'esteban.frare@radiumrocket.com',
-      password: 'test1235',
-      phone: '999900000',
-      active: true,
-    });
-    expect(response.statusCode).toBe(201);
-    expect(response.body.error).toBe(false);
-    // eslint-disable-next-line no-underscore-dangle
-    employeeId = response.body.data._id;
-  });
+describe('POST method', () => {
+    test('add employee', async () => {
+        const response = await request(app).post('/employees').send({
+            first_name: 'Juan',
+            last_name: 'Free',
+            email: 'juan.free@radiumrocket.com',
+            password: 'test1235',
+        });
+        expect(response.status).toBe(201);
+        // employeeId = response.body.data._id;
+    })
+})
 
-  test('It should get the employee list', async () => {
-    const response = await request(app).get('/employees');
-    expect(response.statusCode).toBe(200);
-    expect(response.body.error).toBe(false);
-  });
-
-  test('It should delete a employee', async () => {
-    const response = await request(app).delete(`/employees/${employeeId}`);
-    expect(response.statusCode).toBe(200);
-    expect(response.body.error).toBe(false);
-  });
+describe('/PUT method', () => {
+    test('Incorrect id: error:true', async () => {
+        const response = await request(app).put('/employees/wrongID');
+        expect(response.body.error).not.toBe(false);
+    })
+    test('Correct id: status 200.', async () => {
+        const response = await request(app).put(`/employees/${employeeId}`).send({
+            first_name: 'Editado',
+            last_name: 'New',
+            email: 'edit.nuevo@radiumrocket.com',
+            password: 'test1235',
+        });
+        expect(response.status).toBe(200);
+    })
+    test('Missing first_name', async () => {
+        const response = await request(app).put(`/employees/${employeeId}`).send({
+            last_name: 'New',
+            email: 'edit.nuevo@radiumrocket.com',
+            password: 'test1235',
+        });
+        expect(response.status).toBe(400);
+    })
+    test('Missing last_name', async () => {
+        const response = await request(app).put(`/employees/${employeeId}`).send({
+            first_name: 'Editado',
+            email: 'edit.nuevo@radiumrocket.com',
+            password: 'test1235',
+        });
+        expect(response.status).toBe(400);
+    })
+    test('Missing email', async () => {
+        const response = await request(app).put(`/employees/${employeeId}`).send({
+            first_name: 'Editado',
+            last_name: 'New',
+            password: 'test1235',
+        });
+        expect(response.status).toBe(400);
+    })
+    test('Missing password', async () => {
+        const response = await request(app).put(`/employees/${employeeId}`).send({
+            first_name: 'Editado',
+            last_name: 'New',
+            email: 'edit.nuevo@radiumrocket.com'
+        });
+        expect(response.status).toBe(400);
+    })
 });
+
+describe('/DELETE method', () => {
+    test('Incorrect id: error:true', async () => {
+      const response = await request(app).delete('/employees/wrongID');
+      expect(response.body.error).toBe(true);
+    });
+    test('Correct id: status 200.', async () => {
+      const response = await request(app).delete(`/employees/${employeeId}`);
+      expect(response.status).toBe(200);
+    });
+});
+
+
