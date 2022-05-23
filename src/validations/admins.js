@@ -7,6 +7,7 @@ const adminValidation = (req, res, next) => {
     email: Joi.string().email().required(),
     gender: Joi.string().valid('male', 'female', 'polygender').required(),
     active: Joi.boolean().required(),
+    password: Joi.string().min(3).required(),
   });
   const validation = schemaConditions.validate(req.body);
 
