@@ -15,7 +15,8 @@ const createOrEditTimesheetValidations = (req, res, next) => {
 
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There was an error during the validation of the request',
+      message: 'There was an error during the validation of the request',
+      data: undefined,
       error: validation.error.details[0].message,
     });
   }
