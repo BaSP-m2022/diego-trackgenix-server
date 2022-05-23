@@ -76,7 +76,7 @@ const createAdmin = async (req, res) => {
 const updateAdmin = async (req, res) => {
   try {
     if (!req.params) {
-      res.status(400).json({
+      return res.status(400).json({
         message: 'Please enter an id',
         data: undefined,
         error: true,
@@ -94,7 +94,7 @@ const updateAdmin = async (req, res) => {
         error: true,
       });
     }
-    return res.status(200).json({
+    return res.status(201).json({
       message: 'Admin updated',
       data: result,
       error: false,

@@ -7,8 +7,8 @@ const router = express.Router();
 router
   .get('/', adminsController.getAdmin)
   .get('/:id', adminsController.getAdminById)
-  .post('/', adminValidation.adminValidation, adminsController.createAdmin)
-  .put('/:id', adminValidation.adminValidation, adminsController.updateAdmin)
+  .post('/', adminValidation.adminValidationCreate, adminsController.createAdmin)
+  .put('/:id', adminValidation.adminValidationUpdate, adminsController.updateAdmin)
   .delete('/:id', adminsController.deleteAdmin);
 
 export default router;
