@@ -15,8 +15,6 @@ describe('/POST method', () => {
       last_name: 'como',
       email: 'estas.frare@jeje.com',
       password: 'probandoe345',
-      phone: '999900000',
-      active: true,
     });
     expect(response.statusCode).toBe(201);
     // eslint-disable-next-line no-underscore-dangle
@@ -28,8 +26,6 @@ describe('/POST method', () => {
       last_name: 'Gonzales',
       email: 'another.employee@trackgenix.com',
       password: 'test1235',
-      phone: '999900000',
-      active: true,
     });
     expect(response.body.error).toBe(false);
   });
@@ -41,30 +37,25 @@ describe('/POST method', () => {
     const response = await request(app).post('/employees').send({
       email: 'esteban.frare@radiumrocket.com',
       password: 'test1235',
-      phone: '999900000',
-      active: true,
     });
-    expect(response.body.error).not.toBe(false);
+
+    expect(response.body.error).toBe(true);
   });
   test('Propertys undefined on body: has an error.', async () => {
     const response = await request(app).post('/employees').send({
       cualquiercosa: 'esteban.frare@radiumrocket.com',
       password: 'test1235',
-      phone: '999900000',
-      active: true,
     });
-    expect(response.body.error).not.toBe(false);
+    expect(response.body.error).toBe(true);
   });
-  test('Property phone no respect characters minimum: has an error.', async () => {
+  test('Property first_name no respect characters minimum: has an error.', async () => {
     const response = await request(app).post('/employees').send({
-      first_name: 'hola',
+      first_name: 'h',
       last_name: 'como',
       email: 'estas.frare@jeje.com',
       password: 'probandoe345',
-      phone: '1',
-      active: true,
     });
-    expect(response.body.error).not.toBe(false);
+    expect(response.body.error).toBe(true);
   });
 });
 
