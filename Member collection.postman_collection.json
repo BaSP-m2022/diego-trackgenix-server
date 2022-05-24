@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "19a5da1a-d7f4-4871-8b54-1870855fee89",
+		"name": "Member collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20854823"
+	},
+	"item": [
+		{
+			"name": "Create member",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employeeId\":\"6281860dc32e7c819a91b357\",\r\n    \"role\":\"QA\",\r\n    \"rate\":\"80\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/members",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete member",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/members/628bb9a74d7cd4814af26220",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"members",
+						"628bb9a74d7cd4814af26220"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all members",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/members/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"members",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get member by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/members/628bb9984d7cd4814af2621e",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"members",
+						"628bb9984d7cd4814af2621e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update member",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"employeeId\": \"6281860dc32e7c819a91b357\",\r\n    \"role\": \"Dev\",\r\n    \"rate\":\"90\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/members/628bb9984d7cd4814af2621e",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"members",
+						"628bb9984d7cd4814af2621e"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
