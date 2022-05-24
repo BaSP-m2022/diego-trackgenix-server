@@ -47,10 +47,10 @@ describe('GET /timesheets/:id', () => {
     expect(response.statusCode).toBe(200);
   });
   test('should not throw timesheet, response 404', async () => {
-      const response = await request(app).get('/timesheets/628a58dcee3ba3f7967caa95').send();
-      expect(response.status).toBe(404);
-      expect(response.body.error).toBe(true);
-  })
+    const response = await request(app).get('/timesheets/628a58dcee3ba3f7967caa95').send();
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBe(true);
+  });
 });
 
 describe('PUT /timesheets/:id', () => {
