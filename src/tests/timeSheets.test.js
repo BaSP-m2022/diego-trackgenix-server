@@ -46,6 +46,11 @@ describe('GET /timesheets/:id', () => {
     const response = await request(app).get(`/timesheets/${timesheetId}`).send();
     expect(response.statusCode).toBe(200);
   });
+  test('should not throw timesheet, response 404', async () => {
+      const response = await request(app).get('/timesheets/628a58dcee3ba3f7967caa95').send();
+      expect(response.status).toBe(404);
+      expect(response.body.error).toBe(true);
+  })
 });
 
 describe('PUT /timesheets/:id', () => {
@@ -72,5 +77,6 @@ describe('DELETE /timesheets/:id', () => {
   test('must delete a certain timesheet', async () => {
     const response = await request(app).delete(`/timesheets/${timesheetId}`).send();
     expect(response.error).toBeFalsy();
+    expect(response.status).toBe(200);
   });
 });
