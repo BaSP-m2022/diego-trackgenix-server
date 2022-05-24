@@ -110,18 +110,37 @@ describe('GET /admins/:id', () => {
 describe('PUT / admins', () => {
   test('Error from updating an admin', async () => {
     const response = await request(app).put(`/admins/${adminId}`).send({
-      email: 'wprugel1@homes',
+      firstName: 'Waylen',
+      lastName: 'Prugel',
     });
-    expect(response.error).not.toBeFalsy();
+    expect(response.body.error).toBeTruthy();
+  });
+  test('Answer with a message that there are missing some keys', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      lastName: 'Prugel',
+    });
+    expect(response.error).toBeTruthy();
   });
   test('Answer with a 404 status code', async () => {
-    const response = await request(app).put('/admins/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app).put('/admins/628a59dcee3ba3f8969caa89').send({
+      firstName: 'Waylen',
+      lastName: 'Prugel',
+      email: 'wprugel1@homestead.com',
+      gender: 'male',
+      active: true,
+      password: 'MuQ1zKT6',
+    });
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toMatch('Admin not found');
   });
   test('Response should return a 201 status with admin updated', async () => {
     const response = await request(app).put(`/admins/${adminId}`).send({
-      password: 'sadjhba1276578',
+      firstName: 'Waylen',
+      lastName: 'Prugel',
+      email: 'wprugel1@homestead.com',
+      gender: 'male',
+      active: true,
+      password: 'hgc65474',
     });
     expect(response.body.data).toMatchObject({
       firstName: 'Waylen',
@@ -129,9 +148,21 @@ describe('PUT / admins', () => {
       email: 'wprugel1@homestead.com',
       gender: 'male',
       active: true,
-      password: 'sadjhba1276578',
+      password: 'hgc65474',
     });
+    // console.log(reponse.body.data);
     expect(response.statusCode).toBe(201);
+  });
+  test('Error for invalid key', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Waylen',
+      lastName: 'Prugel',
+      email: 'wprugel1@ho',
+      gender: 'male',
+      active: true,
+      password: 'MuQ1zKT6',
+    });
+    expect(response.error).not.toBeFalsy();
   });
 });
 
@@ -142,7 +173,7 @@ describe('DELETE /admins', () => {
   });
   test('Response should return a 200 status code', async () => {
     const response = await request(app).delete(`/admins/${adminId}`).send();
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(204);
     expect(response.error).not.toBeTruthy();
   });
 });

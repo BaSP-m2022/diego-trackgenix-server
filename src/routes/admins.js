@@ -8,7 +8,7 @@ router
   .get('/', adminsController.getAdmin)
   .get('/:id', adminsController.getAdminById)
   .post('/', adminValidation.adminValidationCreate, adminsController.createAdmin)
-  .put('/:id', adminValidation.adminValidationUpdate, adminsController.updateAdmin)
+  .put('/:id', adminValidation.adminValidationCreate, adminsController.updateAdmin)
   .delete('/:id', adminsController.deleteAdmin);
 
 export default router;
