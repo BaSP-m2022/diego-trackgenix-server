@@ -94,19 +94,37 @@ describe('GET /super-admins/:id', () => {
 });
 
 describe('PUT /super-admins/:id', () => {
-  test('Response should throw error', async () => {
+  test('Response should throw error because of invalid email', async () => {
     const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+      firstName: 'Paula',
+      lastName: 'Rinaldi',
       email: 'paurinaldi95@gmai',
+      password: 'a123456789',
+    });
+    expect(response.error).toBeTruthy();
+  });
+  test('Response should throw error because of missing keys', async () => {
+    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+      firstName: 'Paul',
+      email: 'paurinaldi95@gmail.com',
     });
     expect(response.error).toBeTruthy();
   });
   test('Response should return 404 status and message indicates super admin was not found', async () => {
-    const response = await request(app).put('/super-admins/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app).put('/super-admins/628a59dcee3ba3f8969caa89').send({
+      firstName: 'Paula',
+      lastName: 'Rinaldi',
+      email: 'paurinaldi95@gmail.com',
+      password: 'a123456789',
+    });
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toMatch('Super Admin not found');
   });
   test('Response should return updated Super Admin and respose status should be 201', async () => {
     const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+      firstName: 'Paula',
+      lastName: 'Rinaldi',
+      email: 'paurinaldi95@gmail.com',
       password: 'aaaaaa123456789',
     });
     expect(response.body.data).toMatchObject({
@@ -117,6 +135,12 @@ describe('PUT /super-admins/:id', () => {
     });
     expect(response.statusCode).toBe(201);
   });
+});
+test('Response should throw error', async () => {
+  const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+    firstName: 'Paul',
+  });
+  expect(response.error).toBeTruthy();
 });
 
 describe('Delete /super-admins/:id', () => {

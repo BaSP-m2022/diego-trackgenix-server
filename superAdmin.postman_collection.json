@@ -109,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"password\": \"jajajajaje\"\n}",
+					"raw": "{\n            \"firstName\": \"Marcelo\",\n            \"lastName\": \"Gallardo\",\n            \"email\": \"gall@carp.com\",\n            \"password\": \"jajajajaji\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
