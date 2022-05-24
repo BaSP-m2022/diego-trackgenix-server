@@ -11,7 +11,7 @@ const getMembers = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Super Admin found',
+      message: 'Members found',
       data: allMembers,
       error: false,
     });

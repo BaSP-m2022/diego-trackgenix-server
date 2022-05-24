@@ -8,4 +8,5 @@ export default [{
   client: '6283097baae15b94aa3975b3',
   startDate: '02/11/2022',
   endDate: '10/23/2022',
+  members: [{ memberId: '628bbbe898e5aad84af57df3' }],
 }];

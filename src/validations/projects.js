@@ -8,6 +8,7 @@ const createOrEditProjectsValidations = (req, res, next) => {
     client: joi.string().min(3).required(),
     startDate: joi.date().required(),
     endDate: joi.date().required(),
+    members: joi.array().required(),
   });
   const validation = requirementSchema.validate(req.body);
 
