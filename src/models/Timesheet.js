@@ -1,4 +1,6 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
+
+const { Schema } = mongoose;
 
 const timesheet = new Schema(
   {
@@ -6,34 +8,32 @@ const timesheet = new Schema(
       type: String,
       required: true,
     },
-    date: {
-      type: String,
+    taskId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
-    },
-    task: {
-      type: String,
-      required: true,
+      ref: 'Task',
     },
     validated: {
       type: Boolean,
       required: true,
     },
-    employee: {
-      type: String,
+    employeeId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: 'Employee',
     },
     projectId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Projects',
+    },
+    startDate: {
+      type: Date,
       required: true,
     },
-    projectManager: {
-      type: String,
+    endDate: {
+      type: Date,
       required: true,
-    },
-    role: {
-      type: String,
-      required: true,
-
     },
     hours: {
       type: Number,
@@ -45,4 +45,4 @@ const timesheet = new Schema(
   },
 );
 
-export default model('Timesheet', timesheet);
+export default mongoose.model('Timesheet', timesheet);

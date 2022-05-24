@@ -6,7 +6,6 @@ dotenv.config();
 
 const port = process.env.PORT || 3000;
 const MONGO_URL = process.env.URL_MONGO;
-
 mongoose.connect(
   MONGO_URL,
   (error) => {
