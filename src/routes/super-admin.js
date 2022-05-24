@@ -8,7 +8,7 @@ router
   .get('/', superAdminController.getSuperAdmins)
   .get('/:id', superAdminController.getSuperAdminById)
   .post('/', superAdminValidations.validateCreation, superAdminController.addSuperAdmin)
-  .put('/:id', superAdminValidations.validateUpdate, superAdminController.updateSuperAdmin)
+  .put('/:id', superAdminValidations.validateCreation, superAdminController.updateSuperAdmin)
   .delete('/:id', superAdminController.deleteSuperAdmin);
 
 export default router;
