@@ -10,7 +10,9 @@ const contentValidation = (req, res, next) => {
   const validation = schemaConditions.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      error: validation.error.message,
+      message: validation.error.message,
+      data: undefined,
+      error: true,
     });
   }
   return next();
