@@ -2,7 +2,7 @@ import Project from '../models/Projects';
 
 const getProject = async (req, res) => {
   try {
-    const allProjects = await Project.find(req.body).populate('id', 'name');
+    const allProjects = await Project.find(req.body);
     if (allProjects.length === 0) {
       return res.status(404).json({
         message: 'Not found',
@@ -52,20 +52,16 @@ const addProject = async (req, res) => {
   try {
     const project = new Project({
       name: req.body.name,
+      isActive: req.body.isActive,
       description: req.body.description,
+      client: req.body.client,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      clientName: req.body.clientName,
-      active: req.body.active,
-      devRate: req.body.devRate,
-      qaRate: req.body.qaRate,
-      pmRate: req.body.pmRate,
-      tlRate: req.body.tlRate,
-      devs: req.body.devs,
-      qas: req.body.qas,
-      projectManager: req.body.projectManager,
-      techLeader: req.body.techLeader,
-      admin: req.body.admin,
+      // members: [{
+      //   employeeId: req.body.employeeId,
+      //   role: req.body.role,
+      //   rate: req.body.rate,
+      // }],
     });
     const result = await project.save();
     return res.status(201).json({
