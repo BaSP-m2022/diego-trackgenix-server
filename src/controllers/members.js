@@ -115,12 +115,7 @@ const deleteMember = async (req, res) => {
         error: true,
       });
     }
-    return res.status(200).json({
-      message: 'Member has been deleted',
-      data: result,
-      error: false,
-
-    });
+    return res.status(204).json();
   } catch (error) {
     return res.json({
       message: error.message,

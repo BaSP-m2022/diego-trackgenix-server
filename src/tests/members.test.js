@@ -86,18 +86,26 @@ describe('GET /members/:id', () => {
 describe('PUT /members/:id', () => {
   test('Response should throw error', async () => {
     const response = await request(app).put(`/members/${memberId}`).send({
+      employeeId: '6281860dc32e7c819a91b357',
+      role: 'Dev',
       rate: 'lalala',
     });
     expect(response.error).toBeTruthy();
   });
   test('Response should return 404 status and message indicates super admin was not found', async () => {
-    const response = await request(app).put('/members/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app).put('/members/628a59dcee3ba3f8969caa89').send({
+      employeeId: '6281860dc32e7c819a91b357',
+      role: 'Dev',
+      rate: 90,
+    });
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toMatch('Member not found');
   });
   test('Response should return updated Member and respose status should be 201', async () => {
     const response = await request(app).put(`/members/${memberId}`).send({
+      employeeId: '6281860dc32e7c819a91b357',
       role: 'QA',
+      rate: 90,
     });
     expect(response.body.data).toMatchObject({
       employeeId: '6281860dc32e7c819a91b357',
@@ -113,9 +121,9 @@ describe('Delete /members/:id', () => {
     const response = await request(app).delete('/members/628a59dcee3ba3f8969caa89').send();
     expect(response.statusCode).toBe(404);
   });
-  test('Response should return 200 status', async () => {
+  test('Response should return 204 status', async () => {
     const response = await request(app).delete(`/members/${memberId}`).send();
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(204);
     expect(response.error).toBeFalsy();
   });
 });

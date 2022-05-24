@@ -97,7 +97,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rate\":\"90\"\r\n}",
+					"raw": "{   \r\n    \"employeeId\": \"6281860dc32e7c819a91b357\",\r\n    \"role\": \"Dev\",\r\n    \"rate\":\"90\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
