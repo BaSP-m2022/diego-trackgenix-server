@@ -127,22 +127,21 @@ describe('/PUT method', () => {
 
 describe('/DELETE method', () => {
   test('Incorrect id: error:true', async () => {
-    const response = await request(app).delete('/employees/wrongID');
+    const response = await request(app).delete('/employees/wrongId');
     expect(response.body.error).toBe(true);
   });
   test('Incorrect id: status 404', async () => {
-    const response = await request(app).delete('/employees/');
+    const response = await request(app).delete('/employees/wrongId');
     expect(response.status).toBe(404);
   });
   test('Correct id: status 204.', async () => {
     const response = await request(app).delete(`/employees/${employeeId}`);
     expect(response.status).toBe(204);
   });
-  // test('Correct id: error:false', async () => {
-  //     const response = await request(app).delete(`/employees/${employeeId}`);
-  //     console.log(response);
-  //     expect(response.body.error).toBe(false); <<<< me devuelve undefined en lugar de false.
-  // });
+  test('Correct id: error:false', async () => {
+      const response = await request(app).delete(`/employees/60d4a32f257e066e9495ce12`);
+      expect(response.error).toBe(false);
+  });
   test('Correct id but not found employee: message', async () => {
     const response = await request(app).delete(`/employees/${employeeId}`);
     expect(response.body.message).toEqual('Employee not found');

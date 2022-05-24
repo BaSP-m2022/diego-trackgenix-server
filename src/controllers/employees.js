@@ -124,7 +124,7 @@ const deleteEmployee = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.json({
+    return res.status(404).json({
       message: error.message,
       data: undefined,
       error: true,
