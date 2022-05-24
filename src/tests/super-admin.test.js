@@ -148,9 +148,9 @@ describe('Delete /super-admins/:id', () => {
     const response = await request(app).delete('/super-admins/628a59dcee3ba3f8969caa89').send();
     expect(response.statusCode).toBe(404);
   });
-  test('Response should return 200 status', async () => {
+  test('Response should return 204 status', async () => {
     const response = await request(app).delete(`/super-admins/${superAdminId}`).send();
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(204);
     expect(response.error).toBeFalsy();
   });
 });
