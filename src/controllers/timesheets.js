@@ -26,23 +26,23 @@ const getAllTimesheet = async (req, res) => {
 
 const getTimesheetById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const timesheet = await TimesheetModel.findById(req.params.id);
-      return res.status(200).json({
-        message: 'Request done',
-        data: timesheet,
-        error: false,
+    const timesheet = await TimesheetModel.findById(req.params.id);
+    if (!timesheet) {
+      return res.status(404).json({
+        message: 'The id is wrong',
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(400).json({
-      message: 'The id is wrong',
-      data: null,
-      error: true,
+    return res.status(200).json({
+      message: 'Request done',
+      data: timesheet,
+      error: false,
     });
   } catch (error) {
     return res.json({
       message: error.message,
-      data: null,
+      data: undefined,
       error: true,
     });
   }
@@ -52,13 +52,12 @@ const createTimesheet = async (req, res) => {
   try {
     const newTimesheet = new TimesheetModel({
       description: req.body.description,
-      date: req.body.date,
-      task: req.body.task,
+      taskId: req.body.taskId,
       validated: req.body.validated,
-      employee: req.body.employee,
+      employeeId: req.body.employeeId,
       projectId: req.body.projectId,
-      projectManager: req.body.projectManager,
-      role: req.body.role,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
       hours: req.body.hours,
     });
     const result = await newTimesheet.save();
@@ -69,7 +68,9 @@ const createTimesheet = async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      msg: 'Some error was ocurred, check the body of the request.',
+      message: 'Some error ocurred, check the body of the request.',
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -94,7 +95,7 @@ const updateTimesheet = async (req, res) => {
         error: true,
       });
     }
-    return res.status(200).json({
+    return res.status(201).json({
       message: 'Request done',
       data: result,
       error: false,
@@ -110,32 +111,23 @@ const updateTimesheet = async (req, res) => {
 
 const deleteTimesheet = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        message: "You've to specify an id.",
-        data: null,
-        error: true,
-
-      });
-    }
-
     const result = await TimesheetModel.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
         message: 'Timesheet not found',
-        data: null,
+        data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'request done',
+      message: 'Request done',
       data: result,
       error: false,
     });
   } catch (error) {
     return res.json({
       message: error.message,
-      data: null,
+      data: undefined,
       error: true,
     });
   }
