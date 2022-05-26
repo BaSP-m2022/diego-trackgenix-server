@@ -57,6 +57,7 @@ const addProject = async (req, res) => {
       client: req.body.client,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
+      members: req.body.members,
     });
     const result = await project.save();
     return res.status(201).json({
@@ -112,7 +113,9 @@ const deleteProject = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
-        msg: 'Missing id parameter',
+        message: 'Missing id parameter',
+        data: undefined,
+        error: true,
       });
     }
     const result = await Project.findByIdAndDelete(req.params.id);
