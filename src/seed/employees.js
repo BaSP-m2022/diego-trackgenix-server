@@ -7,6 +7,4 @@ export default [{
   last_name: 'Frare',
   email: 'esteban.frare@radiumrocket.com',
   password: 'test1235',
-  phone: '999900000',
-  active: true,
 }];

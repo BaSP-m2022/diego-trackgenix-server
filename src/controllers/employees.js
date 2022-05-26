@@ -70,7 +70,11 @@ const updateEmployee = async (req, res) => {
         error: true,
       });
     }
-    return res.status(200).json(result);
+    return res.status(201).json({
+      message: 'Employee information updated',
+      data: result,
+      error: false,
+    });
   } catch (error) {
     return res.json({
       message: 'There has been an error',
@@ -114,14 +118,13 @@ const deleteEmployee = async (req, res) => {
         error: true,
       });
     }
-    return res.status(200).json({
+    return res.status(204).json({
       message: 'The employee has been deleted',
       data: result,
       error: false,
-
     });
   } catch (error) {
-    return res.json({
+    return res.status(404).json({
       message: error.message,
       data: undefined,
       error: true,
