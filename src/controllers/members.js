@@ -1,9 +1,9 @@
-import Project from '../models/Projects';
+import Members from '../models/Members';
 
-const getProject = async (req, res) => {
+const getMembers = async (req, res) => {
   try {
-    const allProjects = await Project.find(req.body);
-    if (allProjects.length === 0) {
+    const allMembers = await Members.find(req.body);
+    if (allMembers.length === 0) {
       return res.status(404).json({
         message: 'Not found',
         data: undefined,
@@ -11,8 +11,8 @@ const getProject = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Project found',
-      data: allProjects,
+      message: 'Members found',
+      data: allMembers,
       error: false,
     });
   } catch (error) {
@@ -24,19 +24,19 @@ const getProject = async (req, res) => {
   }
 };
 
-const getProjectById = async (req, res) => {
+const getMemberById = async (req, res) => {
   try {
-    const project = await Project.findById(req.params.id);
-    if (project == null) {
+    const member = await Members.findById(req.params.id);
+    if (member == null) {
       return res.status(404).json({
-        message: 'Project not found',
+        message: 'Member not found',
         data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Project found',
-      data: project,
+      message: 'Member found',
+      data: member,
       error: false,
     });
   } catch (error) {
@@ -48,19 +48,16 @@ const getProjectById = async (req, res) => {
   }
 };
 
-const addProject = async (req, res) => {
+const addMember = async (req, res) => {
   try {
-    const project = new Project({
-      name: req.body.name,
-      isActive: req.body.isActive,
-      description: req.body.description,
-      client: req.body.client,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
+    const member = new Members({
+      employeeId: req.body.employeeId,
+      role: req.body.role,
+      rate: req.body.rate,
     });
-    const result = await project.save();
+    const result = await member.save();
     return res.status(201).json({
-      message: 'Project created',
+      message: 'Member created',
       data: result,
       error: false,
     });
@@ -73,7 +70,7 @@ const addProject = async (req, res) => {
   }
 };
 
-const updateProject = async (req, res) => {
+const updateMember = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
@@ -82,20 +79,20 @@ const updateProject = async (req, res) => {
         error: true,
       });
     }
-    const result = await Project.findByIdAndUpdate(
+    const result = await Members.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true },
     );
     if (!result) {
       return res.status(404).json({
-        message: 'Project not found',
-        data: null,
+        message: 'Member not found',
+        data: undefined,
         error: true,
       });
     }
     return res.status(201).json({
-      message: 'Project updated',
+      message: 'Member updated',
       data: result,
       error: false,
     });
@@ -108,39 +105,31 @@ const updateProject = async (req, res) => {
   }
 };
 
-const deleteProject = async (req, res) => {
+const deleteMember = async (req, res) => {
   try {
-    if (!req.params) {
-      return res.status(400).json({
-        msg: 'Missing id parameter',
-      });
-    }
-    const result = await Project.findByIdAndDelete(req.params.id);
+    const result = await Members.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        message: 'Project not found',
-        data: null,
+        message: 'Member not found',
+        data: undefined,
         error: true,
       });
     }
-    return res.status(204).json({
-      message: 'Project has been deleted',
-      data: result,
-      error: false,
-    });
+    return res.status(204).json();
   } catch (error) {
     return res.json({
       message: error.message,
       data: undefined,
       error: true,
+
     });
   }
 };
 
 export default {
-  getProject,
-  getProjectById,
-  addProject,
-  updateProject,
-  deleteProject,
+  getMembers,
+  getMemberById,
+  addMember,
+  updateMember,
+  deleteMember,
 };
