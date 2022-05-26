@@ -24,6 +24,25 @@ describe('POST /projects', () => {
     // eslint-disable-next-line no-underscore-dangle
     projectsId = response.body.data._id;
   });
+  test('Message should indicate creation of project', async () => {
+    const response = await request(app).post('/projects').send({
+      name: 'Lorem Ipsum',
+      isActive: true,
+      description: 'nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor',
+      client: '6283097baae15b94aa3975b3',
+      startDate: '02/11/2022',
+      endDate: '10/23/2022',
+      members: [{ memberId: '628bbbe898e5aad84af57df3' }],
+    });
+    expect(response.body.message).toEqual('Project created');
+    // eslint-disable-next-line no-underscore-dangle
+    projectsId = response.body.data._id;
+  });
+  test('Must not create', async () => {
+    const response = await request(app).post('/projects').send({
+    });
+    expect(response.status).toBe(400);
+  });
 });
 
 describe('GET /projects', () => {
@@ -64,6 +83,7 @@ describe('PUT /projects', () => {
       members: [{ memberId: '628bbbe898e5aad84af57df3' }],
     });
     expect(response.status).toBe(201);
+    expect(response.body.message).toEqual('Project updated');
   });
 });
 
