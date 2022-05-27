@@ -1,6 +1,6 @@
 import Task from '../models/tasks';
 
-const getAllTasks = async (req, res) => {
+async function getAllTasks(req, res) {
   try {
     const allTasks = await Task.find(req.body);
     if (allTasks.length === 0) {
@@ -17,7 +17,7 @@ const getAllTasks = async (req, res) => {
       message: 'not found',
     });
   }
-};
+}
 
 const getTaskById = async (req, res) => {
   try {
@@ -39,10 +39,12 @@ const createTask = async (req, res) => {
   try {
     const newTask = new Task({
       description: req.body.description,
+      workedHours: req.body.workedHours,
+      date: req.body.date,
     });
     const newTaskDone = await newTask.save();
     return res.status(200).json({
-      msg: 'done',
+      msg: 'Tasks has been created',
       newTaskDone,
     });
   } catch (error) {
@@ -60,11 +62,9 @@ const updateTask = async (req, res) => {
         msg: 'Missing id parameter',
       });
     }
-    const result = await Task.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const result = await Task.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!result) {
       return res.status(404).json({
         msg: 'Task not found',
@@ -87,7 +87,7 @@ const deleteTask = async (req, res) => {
         msg: 'Task not found',
       });
     }
-    return res.status(200).json({
+    return res.status(204).json({
       msg: 'Task has been deleted',
     });
   } catch (error) {

@@ -1,4 +1,4 @@
-import Project from '../models/Projects';
+import Project from '../models/projects';
 
 const getProject = async (req, res) => {
   try {
@@ -83,11 +83,9 @@ const updateProject = async (req, res) => {
         error: true,
       });
     }
-    const result = await Project.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const result = await Project.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!result) {
       return res.status(404).json({
         message: 'Project not found',

@@ -1,4 +1,4 @@
-import Members from '../models/Members';
+import Members from '../models/members';
 
 const getMembers = async (req, res) => {
   try {
@@ -79,11 +79,9 @@ const updateMember = async (req, res) => {
         error: true,
       });
     }
-    const result = await Members.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const result = await Members.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!result) {
       return res.status(404).json({
         message: 'Member not found',
@@ -121,7 +119,6 @@ const deleteMember = async (req, res) => {
       message: error.message,
       data: undefined,
       error: true,
-
     });
   }
 };

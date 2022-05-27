@@ -1,4 +1,4 @@
-import SuperAdmin from '../models/Super-admin';
+import SuperAdmin from '../models/super-admins';
 
 const getSuperAdmins = async (req, res) => {
   try {
@@ -80,11 +80,9 @@ const updateSuperAdmin = async (req, res) => {
         error: true,
       });
     }
-    const result = await SuperAdmin.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const result = await SuperAdmin.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!result) {
       return res.status(404).json({
         message: 'Super Admin not found',
@@ -122,7 +120,6 @@ const deleteSuperAdmin = async (req, res) => {
       message: error.message,
       data: undefined,
       error: true,
-
     });
   }
 };

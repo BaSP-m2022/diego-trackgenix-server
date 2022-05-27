@@ -1,4 +1,4 @@
-import Admin from '../models/admin';
+import Admin from '../models/admins';
 
 const getAdmin = async (req, res) => {
   try {
@@ -82,11 +82,9 @@ const updateAdmin = async (req, res) => {
         error: true,
       });
     }
-    const result = await Admin.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const result = await Admin.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!result) {
       return res.status(404).json({
         message: 'Admin not found',
