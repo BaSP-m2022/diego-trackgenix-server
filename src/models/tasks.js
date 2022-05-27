@@ -8,6 +8,13 @@ const tasksSchema = new Schema(
       type: String,
       required: true,
     },
+    workedHours: {
+      type: Number,
+    },
+    date: {
+      type: Date,
+    },
+
   },
 );
 

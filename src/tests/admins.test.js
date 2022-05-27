@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 import request from 'supertest';
 import app from '../app';
-import admin from '../models/admin';
-import adminSeed from '../seed/admin';
+import admin from '../models/admins';
+import adminSeed from '../seed/admins';
 
 beforeAll(async () => {
   await admin.collection.insertMany(adminSeed);
@@ -91,7 +91,9 @@ describe('GET /admins/:id', () => {
     expect(response.statusCode).toBe(200);
   });
   test('Response should return a 404 status', async () => {
-    const response = await request(app).get('/admins/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app)
+      .get('/admins/628a59dcee3ba3f8969caa89')
+      .send();
     expect(response.statusCode).toBe(404);
   });
   test('Answer with the admin called', async () => {
@@ -122,14 +124,16 @@ describe('PUT / admins', () => {
     expect(response.error).toBeTruthy();
   });
   test('Answer with a 404 status code', async () => {
-    const response = await request(app).put('/admins/628a59dcee3ba3f8969caa89').send({
-      firstName: 'Waylen',
-      lastName: 'Prugel',
-      email: 'wprugel1@homestead.com',
-      gender: 'male',
-      active: true,
-      password: 'MuQ1zKT6',
-    });
+    const response = await request(app)
+      .put('/admins/628a59dcee3ba3f8969caa89')
+      .send({
+        firstName: 'Waylen',
+        lastName: 'Prugel',
+        email: 'wprugel1@homestead.com',
+        gender: 'male',
+        active: true,
+        password: 'MuQ1zKT6',
+      });
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toMatch('Admin not found');
   });
@@ -168,7 +172,9 @@ describe('PUT / admins', () => {
 
 describe('DELETE /admins', () => {
   test('Should response a 404 status code and fail to delete the admin', async () => {
-    const response = await request(app).delete('/admins/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app)
+      .delete('/admins/628a59dcee3ba3f8969caa89')
+      .send();
     expect(response.statusCode).toBe(404);
   });
   test('Response should return a 200 status code', async () => {

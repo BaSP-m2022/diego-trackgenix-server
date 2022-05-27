@@ -1,11 +1,11 @@
-import TimesheetModel from '../models/Timesheet';
+import TimesheetModel from '../models/timesheets';
 
 const getAllTimesheet = async (req, res) => {
   try {
     const filteredTimesheets = await TimesheetModel.find(req.body);
     if (filteredTimesheets.length === 0) {
       return res.status(400).json({
-        message: 'Error on the search\'s criteria',
+        message: "Error on the search's criteria",
         data: null,
         error: true,
       });
@@ -79,15 +79,19 @@ const updateTimesheet = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        message: 'You\'ve to specify an id',
+        message: "You've to specify an id",
         data: null,
         error: true,
       });
     }
 
-    const result = await TimesheetModel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const result = await TimesheetModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      },
+    );
     if (!result) {
       return res.status(404).json({
         message: 'Timesheet not found',
@@ -111,6 +115,14 @@ const updateTimesheet = async (req, res) => {
 
 const deleteTimesheet = async (req, res) => {
   try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        message: "You've to specify an id.",
+        data: null,
+        error: true,
+      });
+    }
+
     const result = await TimesheetModel.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({

@@ -1,4 +1,4 @@
-import Employee from '../models/Employees';
+import Employee from '../models/employees';
 
 const createEmployee = async (req, res) => {
   try {
@@ -58,11 +58,9 @@ const updateEmployee = async (req, res) => {
         error: true,
       });
     }
-    const result = await Employee.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const result = await Employee.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!result) {
       return res.status(404).json({
         message: 'Employee not found',
@@ -128,7 +126,6 @@ const deleteEmployee = async (req, res) => {
       message: error.message,
       data: undefined,
       error: true,
-
     });
   }
 };

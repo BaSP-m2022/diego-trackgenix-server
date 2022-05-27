@@ -1,6 +1,6 @@
 import request from 'supertest';
-import Superadmin from '../models/Super-admin';
-import SuperAdminSeed from '../seed/super-admin';
+import Superadmin from '../models/super-admins';
+import SuperAdminSeed from '../seed/super-admins';
 import app from '../app';
 
 beforeAll(async () => {
@@ -75,15 +75,21 @@ describe('GET /super-admins', () => {
 
 describe('GET /super-admins/:id', () => {
   test('Response should return 200 status', async () => {
-    const response = await request(app).get(`/super-admins/${superAdminId}`).send();
+    const response = await request(app)
+      .get(`/super-admins/${superAdminId}`)
+      .send();
     expect(response.statusCode).toBe(200);
   });
   test('Response should return 404 status', async () => {
-    const response = await request(app).get('/super-admins/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app)
+      .get('/super-admins/628a59dcee3ba3f8969caa89')
+      .send();
     expect(response.statusCode).toBe(404);
   });
   test('Response should return only the Super Admin with the Id indicated', async () => {
-    const response = await request(app).get(`/super-admins/${superAdminId}`).send();
+    const response = await request(app)
+      .get(`/super-admins/${superAdminId}`)
+      .send();
     expect(response.body.data).toMatchObject({
       firstName: 'Paula',
       lastName: 'Rinaldi',
@@ -95,38 +101,46 @@ describe('GET /super-admins/:id', () => {
 
 describe('PUT /super-admins/:id', () => {
   test('Response should throw error because of invalid email', async () => {
-    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-      firstName: 'Paula',
-      lastName: 'Rinaldi',
-      email: 'paurinaldi95@gmai',
-      password: 'a123456789',
-    });
+    const response = await request(app)
+      .put(`/super-admins/${superAdminId}`)
+      .send({
+        firstName: 'Paula',
+        lastName: 'Rinaldi',
+        email: 'paurinaldi95@gmai',
+        password: 'a123456789',
+      });
     expect(response.error).toBeTruthy();
   });
   test('Response should throw error because of missing keys', async () => {
-    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-      firstName: 'Paul',
-      email: 'paurinaldi95@gmail.com',
-    });
+    const response = await request(app)
+      .put(`/super-admins/${superAdminId}`)
+      .send({
+        firstName: 'Paul',
+        email: 'paurinaldi95@gmail.com',
+      });
     expect(response.error).toBeTruthy();
   });
   test('Response should return 404 status and message indicates super admin was not found', async () => {
-    const response = await request(app).put('/super-admins/628a59dcee3ba3f8969caa89').send({
-      firstName: 'Paula',
-      lastName: 'Rinaldi',
-      email: 'paurinaldi95@gmail.com',
-      password: 'a123456789',
-    });
+    const response = await request(app)
+      .put('/super-admins/628a59dcee3ba3f8969caa89')
+      .send({
+        firstName: 'Paula',
+        lastName: 'Rinaldi',
+        email: 'paurinaldi95@gmail.com',
+        password: 'a123456789',
+      });
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toMatch('Super Admin not found');
   });
   test('Response should return updated Super Admin and respose status should be 201', async () => {
-    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-      firstName: 'Paula',
-      lastName: 'Rinaldi',
-      email: 'paurinaldi95@gmail.com',
-      password: 'aaaaaa123456789',
-    });
+    const response = await request(app)
+      .put(`/super-admins/${superAdminId}`)
+      .send({
+        firstName: 'Paula',
+        lastName: 'Rinaldi',
+        email: 'paurinaldi95@gmail.com',
+        password: 'aaaaaa123456789',
+      });
     expect(response.body.data).toMatchObject({
       firstName: 'Paula',
       lastName: 'Rinaldi',
@@ -137,19 +151,25 @@ describe('PUT /super-admins/:id', () => {
   });
 });
 test('Response should throw error', async () => {
-  const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-    firstName: 'Paul',
-  });
+  const response = await request(app)
+    .put(`/super-admins/${superAdminId}`)
+    .send({
+      firstName: 'Paul',
+    });
   expect(response.error).toBeTruthy();
 });
 
 describe('Delete /super-admins/:id', () => {
   test('Should return 404 status and fail to delete', async () => {
-    const response = await request(app).delete('/super-admins/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app)
+      .delete('/super-admins/628a59dcee3ba3f8969caa89')
+      .send();
     expect(response.statusCode).toBe(404);
   });
   test('Response should return 204 status', async () => {
-    const response = await request(app).delete(`/super-admins/${superAdminId}`).send();
+    const response = await request(app)
+      .delete(`/super-admins/${superAdminId}`)
+      .send();
     expect(response.statusCode).toBe(204);
     expect(response.error).toBeFalsy();
   });

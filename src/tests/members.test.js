@@ -1,5 +1,5 @@
 import request from 'supertest';
-import Members from '../models/Members';
+import Members from '../models/members';
 import MemberSeed from '../seed/members';
 import app from '../app';
 
@@ -70,7 +70,9 @@ describe('GET /members/:id', () => {
     expect(response.statusCode).toBe(200);
   });
   test('Response should return 404 status', async () => {
-    const response = await request(app).get('/members/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app)
+      .get('/members/628a59dcee3ba3f8969caa89')
+      .send();
     expect(response.statusCode).toBe(404);
   });
   test('Response should return only the Member with the Id indicated', async () => {
@@ -93,11 +95,13 @@ describe('PUT /members/:id', () => {
     expect(response.error).toBeTruthy();
   });
   test('Response should return 404 status and message indicates super admin was not found', async () => {
-    const response = await request(app).put('/members/628a59dcee3ba3f8969caa89').send({
-      employeeId: '6281860dc32e7c819a91b357',
-      role: 'Dev',
-      rate: 90,
-    });
+    const response = await request(app)
+      .put('/members/628a59dcee3ba3f8969caa89')
+      .send({
+        employeeId: '6281860dc32e7c819a91b357',
+        role: 'Dev',
+        rate: 90,
+      });
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toMatch('Member not found');
   });
@@ -118,7 +122,9 @@ describe('PUT /members/:id', () => {
 
 describe('Delete /members/:id', () => {
   test('Should return 404 status and fail to delete', async () => {
-    const response = await request(app).delete('/members/628a59dcee3ba3f8969caa89').send();
+    const response = await request(app)
+      .delete('/members/628a59dcee3ba3f8969caa89')
+      .send();
     expect(response.statusCode).toBe(404);
   });
   test('Response should return 204 status', async () => {
