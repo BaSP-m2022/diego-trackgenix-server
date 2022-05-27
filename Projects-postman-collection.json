@@ -1,404 +1,58 @@
 {
 	"info": {
-		"_postman_id": "5cf18eab-26c8-477a-b63e-8d0011f4ab47",
-		"name": "postman-collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "9f954569-cc59-4034-b9db-1680925482a7",
+		"name": "Projects",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20872559"
 	},
 	"item": [
 		{
-			"name": "create a project",
+			"name": "GET",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"name\": \"Kanlam\",\n  \"description\": \"nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor\",\n  \"startDate\": \"07.04.2022\",\n  \"endDate\": \"19.07.2021\",\n  \"clientName\": \"Bamity\",\n  \"active\": false,\n  \"devRate\": 57.93,\n  \"qaRate\": 5.35,\n  \"pmRate\": 33.33,\n  \"tlRate\": 38.51,\n  \"devs\": {\n  \"employeeId\": \"7109e566-c13b-4359-b03d-2c7528438c8b\",\n  \"name\": \"King\"\n  }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "localhost:3000/projects",
+					"raw": "http://localhost:4000/projects",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "4000",
 					"path": [
 						"projects"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "create a project succesfully",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Kanlam\",\n  \"description\": \"nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor\",\n  \"startDate\": \"07.04.2022\",\n  \"endDate\": \"19.07.2021\",\n  \"clientName\": \"Bamity\",\n  \"active\": false,\n  \"devRate\": 57.93,\n  \"qaRate\": 5.35,\n  \"pmRate\": 33.33,\n  \"tlRate\": 38.51,\n  \"devs\": {\n  \"employeeId\": \"7109e566-c13b-4359-b03d-2c7528438c8b\",\n  \"name\": \"King\"\n  },\n  \"qas\": {\n      \"qasId\": \"c8ae516a-d2d4-48d0-868c-8985171a0678\",\n      \"qasName\": \"Raymond\"\n  },\n  \"projectManager\": \"5dec67bb-8242-4c1c-aff5-ba21ee5609c9\",\n  \"techLeader\": \"2bd0a01e-9e12-4c30-bb6e-460a33bfb943\",\n  \"admin\": \"946d271c-9282-4c40-b924-4e7886d6a62c\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/projects",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "686"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2ae-7phkJPziAdFaDMQUAfyKBwIxO9A\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 02:33:31 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"name\": \"Kanlam\",\n    \"description\": \"nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor\",\n    \"startDate\": \"07.04.2022\",\n    \"endDate\": \"19.07.2021\",\n    \"clientName\": \"Bamity\",\n    \"active\": false,\n    \"devRate\": 57.93,\n    \"qaRate\": 5.35,\n    \"pmRate\": 33.33,\n    \"tlRate\": 38.51,\n    \"devs\": [\n        {\n            \"employeeId\": \"7109e566-c13b-4359-b03d-2c7528438c8b\",\n            \"name\": \"King\",\n            \"_id\": \"6283097baae15b94aa3975b3\"\n        }\n    ],\n    \"qas\": [\n        {\n            \"qasId\": \"c8ae516a-d2d4-48d0-868c-8985171a0678\",\n            \"qasName\": \"Raymond\",\n            \"_id\": \"6283097baae15b94aa3975b4\"\n        }\n    ],\n    \"projectManager\": \"5dec67bb-8242-4c1c-aff5-ba21ee5609c9\",\n    \"techLeader\": \"2bd0a01e-9e12-4c30-bb6e-460a33bfb943\",\n    \"admin\": \"946d271c-9282-4c40-b924-4e7886d6a62c\",\n    \"_id\": \"6283097baae15b94aa3975b2\",\n    \"__v\": 0\n}"
-				},
-				{
-					"name": "create a project validation required admin",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Kanlam\",\n  \"description\": \"nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor\",\n  \"startDate\": \"07.04.2022\",\n  \"endDate\": \"19.07.2021\",\n  \"clientName\": \"Bamity\",\n  \"active\": false,\n  \"devRate\": 57.93,\n  \"qaRate\": 5.35,\n  \"pmRate\": 33.33,\n  \"tlRate\": 38.51,\n  \"devs\": {\n  \"employeeId\": \"7109e566-c13b-4359-b03d-2c7528438c8b\",\n  \"name\": \"King\"\n  },\n  \"qas\": {\n      \"qasId\": \"c8ae516a-d2d4-48d0-868c-8985171a0678\",\n      \"qasName\": \"Raymond\"\n  },\n  \"projectManager\": \"5dec67bb-8242-4c1c-aff5-ba21ee5609c9\",\n  \"techLeader\": \"2bd0a01e-9e12-4c30-bb6e-460a33bfb943\",\n  \"admin\": false\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/projects",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects"
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "102"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"66-eEAISZm73jA2XMuKptOGpfuou2M\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 02:34:54 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"admin\\\" must be a string\"\n}"
-				},
-				{
-					"name": "create a project validation nam.lenght",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Ka\",\n  \"description\": \"nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor\",\n  \"startDate\": \"07.04.2022\",\n  \"endDate\": \"19.07.2021\",\n  \"clientName\": \"Bamity\",\n  \"active\": false,\n  \"devRate\": 57.93,\n  \"qaRate\": 5.35,\n  \"pmRate\": 33.33,\n  \"tlRate\": 38.51,\n  \"devs\": {\n  \"employeeId\": \"7109e566-c13b-4359-b03d-2c7528438c8b\",\n  \"name\": \"King\"\n  },\n  \"qas\": {\n      \"qasId\": \"c8ae516a-d2d4-48d0-868c-8985171a0678\",\n      \"qasName\": \"Raymond\"\n  },\n  \"projectManager\": \"5dec67bb-8242-4c1c-aff5-ba21ee5609c9\",\n  \"techLeader\": \"2bd0a01e-9e12-4c30-bb6e-460a33bfb943\",\n  \"admin\": false\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/projects",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects"
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "126"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"7e-xEm8UgXyAlBqO+BWP1X5bb+N69A\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 02:42:56 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"name\\\" length must be at least 3 characters long\"\n}"
-				}
-			]
-		},
-		{
-			"name": "delete a project",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/projects/62830049e95a7b9cd80a5fa7",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"projects",
-						"62830049e95a7b9cd80a5fa7"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Update a project name length validation",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"Da\",\n    \"description\":\"blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non\",\n    \"startDate\":\"03.10.2021\",\n    \"endDate\":\"16.05.2021\",\n    \"clientName\":\"Cardify\",\n    \"active\":true,\n    \"devRate\": \"79.31\",\n    \"qaRate\":\"53.47\",\n    \"pmRate\":\"91.99\",\n    \"tlRate\":\"77.36\",\n    \"devs\":{\n        \"employeeId\":\"6b641695-cb64-485a-b9cc-7d776f927897\",\n        \"name\":\"Span\"\n        },\n    \"qas\":{\n        \"qasId\":\"ddf9f561-ecfa-4999-8e15-70314a15dc10\",\n        \"qasName\":\"Robert\"\n            },\n    \"projectManager\":\"af2c5009-9f15-4c34-8f5d-b9ad5b8d2f66\",\n    \"techLeader\":\"55764d8f-e05c-4a57-a00e-de552ea55544\",\n    \"admin\":\"d0e71f75-a791-4e68-805e-684f2a99166b\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/projects/62830fc4aae15b94aa3975b6",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"projects",
-						"62830fc4aae15b94aa3975b6"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Update a project name length validation",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Da\",\n    \"description\":\"blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non\",\n    \"startDate\":\"03.10.2021\",\n    \"endDate\":\"16.05.2021\",\n    \"clientName\":\"Cardify\",\n    \"active\":true,\n    \"devRate\": \"79.31\",\n    \"qaRate\":\"53.47\",\n    \"pmRate\":\"91.99\",\n    \"tlRate\":\"77.36\",\n    \"devs\":{\n        \"employeeId\":\"6b641695-cb64-485a-b9cc-7d776f927897\",\n        \"name\":\"Span\"\n        },\n    \"qas\":{\n        \"qasId\":\"ddf9f561-ecfa-4999-8e15-70314a15dc10\",\n        \"qasName\":\"Robert\"\n            },\n    \"projectManager\":\"af2c5009-9f15-4c34-8f5d-b9ad5b8d2f66\",\n    \"techLeader\":\"55764d8f-e05c-4a57-a00e-de552ea55544\",\n    \"admin\":\"d0e71f75-a791-4e68-805e-684f2a99166b\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/projects/62830fc4aae15b94aa3975b6",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects",
-								"62830fc4aae15b94aa3975b6"
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "126"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"7e-xEm8UgXyAlBqO+BWP1X5bb+N69A\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 04:37:54 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"msg\": \"There was an error during the validation of the request\",\n    \"error\": \"\\\"name\\\" length must be at least 3 characters long\"\n}"
-				},
-				{
-					"name": "Update a project succesfully",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Daniel\",\n    \"description\":\"blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non\",\n    \"startDate\":\"03.10.2021\",\n    \"endDate\":\"16.05.2021\",\n    \"clientName\":\"Cardify\",\n    \"active\":true,\n    \"devRate\": \"79.31\",\n    \"qaRate\":\"53.47\",\n    \"pmRate\":\"91.99\",\n    \"tlRate\":\"77.36\",\n    \"devs\":{\n        \"employeeId\":\"6b641695-cb64-485a-b9cc-7d776f927897\",\n        \"name\":\"Span\"\n        },\n    \"qas\":{\n        \"qasId\":\"ddf9f561-ecfa-4999-8e15-70314a15dc10\",\n        \"qasName\":\"Robert\"\n            },\n    \"projectManager\":\"af2c5009-9f15-4c34-8f5d-b9ad5b8d2f66\",\n    \"techLeader\":\"55764d8f-e05c-4a57-a00e-de552ea55544\",\n    \"admin\":\"d0e71f75-a791-4e68-805e-684f2a99166b\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/projects/62830fc4aae15b94aa3975b6",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects",
-								"62830fc4aae15b94aa3975b6"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "698"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2ba-5VDoSvXVhicGzUyrNXkdZOVWLNk\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 04:39:09 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"_id\": \"62830fc4aae15b94aa3975b6\",\n    \"name\": \"Daniel\",\n    \"description\": \"blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non\",\n    \"startDate\": \"03.10.2021\",\n    \"endDate\": \"16.05.2021\",\n    \"clientName\": \"Cardify\",\n    \"active\": true,\n    \"devRate\": 79.31,\n    \"qaRate\": 53.47,\n    \"pmRate\": 91.99,\n    \"tlRate\": 77.36,\n    \"devs\": [\n        {\n            \"employeeId\": \"6b641695-cb64-485a-b9cc-7d776f927897\",\n            \"name\": \"Span\",\n            \"_id\": \"628326edaae15b94aa3975ba\"\n        }\n    ],\n    \"qas\": [\n        {\n            \"qasId\": \"ddf9f561-ecfa-4999-8e15-70314a15dc10\",\n            \"qasName\": \"Robert\",\n            \"_id\": \"628326edaae15b94aa3975bb\"\n        }\n    ],\n    \"projectManager\": \"af2c5009-9f15-4c34-8f5d-b9ad5b8d2f66\",\n    \"techLeader\": \"55764d8f-e05c-4a57-a00e-de552ea55544\",\n    \"admin\": \"d0e71f75-a791-4e68-805e-684f2a99166b\",\n    \"__v\": 0\n}"
-				}
-			]
-		},
-		{
-			"name": "getAll succesfully",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "GET by ID",
 			"request": {
 				"method": "GET",
 				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/projects/6290f01206004c21b6548441",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"projects",
+						"6290f01206004c21b6548441"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"request": {
+				"method": "POST",
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n            \"name\": \"Lorem Ipsum\",\r\n            \"isActive\": true,\r\n            \"description\": \"generic both\",\r\n            \"client\": \"6283097baae15b94aa3975b3\",\r\n            \"startDate\": \"2022-02-11T03:00:00.000Z\",\r\n            \"endDate\": \"2022-10-23T03:00:00.000Z\",\r\n            \"members\": [{ \"memberId\": \"6290ee7d9415aac24f94294d\" }]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -406,274 +60,192 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/projects",
+					"raw": "http://localhost:4000/projects",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "4000",
 					"path": [
 						"projects"
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "getAll succesfully",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/projects",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "1420"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"58c-jrPLPJmBmAaThX2EOvBlyuP6jn4\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 04:41:16 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"msg\": \"Project found\",\n    \"result\": [\n        {\n            \"_id\": \"6283097baae15b94aa3975b2\",\n            \"name\": \"Kanlam\",\n            \"description\": \"nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor\",\n            \"startDate\": \"07.04.2022\",\n            \"endDate\": \"19.07.2021\",\n            \"clientName\": \"Bamity\",\n            \"active\": false,\n            \"devRate\": 57.93,\n            \"qaRate\": 5.35,\n            \"pmRate\": 33.33,\n            \"tlRate\": 38.51,\n            \"devs\": [\n                {\n                    \"employeeId\": \"7109e566-c13b-4359-b03d-2c7528438c8b\",\n                    \"name\": \"King\",\n                    \"_id\": \"6283097baae15b94aa3975b3\"\n                }\n            ],\n            \"qas\": [\n                {\n                    \"qasId\": \"c8ae516a-d2d4-48d0-868c-8985171a0678\",\n                    \"qasName\": \"Raymond\",\n                    \"_id\": \"6283097baae15b94aa3975b4\"\n                }\n            ],\n            \"projectManager\": \"5dec67bb-8242-4c1c-aff5-ba21ee5609c9\",\n            \"techLeader\": \"2bd0a01e-9e12-4c30-bb6e-460a33bfb943\",\n            \"admin\": \"946d271c-9282-4c40-b924-4e7886d6a62c\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62830fc4aae15b94aa3975b6\",\n            \"name\": \"Daniel\",\n            \"description\": \"blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non\",\n            \"startDate\": \"03.10.2021\",\n            \"endDate\": \"16.05.2021\",\n            \"clientName\": \"Cardify\",\n            \"active\": true,\n            \"devRate\": 79.31,\n            \"qaRate\": 53.47,\n            \"pmRate\": 91.99,\n            \"tlRate\": 77.36,\n            \"devs\": [\n                {\n                    \"employeeId\": \"6b641695-cb64-485a-b9cc-7d776f927897\",\n                    \"name\": \"Span\",\n                    \"_id\": \"628326edaae15b94aa3975ba\"\n                }\n            ],\n            \"qas\": [\n                {\n                    \"qasId\": \"ddf9f561-ecfa-4999-8e15-70314a15dc10\",\n                    \"qasName\": \"Robert\",\n                    \"_id\": \"628326edaae15b94aa3975bb\"\n                }\n            ],\n            \"projectManager\": \"af2c5009-9f15-4c34-8f5d-b9ad5b8d2f66\",\n            \"techLeader\": \"55764d8f-e05c-4a57-a00e-de552ea55544\",\n            \"admin\": \"d0e71f75-a791-4e68-805e-684f2a99166b\",\n            \"__v\": 0\n        }\n    ]\n}"
-				},
-				{
-					"name": "getAll by filter",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"active\": \"true\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/projects",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "733"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2dd-s/2J4ZSwjR0flNPjjslEyzFG2GI\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 04:43:36 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"msg\": \"Project found\",\n    \"result\": [\n        {\n            \"_id\": \"62830fc4aae15b94aa3975b6\",\n            \"name\": \"Daniel\",\n            \"description\": \"blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non\",\n            \"startDate\": \"03.10.2021\",\n            \"endDate\": \"16.05.2021\",\n            \"clientName\": \"Cardify\",\n            \"active\": true,\n            \"devRate\": 79.31,\n            \"qaRate\": 53.47,\n            \"pmRate\": 91.99,\n            \"tlRate\": 77.36,\n            \"devs\": [\n                {\n                    \"employeeId\": \"6b641695-cb64-485a-b9cc-7d776f927897\",\n                    \"name\": \"Span\",\n                    \"_id\": \"628326edaae15b94aa3975ba\"\n                }\n            ],\n            \"qas\": [\n                {\n                    \"qasId\": \"ddf9f561-ecfa-4999-8e15-70314a15dc10\",\n                    \"qasName\": \"Robert\",\n                    \"_id\": \"628326edaae15b94aa3975bb\"\n                }\n            ],\n            \"projectManager\": \"af2c5009-9f15-4c34-8f5d-b9ad5b8d2f66\",\n            \"techLeader\": \"55764d8f-e05c-4a57-a00e-de552ea55544\",\n            \"admin\": \"d0e71f75-a791-4e68-805e-684f2a99166b\",\n            \"__v\": 0\n        }\n    ]\n}"
-				},
-				{
-					"name": "getAll error",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"active\": 3\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/projects",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects"
-							]
-						}
-					},
-					"status": "Internal Server Error",
-					"code": 500,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "33"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"21-7F2ILBQM71FvKFsGv+FGkVKpJOY\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 04:45:20 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"msg\": \"There has been an error\"\n}"
-				}
-			]
+			"response": []
 		},
 		{
-			"name": "getById projects",
+			"name": "UPDATE",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"name\": \"Lorem Ipsum\",\r\n        \"isActive\": true,\r\n        \"description\": \"Updated description\",\r\n        \"client\": \"6283097baae15b94aa3975b3\",\r\n        \"startDate\": \"2022-02-11T03:00:00.000Z\",\r\n        \"endDate\": \"2022-10-23T03:00:00.000Z\",\r\n        \"members\": [\r\n            {\r\n                \"memberId\": \"6290ee7d9415aac24f94294d\",\r\n                \"_id\": \"6290f01206004c21b6548442\"\r\n            }\r\n        ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:3000/projects/62830fc4aae15b94aa3975b6",
+					"raw": "http://localhost:4000/projects/6290f01206004c21b6548441",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "4000",
 					"path": [
 						"projects",
-						"62830fc4aae15b94aa3975b6"
+						"6290f01206004c21b6548441"
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "getById projects succesfully",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/projects/62830fc4aae15b94aa3975b6",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects",
-								"62830fc4aae15b94aa3975b6"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "698"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2ba-5VDoSvXVhicGzUyrNXkdZOVWLNk\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 17 May 2022 04:46:39 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/projects/6290f01206004c21b6548441",
+					"protocol": "http",
+					"host": [
+						"localhost"
 					],
-					"cookie": [],
-					"body": "{\n    \"_id\": \"62830fc4aae15b94aa3975b6\",\n    \"name\": \"Daniel\",\n    \"description\": \"blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non\",\n    \"startDate\": \"03.10.2021\",\n    \"endDate\": \"16.05.2021\",\n    \"clientName\": \"Cardify\",\n    \"active\": true,\n    \"devRate\": 79.31,\n    \"qaRate\": 53.47,\n    \"pmRate\": 91.99,\n    \"tlRate\": 77.36,\n    \"devs\": [\n        {\n            \"employeeId\": \"6b641695-cb64-485a-b9cc-7d776f927897\",\n            \"name\": \"Span\",\n            \"_id\": \"628326edaae15b94aa3975ba\"\n        }\n    ],\n    \"qas\": [\n        {\n            \"qasId\": \"ddf9f561-ecfa-4999-8e15-70314a15dc10\",\n            \"qasName\": \"Robert\",\n            \"_id\": \"628326edaae15b94aa3975bb\"\n        }\n    ],\n    \"projectManager\": \"af2c5009-9f15-4c34-8f5d-b9ad5b8d2f66\",\n    \"techLeader\": \"55764d8f-e05c-4a57-a00e-de552ea55544\",\n    \"admin\": \"d0e71f75-a791-4e68-805e-684f2a99166b\",\n    \"__v\": 0\n}"
+					"port": "4000",
+					"path": [
+						"projects",
+						"6290f01206004c21b6548441"
+					]
 				}
-			]
+			},
+			"response": []
 		}
 	]
-}
+    {
+        "info": {
+            "_postman_id": "9f954569-cc59-4034-b9db-1680925482a7",
+            "name": "Projects",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+            "_exporter_id": "20872559"
+        },
+        "item": [
+            {
+                "name": "GET",
+                "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                        "raw": "http://localhost:4000/projects",
+                        "protocol": "http",
+                        "host": [
+                            "localhost"
+                        ],
+                        "port": "4000",
+                        "path": [
+                            "projects"
+                        ]
+                    }
+                },
+                "response": []
+            },
+            {
+                "name": "GET by ID",
+                "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                        "raw": "http://localhost:4000/projects/6290f01206004c21b6548441",
+                        "protocol": "http",
+                        "host": [
+                            "localhost"
+                        ],
+                        "port": "4000",
+                        "path": [
+                            "projects",
+                            "6290f01206004c21b6548441"
+                        ]
+                    }
+                },
+                "response": []
+            },
+            {
+                "name": "POST",
+                "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                        "mode": "raw",
+                        "raw": "{\r\n            \"name\": \"Lorem Ipsum\",\r\n            \"isActive\": true,\r\n            \"description\": \"generic both\",\r\n            \"client\": \"6283097baae15b94aa3975b3\",\r\n            \"startDate\": \"2022-02-11T03:00:00.000Z\",\r\n            \"endDate\": \"2022-10-23T03:00:00.000Z\",\r\n            \"members\": [{ \"memberId\": \"6290ee7d9415aac24f94294d\" }]\r\n}",
+                        "options": {
+                            "raw": {
+                                "language": "json"
+                            }
+                        }
+                    },
+                    "url": {
+                        "raw": "http://localhost:4000/projects",
+                        "protocol": "http",
+                        "host": [
+                            "localhost"
+                        ],
+                        "port": "4000",
+                        "path": [
+                            "projects"
+                        ]
+                    }
+                },
+                "response": []
+            },
+            {
+                "name": "UPDATE",
+                "request": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                        "mode": "raw",
+                        "raw": "{\r\n        \"name\": \"Lorem Ipsum\",\r\n        \"isActive\": true,\r\n        \"description\": \"Updated description\",\r\n        \"client\": \"6283097baae15b94aa3975b3\",\r\n        \"startDate\": \"2022-02-11T03:00:00.000Z\",\r\n        \"endDate\": \"2022-10-23T03:00:00.000Z\",\r\n        \"members\": [\r\n            {\r\n                \"memberId\": \"6290ee7d9415aac24f94294d\",\r\n                \"_id\": \"6290f01206004c21b6548442\"\r\n            }\r\n        ]\r\n}",
+                        "options": {
+                            "raw": {
+                                "language": "json"
+                            }
+                        }
+                    },
+                    "url": {
+                        "raw": "http://localhost:4000/projects/6290f01206004c21b6548441",
+                        "protocol": "http",
+                        "host": [
+                            "localhost"
+                        ],
+                        "port": "4000",
+                        "path": [
+                            "projects",
+                            "6290f01206004c21b6548441"
+                        ]
+                    }
+                },
+                "response": []
+            },
+            {
+                "name": "DELETE",
+                "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                        "raw": "http://localhost:4000/projects/6290f01206004c21b6548441",
+                        "protocol": "http",
+                        "host": [
+                            "localhost"
+                        ],
+                        "port": "4000",
+                        "path": [
+                            "projects",
+                            "6290f01206004c21b6548441"
+                        ]
+                    }
+                },
+                "response": []
+            }
+        ]
+    }
