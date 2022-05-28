@@ -3,8 +3,8 @@ import Employee from '../models/employees';
 const createEmployee = async (req, res) => {
   try {
     const employee = new Employee({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       phone: req.body.phone,
       email: req.body.email,
       password: req.body.password,
