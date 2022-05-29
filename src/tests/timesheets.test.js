@@ -1,6 +1,6 @@
 import request from 'supertest';
 import Timesheet from '../models/timesheets';
-import timeSheetsSeed from '../seed/timesheets';
+import timeSheetsSeed from '../seed/timesheetss';
 import app from '../app';
 
 beforeAll(async () => {
