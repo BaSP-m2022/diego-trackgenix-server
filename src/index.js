@@ -1,11 +1,10 @@
-// eslint-disable-next-line import/no-unresolved
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import app from './app';
 
 dotenv.config();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const MONGO_URL = process.env.URL_MONGO;
 
 mongoose.connect(
