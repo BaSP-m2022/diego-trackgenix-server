@@ -25,27 +25,34 @@ const getAllTimesheet = async (req, res) => {
 };
 
 const getTimesheetById = async (req, res) => {
-  try {
-    const timesheet = await TimesheetModel.findById(req.params.id);
-    if (!timesheet) {
-      return res.status(404).json({
-        message: 'The id is wrong',
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      const timesheet = await TimesheetModel.findById(req.params.id);
+      if (!timesheet) {
+        return res.status(404).json({
+          message: 'The id is wrong',
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'Request done',
+        data: timesheet,
+        error: false,
+      });
+    } catch (error) {
+      return res.json({
+        message: error.message,
         data: undefined,
         error: true,
       });
     }
-    return res.status(200).json({
-      message: 'Request done',
-      data: timesheet,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: error.message,
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 const createTimesheet = async (req, res) => {

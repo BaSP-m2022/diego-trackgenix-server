@@ -25,27 +25,34 @@ async function getAllTasks(req, res) {
 }
 
 const getTaskById = async (req, res) => {
-  try {
-    const taskById = await Task.findById(req.params.id);
-    if (taskById) {
-      return res.status(200).json({
-        message: (`Request Successful. Task with Id: ${req.params.id} found.`),
-        data: taskById,
-        error: false,
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      const taskById = await Task.findById(req.params.id);
+      if (taskById) {
+        return res.status(200).json({
+          message: (`Request Successful. Task with Id: ${req.params.id} found.`),
+          data: taskById,
+          error: false,
+        });
+      }
+      return res.status(404).json({
+        message: (`Id: ${req.params.id} doesn't exist.`),
+        data: undefined,
+        error: true,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: (`An error has ocurred: ${error}`),
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: (`Id: ${req.params.id} doesn't exist.`),
-      data: undefined,
-      error: true,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: (`An error has ocurred: ${error}`),
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 const createTask = async (req, res) => {

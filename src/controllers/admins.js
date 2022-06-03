@@ -25,27 +25,34 @@ const getAdmin = async (req, res) => {
 };
 
 const getAdminById = async (req, res) => {
-  try {
-    const admin = await Admin.findById(req.params.id);
-    if (admin == null) {
-      return res.status(404).json({
-        message: 'Admin not found',
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      const admin = await Admin.findById(req.params.id);
+      if (!admin) {
+        return res.status(404).json({
+          message: 'Admin not found',
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'Admin found',
+        data: admin,
+        error: false,
+      });
+    } catch (error) {
+      return res.json({
+        message: error.message,
         data: undefined,
         error: true,
       });
     }
-    return res.status(200).json({
-      message: 'Admin found',
-      data: admin,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: error.message,
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 const createAdmin = async (req, res) => {

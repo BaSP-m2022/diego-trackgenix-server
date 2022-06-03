@@ -25,27 +25,34 @@ const getMembers = async (req, res) => {
 };
 
 const getMemberById = async (req, res) => {
-  try {
-    const member = await Members.findById(req.params.id);
-    if (member == null) {
-      return res.status(404).json({
-        message: 'Member not found',
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      const member = await Members.findById(req.params.id);
+      if (member == null) {
+        return res.status(404).json({
+          message: 'Member not found',
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'Member found',
+        data: member,
+        error: false,
+      });
+    } catch (error) {
+      return res.json({
+        message: error.message,
         data: undefined,
         error: true,
       });
     }
-    return res.status(200).json({
-      message: 'Member found',
-      data: member,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: error.message,
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 const addMember = async (req, res) => {
