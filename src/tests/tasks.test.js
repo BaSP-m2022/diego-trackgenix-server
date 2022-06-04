@@ -55,6 +55,6 @@ describe('intentando segunda parte', () => {
 describe('intentando deletear la tarea', () => {
   test('ahi va la el delete', async () => {
     const response = await request(app).delete('/tasks/60d4a32f257e066e9495ce12').send();
-    expect(response.status).toBe(204);
+    expect(response.status).toBe(200);
   });
 });

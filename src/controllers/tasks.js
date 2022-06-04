@@ -25,27 +25,34 @@ async function getAllTasks(req, res) {
 }
 
 const getTaskById = async (req, res) => {
-  try {
-    const taskById = await Task.findById(req.params.id);
-    if (taskById) {
-      return res.status(200).json({
-        message: (`Request Successful. Task with Id: ${req.params.id} found.`),
-        data: taskById,
-        error: false,
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      const taskById = await Task.findById(req.params.id);
+      if (taskById) {
+        return res.status(200).json({
+          message: (`Request Successful. Task with Id: ${req.params.id} found.`),
+          data: taskById,
+          error: false,
+        });
+      }
+      return res.status(404).json({
+        message: (`Id: ${req.params.id} doesn't exist.`),
+        data: undefined,
+        error: true,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: (`An error has ocurred: ${error}`),
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: (`Id: ${req.params.id} doesn't exist.`),
-      data: undefined,
-      error: true,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: (`An error has ocurred: ${error}`),
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 const createTask = async (req, res) => {
@@ -71,54 +78,68 @@ const createTask = async (req, res) => {
 };
 
 const updateTask = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const updatedTask = await Task.findByIdAndUpdate(id, req.body, { new: true });
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    const { id } = req.params;
+    try {
+      const updatedTask = await Task.findByIdAndUpdate(id, req.body, { new: true });
 
-    if (updatedTask) {
-      return res.status(200).json({
-        message: 'Task Modified',
-        data: updatedTask,
-        error: false,
+      if (updatedTask) {
+        return res.status(200).json({
+          message: 'Task Modified',
+          data: updatedTask,
+          error: false,
+        });
+      }
+      return res.status(400).json({
+        message: (`Id: ${id} doesn't exist.`),
+        data: undefined,
+        error: true,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: (`Error: ${error}`),
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(400).json({
-      message: (`Id: ${id} doesn't exist.`),
-      data: undefined,
-      error: true,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: (`Error: ${error}`),
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 const deleteTask = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const deteledTask = await Task.findByIdAndDelete(id);
-    if (deteledTask) {
-      return res.status(204).json({
-        message: 'Task Deleted',
-        data: deteledTask,
-        error: false,
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    const { id } = req.params;
+    try {
+      const deleteTaskById = await Task.findByIdAndDelete(id);
+      if (deleteTaskById) {
+        return res.status(200).json({
+          message: 'Task Deleted',
+          data: deleteTaskById,
+          error: false,
+        });
+      }
+      return res.status(404).json({
+        message: `Task with id: ${id} not found`,
+        data: undefined,
+        error: true,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: `Error: ${error}`,
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: `Task with id: ${id} not found`,
-      data: undefined,
-      error: true,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: `Error: ${error}`,
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 export default {
