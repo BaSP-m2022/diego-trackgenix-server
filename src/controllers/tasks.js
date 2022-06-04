@@ -5,32 +5,45 @@ async function getAllTasks(req, res) {
     const allTasks = await Task.find(req.body);
     if (allTasks.length === 0) {
       return res.status(404).json({
-        messages: 'Not found',
+        message: 'No tasks found.',
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json({
-      message: 'found',
+      message: 'Request Successful. All tasks.',
       data: allTasks,
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'not found',
+      message: `Server error: ${error}`,
+      data: error,
+      error: true,
     });
   }
 }
 
 const getTaskById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const employee = await Task.findById(req.params.id);
-      return res.status(200).json(employee);
+    const taskById = await Task.findById(req.params.id);
+    if (taskById) {
+      return res.status(200).json({
+        message: (`Request Successful. Task with Id: ${req.params.id} found.`),
+        data: taskById,
+        error: false,
+      });
     }
-    return res.status(400).json({
-      msg: 'Missing id parameter',
+    return res.status(404).json({
+      message: (`Id: ${req.params.id} doesn't exist.`),
+      data: undefined,
+      error: true,
     });
   } catch (error) {
-    return res.json({
-      msg: error,
+    return res.status(500).json({
+      message: (`An error has ocurred: ${error}`),
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -44,56 +57,66 @@ const createTask = async (req, res) => {
     });
     const newTaskDone = await newTask.save();
     return res.status(200).json({
-      msg: 'Tasks has been created',
-      newTaskDone,
+      message: 'Task Added',
+      data: newTaskDone,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      message: 'not valid',
-      error,
+      message: 'Please include employee ID, project ID, title, description, date and done.',
+      data: undefined,
+      error: true,
     });
   }
 };
 
 const updateTask = async (req, res) => {
+  const { id } = req.params;
   try {
-    if (!req.params) {
-      res.status(400).json({
-        msg: 'Missing id parameter',
+    const updatedTask = await Task.findByIdAndUpdate(id, req.body, { new: true });
+
+    if (updatedTask) {
+      return res.status(200).json({
+        message: 'Task Modified',
+        data: updatedTask,
+        error: false,
       });
     }
-    const result = await Task.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+    return res.status(400).json({
+      message: (`Id: ${id} doesn't exist.`),
+      data: undefined,
+      error: true,
     });
-    if (!result) {
-      return res.status(404).json({
-        msg: 'Task not found',
-      });
-    }
-    return res.status(200).json(result);
   } catch (error) {
-    return res.json({
-      msg: 'There has been an error',
-      error: error.message,
+    return res.status(500).json({
+      message: (`Error: ${error}`),
+      data: undefined,
+      error: true,
     });
   }
 };
 
 const deleteTask = async (req, res) => {
+  const { id } = req.params;
   try {
-    const result = await Task.findByIdAndDelete(req.params.id);
-    if (!result) {
-      return res.status(404).json({
-        msg: 'Task not found',
+    const deteledTask = await Task.findByIdAndDelete(id);
+    if (deteledTask) {
+      return res.status(204).json({
+        message: 'Task Deleted',
+        data: deteledTask,
+        error: false,
       });
     }
-    return res.status(204).json({
-      msg: 'Task has been deleted',
+    return res.status(404).json({
+      message: `Task with id: ${id} not found`,
+      data: undefined,
+      error: true,
     });
   } catch (error) {
-    return res.json({
-      msg: 'There has been an error',
-      error: error.message,
+    return res.status(400).json({
+      message: `Error: ${error}`,
+      data: undefined,
+      error: true,
     });
   }
 };
