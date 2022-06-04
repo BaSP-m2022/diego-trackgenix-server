@@ -129,7 +129,7 @@ describe('Delete /members/:id', () => {
   });
   test('Response should return 204 status', async () => {
     const response = await request(app).delete(`/members/${memberId}`).send();
-    expect(response.statusCode).toBe(204);
+    expect(response.statusCode).toBe(200);
     expect(response.error).toBeFalsy();
   });
 });

@@ -179,7 +179,7 @@ describe('DELETE /admins', () => {
   });
   test('Response should return a 200 status code', async () => {
     const response = await request(app).delete(`/admins/${adminId}`).send();
-    expect(response.statusCode).toBe(204);
+    expect(response.statusCode).toBe(200);
     expect(response.error).not.toBeTruthy();
   });
 });

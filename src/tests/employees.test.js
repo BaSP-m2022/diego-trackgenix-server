@@ -136,7 +136,7 @@ describe('/DELETE method', () => {
   });
   test('Correct id: status 204.', async () => {
     const response = await request(app).delete(`/employees/${employeeId}`);
-    expect(response.status).toBe(204);
+    expect(response.status).toBe(200);
   });
   test('Correct id: error:false', async () => {
     const response = await request(app).delete(
