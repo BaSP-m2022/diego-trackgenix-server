@@ -2,8 +2,8 @@ import Joi from 'joi';
 
 const validateCreation = (req, res, next) => {
   const superAdminValidation = Joi.object({
-    firstName: Joi.string().min(1).max(50).required(),
-    lastName: Joi.string().min(1).max(50).required(),
+    firstName: Joi.string().min(3).max(50).required(),
+    lastName: Joi.string().min(3).max(50).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
   });
