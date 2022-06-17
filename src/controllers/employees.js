@@ -92,18 +92,18 @@ const updateEmployee = async (req, res) => {
 const getEmployeesById = async (req, res) => {
   if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
     try {
-      if (req.params.id) {
-        const employee = await Employee.findById(req.params.id);
-        return res.status(200).json({
-          message: 'Employee found',
-          data: employee,
-          error: false,
+      const result = await Employee.findById(req.params.id);
+      if (!result) {
+        return res.status(404).json({
+          message: `There were no employees found with the id ${req.params.id}`,
+          data: undefined,
+          error: true,
         });
       }
-      return res.status(400).json({
-        message: 'Missing id parameter',
-        data: undefined,
-        error: true,
+      return res.status(200).json({
+        message: 'Employee found',
+        data: result,
+        error: false,
       });
     } catch (error) {
       return res.json({
