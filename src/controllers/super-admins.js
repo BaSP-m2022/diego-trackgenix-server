@@ -83,7 +83,7 @@ const updateSuperAdmin = async (req, res) => {
     try {
       if (!req.params) {
         return res.status(400).json({
-          message: 'missing id parameter',
+          message: 'Missing id parameter',
           data: undefined,
           error: true,
         });
@@ -130,7 +130,7 @@ const deleteSuperAdmin = async (req, res) => {
         });
       }
       return res.status(200).json({
-        message: 'Super Admins has been deleted',
+        message: 'Super Admin deleted',
         data: result,
         error: false,
       });
