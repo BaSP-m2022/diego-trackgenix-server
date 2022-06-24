@@ -1,4 +1,4 @@
-import Employee from '../models/employees';
+import Employee from '../models/Employees';
 
 const createEmployee = async (req, res) => {
   try {

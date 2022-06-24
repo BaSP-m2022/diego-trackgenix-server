@@ -1,5 +1,5 @@
 import request from 'supertest';
-import Employees from '../models/employees';
+import Employees from '../models/Employees';
 import employeesSeed from '../seed/employees';
 import app from '../app';
 
