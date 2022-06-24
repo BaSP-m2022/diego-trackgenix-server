@@ -11,6 +11,10 @@ const employeeSchema = new Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: Number,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -18,6 +22,10 @@ const employeeSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  active: {
+    type: Boolean,
+    required: false,
   },
 });
 
