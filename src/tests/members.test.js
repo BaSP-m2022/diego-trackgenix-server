@@ -13,13 +13,13 @@ describe('POST /members', () => {
   test('Response should return 201 status and object', async () => {
     const response = await request(app).post('/members').send({
       employeeId: '6281860dc32e7c819a91b357',
-      role: 'Dev',
+      role: 'DEV',
       rate: 90,
     });
     expect(response.statusCode).toBe(201);
     expect(response.body.data).toMatchObject({
       employeeId: '6281860dc32e7c819a91b357',
-      role: 'Dev',
+      role: 'DEV',
       rate: 90,
     });
     // eslint-disable-next-line no-underscore-dangle
@@ -28,21 +28,21 @@ describe('POST /members', () => {
   test('Response body message should indicate Member was created', async () => {
     const response = await request(app).post('/members').send({
       employeeId: '6281860dc32e7c819a91b357',
-      role: 'Dev',
+      role: 'DEV',
       rate: 90,
     });
     expect(response.body.message).toMatch('Member created');
   });
   test('Should not create Member and throw error', async () => {
     const response = await request(app).post('/members').send({
-      role: 'Dev',
+      role: 'DEV',
       rate: 90,
     });
     expect(response.error).toBeTruthy();
   });
   test('Response body data of incomplete request should be undefined', async () => {
     const response = await request(app).post('/members').send({
-      role: 'Dev',
+      role: 'DEV',
       rate: 90,
     });
     expect(response.body.data).toBeUndefined();
@@ -79,7 +79,7 @@ describe('GET /members/:id', () => {
     const response = await request(app).get(`/members/${memberId}`).send();
     expect(response.body.data).toMatchObject({
       employeeId: '6281860dc32e7c819a91b357',
-      role: 'Dev',
+      role: 'DEV',
       rate: 90,
     });
   });
@@ -89,7 +89,7 @@ describe('PUT /members/:id', () => {
   test('Response should throw error', async () => {
     const response = await request(app).put(`/members/${memberId}`).send({
       employeeId: '6281860dc32e7c819a91b357',
-      role: 'Dev',
+      role: 'DEV',
       rate: 'lalala',
     });
     expect(response.error).toBeTruthy();
@@ -99,7 +99,7 @@ describe('PUT /members/:id', () => {
       .put('/members/628a59dcee3ba3f8969caa89')
       .send({
         employeeId: '6281860dc32e7c819a91b357',
-        role: 'Dev',
+        role: 'DEV',
         rate: 90,
       });
     expect(response.statusCode).toBe(404);
