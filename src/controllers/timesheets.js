@@ -74,7 +74,7 @@ const createTimesheet = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'Some error ocurred, check the body of the request.',
       data: undefined,
       error: true,

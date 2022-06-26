@@ -56,25 +56,32 @@ const getMemberById = async (req, res) => {
 };
 
 const addMember = async (req, res) => {
-  try {
-    const member = new Members({
-      employeeId: req.body.employeeId,
-      role: req.body.role,
-      rate: req.body.rate,
-    });
-    const result = await member.save();
-    return res.status(201).json({
-      message: 'Member created',
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: 'An error has ocurred',
-      data: undefined,
-      error: true,
-    });
+  if (req.body.employeeId.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      const member = new Members({
+        employeeId: req.body.employeeId,
+        role: req.body.role,
+        rate: req.body.rate,
+      });
+      const result = await member.save();
+      return res.status(201).json({
+        message: 'Member created',
+        data: result,
+        error: false,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: 'An error has ocurred',
+        data: error,
+        error: true,
+      });
+    }
   }
+  return res.status(400).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 const updateMember = async (req, res) => {
