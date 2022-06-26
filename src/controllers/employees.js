@@ -1,8 +1,18 @@
 import Employee from '../models/Employees';
 
+const Firebase = require('../helpers/firebase');
+
 const createEmployee = async (req, res) => {
+  let firebaseUid;
   try {
+    const newFirebaseUser = await Firebase.default.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    firebaseUid = newFirebaseUser.uid;
+    await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
     const employee = new Employee({
+      firebaseUid,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phone: req.body.phone,
@@ -14,10 +24,14 @@ const createEmployee = async (req, res) => {
     return res.status(201).json({
       message: 'Employee created',
       data: result,
+      firebase: firebaseUid,
       error: false,
     });
   } catch (error) {
-    return res.json({
+    if (firebaseUid) {
+      await Firebase.default.auth().deleteUser(firebaseUid);
+    }
+    return res.status(400).json({
       message: 'There has been an error',
       data: undefined,
       error: true,

@@ -1,11 +1,13 @@
-// const admin = require('firebase-admin');
+import 'dotenv/config';
 
-// const firebaseApp = admin.initializeApp({
-//   credential: admin.credential.cert({
-//     privateKey: process.env.FIREBASE_PRIVATE_KEY,
-//     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-//     projectId: process.env.FIREBASE_PROJECT_ID,
-//   }),
-// });
+const admin = require('firebase-admin');
 
-// export default firebaseApp;
+const firebaseApp = admin.initializeApp({
+  credential: admin.credential.cert({
+    privateKey: process.env.FIREBASE_PRIVATE_KEY,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+  }),
+});
+
+export default firebaseApp;
