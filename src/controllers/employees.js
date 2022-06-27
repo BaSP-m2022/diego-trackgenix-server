@@ -1,4 +1,4 @@
-import Employee from '../models/Employees';
+import Employee from '../models/employees';
 
 const Firebase = require('../helpers/firebase');
 
