@@ -8,12 +8,18 @@ let newTask;
 beforeAll(async () => {
   await Tasks.collection.insertMany(tasksSeed);
 });
-describe('/GET /tasks', () => {
-  test('Return a 200 status, a false error and a success message if the get method worked ok', async () => {
+describe('Haciendo prueba de GET', () => {
+  test('Al recibir todas las tasks reciba un status 200', async () => {
     const response = await request(app).get('/tasks').send();
+    expect(response.statusCode).toBe(200);
+  });
+  test('cheking error to false', async () => {
+    const response = await request(app).get('/tasks').send();
+    expect(response.error).toBe(false);
+  });
+  test('Getting by ID', async () => {
+    const response = await request(app).get(`/tasks/${newTask}`).send();
     expect(response.status).toBe(200);
-    expect(response.error).toBeFalsy();
-    expect(response.body.data.length).toBeGreaterThan(0);
   });
 });
 
@@ -21,16 +27,16 @@ describe('Test to Post', () => {
   test('Test to creat a task, correct', async () => {
     const response = await request(app).post('/tasks/').send({
       description: 'Here is the description of the task',
-      workedHours: 8,
+      workedHours: '8',
     });
-    expect(response.body.message).toEqual('Task Added');
+    expect(response.body.msg).toEqual('Tasks has been created');
     // eslint-disable-next-line no-underscore-dangle
-    newTask = response.body.data._id;
+    newTask = response.body.newTaskDone._id;
   });
 
   test('Test to create a task with incorrect description', async () => {
     const response = await request(app).post('/tasks/').send({
-      description: 1234,
+      description: '...',
       workedHours: '8',
     });
     expect(response.status).toBe(400);
@@ -54,7 +60,7 @@ describe('intentando segunda parte', () => {
 });
 describe('intentando deletear la tarea', () => {
   test('ahi va la el delete', async () => {
-    const response = await request(app).delete('/tasks/60d4a32f257e066e9495ce12').send();
-    expect(response.status).toBe(200);
+    const response = await request(app).delete(`/tasks/${newTask}`).send();
+    expect(response.status).toBe(204);
   });
 });

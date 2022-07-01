@@ -98,6 +98,6 @@ describe('PUT /projects', () => {
 describe('DELETE /projects/:id', () => {
   test('Must delete a project', async () => {
     const response = await request(app).delete(`/projects/${projectsId}`);
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(204);
   });
 });

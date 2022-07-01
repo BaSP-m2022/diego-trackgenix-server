@@ -6,6 +6,7 @@ import projects from './projects';
 import admins from './admins';
 import superAdminRoutes from './super-admin';
 import members from './members';
+import auth from './auth';
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router
   .use('/projects', projects)
   .use('/admins', admins)
   .use('/super-admins', superAdminRoutes)
-  .use('/members', members);
+  .use('/members', members)
+  .use('/auth', auth);
 
 export default router;

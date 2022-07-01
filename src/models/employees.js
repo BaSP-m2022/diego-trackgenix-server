@@ -3,16 +3,13 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const employeeSchema = new Schema({
+  firebaseUid: { type: String, required: true },
   firstName: {
     type: String,
     required: true,
   },
   lastName: {
     type: String,
-    required: true,
-  },
-  phone: {
-    type: Number,
     required: true,
   },
   email: {
@@ -22,10 +19,6 @@ const employeeSchema = new Schema({
   password: {
     type: String,
     required: true,
-  },
-  active: {
-    type: Boolean,
-    required: false,
   },
 });
 

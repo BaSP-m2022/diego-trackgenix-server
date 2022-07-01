@@ -25,34 +25,27 @@ const getAdmin = async (req, res) => {
 };
 
 const getAdminById = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    try {
-      const admin = await Admin.findById(req.params.id);
-      if (!admin) {
-        return res.status(404).json({
-          message: 'Admin not found',
-          data: undefined,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Admin found',
-        data: admin,
-        error: false,
-      });
-    } catch (error) {
-      return res.json({
-        message: error.message,
+  try {
+    const admin = await Admin.findById(req.params.id);
+    if (admin == null) {
+      return res.status(404).json({
+        message: 'Admin not found',
         data: undefined,
         error: true,
       });
     }
+    return res.status(200).json({
+      message: 'Admin found',
+      data: admin,
+      error: false,
+    });
+  } catch (error) {
+    return res.json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 const createAdmin = async (req, res) => {
@@ -81,74 +74,60 @@ const createAdmin = async (req, res) => {
 };
 
 const updateAdmin = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    try {
-      if (!req.params) {
-        return res.status(400).json({
-          message: 'Please enter an id',
-          data: undefined,
-          error: true,
-        });
-      }
-      const result = await Admin.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-      });
-      if (!result) {
-        return res.status(404).json({
-          message: 'Admin not found',
-          data: undefined,
-          error: true,
-        });
-      }
-      return res.status(201).json({
-        message: 'Admin updated',
-        data: result,
-        error: false,
-      });
-    } catch (error) {
-      return res.json({
-        message: 'There has been an error',
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Please enter an id',
         data: undefined,
         error: true,
       });
     }
+    const result = await Admin.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!result) {
+      return res.status(404).json({
+        message: 'Admin not found',
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Admin updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.json({
+      message: 'There has been an error',
+      data: undefined,
+      error: true,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 const deleteAdmin = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    try {
-      const result = await Admin.findByIdAndDelete(req.params.id);
-      if (!result) {
-        return res.status(404).json({
-          message: 'Admin not found',
-          data: undefined,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Admin has been deleted',
-        data: result,
-        error: false,
-      });
-    } catch (error) {
-      return res.json({
-        message: error.message,
+  try {
+    const result = await Admin.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        message: 'Admin not found',
         data: undefined,
         error: true,
       });
     }
+    return res.status(204).json({
+      message: 'Admin has been deleted',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 export default {

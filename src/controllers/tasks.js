@@ -5,54 +5,34 @@ async function getAllTasks(req, res) {
     const allTasks = await Task.find(req.body);
     if (allTasks.length === 0) {
       return res.status(404).json({
-        message: 'No tasks found.',
-        data: undefined,
-        error: true,
+        messages: 'Not found',
       });
     }
     return res.status(200).json({
-      message: 'Request Successful. All tasks.',
+      message: 'found',
       data: allTasks,
-      error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: `Server error: ${error}`,
-      data: error,
-      error: true,
+      message: 'not found',
     });
   }
 }
 
 const getTaskById = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    try {
-      const taskById = await Task.findById(req.params.id);
-      if (taskById) {
-        return res.status(200).json({
-          message: (`Request Successful. Task with Id: ${req.params.id} found.`),
-          data: taskById,
-          error: false,
-        });
-      }
-      return res.status(404).json({
-        message: (`Id: ${req.params.id} doesn't exist.`),
-        data: undefined,
-        error: true,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: (`An error has ocurred: ${error}`),
-        data: undefined,
-        error: true,
-      });
+  try {
+    if (req.params.id) {
+      const employee = await Task.findById(req.params.id);
+      return res.status(200).json(employee);
     }
+    return res.status(400).json({
+      msg: 'Missing id parameter',
+    });
+  } catch (error) {
+    return res.json({
+      msg: error,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 const createTask = async (req, res) => {
@@ -64,82 +44,58 @@ const createTask = async (req, res) => {
     });
     const newTaskDone = await newTask.save();
     return res.status(200).json({
-      message: 'Task Added',
-      data: newTaskDone,
-      error: false,
+      msg: 'Tasks has been created',
+      newTaskDone,
     });
   } catch (error) {
     return res.status(400).json({
-      message: 'Please include employee ID, project ID, title, description, date and done.',
-      data: undefined,
-      error: true,
+      message: 'not valid',
+      error,
     });
   }
 };
 
 const updateTask = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    const { id } = req.params;
-    try {
-      const updatedTask = await Task.findByIdAndUpdate(id, req.body, { new: true });
-
-      if (updatedTask) {
-        return res.status(200).json({
-          message: 'Task Modified',
-          data: updatedTask,
-          error: false,
-        });
-      }
-      return res.status(400).json({
-        message: (`Id: ${id} doesn't exist.`),
-        data: undefined,
-        error: true,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: (`Error: ${error}`),
-        data: undefined,
-        error: true,
+  try {
+    if (!req.params) {
+      res.status(400).json({
+        msg: 'Missing id parameter',
       });
     }
+    const result = await Task.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!result) {
+      return res.status(404).json({
+        msg: 'Task not found',
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.json({
+      msg: 'There has been an error',
+      error: error.message,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 const deleteTask = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    const { id } = req.params;
-    try {
-      const deleteTaskById = await Task.findByIdAndDelete(id);
-      if (deleteTaskById) {
-        return res.status(200).json({
-          message: 'Task Deleted',
-          data: deleteTaskById,
-          error: false,
-        });
-      }
+  try {
+    const result = await Task.findByIdAndDelete(req.params.id);
+    if (!result) {
       return res.status(404).json({
-        message: `Task with id: ${id} not found`,
-        data: undefined,
-        error: true,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        message: `Error: ${error}`,
-        data: undefined,
-        error: true,
+        msg: 'Task not found',
       });
     }
+    return res.status(204).json({
+      msg: 'Task has been deleted',
+    });
+  } catch (error) {
+    return res.json({
+      msg: 'There has been an error',
+      error: error.message,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 export default {

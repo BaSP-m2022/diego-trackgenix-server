@@ -25,134 +25,102 @@ const getMembers = async (req, res) => {
 };
 
 const getMemberById = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    try {
-      const member = await Members.findById(req.params.id);
-      if (member == null) {
-        return res.status(404).json({
-          message: 'Member not found',
-          data: undefined,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Member found',
-        data: member,
-        error: false,
-      });
-    } catch (error) {
-      return res.json({
-        message: error.message,
+  try {
+    const member = await Members.findById(req.params.id);
+    if (member == null) {
+      return res.status(404).json({
+        message: 'Member not found',
         data: undefined,
         error: true,
       });
     }
+    return res.status(200).json({
+      message: 'Member found',
+      data: member,
+      error: false,
+    });
+  } catch (error) {
+    return res.json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 const addMember = async (req, res) => {
-  if (req.body.employeeId.match(/^[0-9a-fA-F]{24}$/)) {
-    try {
-      const member = new Members({
-        employeeId: req.body.employeeId,
-        role: req.body.role,
-        rate: req.body.rate,
-      });
-      const result = await member.save();
-      return res.status(201).json({
-        message: 'Member created',
-        data: result,
-        error: false,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        message: 'An error has ocurred',
-        data: error,
-        error: true,
-      });
-    }
+  try {
+    const member = new Members({
+      employeeId: req.body.employeeId,
+      role: req.body.role,
+      rate: req.body.rate,
+    });
+    const result = await member.save();
+    return res.status(201).json({
+      message: 'Member created',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.json({
+      message: 'An error has ocurred',
+      data: undefined,
+      error: true,
+    });
   }
-  return res.status(400).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 const updateMember = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    try {
-      if (!req.params) {
-        return res.status(400).json({
-          message: 'missing id parameter',
-          data: undefined,
-          error: true,
-        });
-      }
-      const result = await Members.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-      });
-      if (!result) {
-        return res.status(404).json({
-          message: 'Member not found',
-          data: undefined,
-          error: true,
-        });
-      }
-      return res.status(201).json({
-        message: 'Member updated',
-        data: result,
-        error: false,
-      });
-    } catch (error) {
-      return res.json({
-        message: 'An error has ocurred',
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'missing id parameter',
         data: undefined,
         error: true,
       });
     }
+    const result = await Members.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!result) {
+      return res.status(404).json({
+        message: 'Member not found',
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Member updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.json({
+      message: 'An error has ocurred',
+      data: undefined,
+      error: true,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 const deleteMember = async (req, res) => {
-  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    try {
-      const result = await Members.findByIdAndDelete(req.params.id);
-      if (!result) {
-        return res.status(404).json({
-          message: 'Member not found',
-          data: undefined,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Member has been deleted',
-        data: result,
-        error: false,
-      });
-    } catch (error) {
-      return res.json({
-        message: error.message,
+  try {
+    const result = await Members.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        message: 'Member not found',
         data: undefined,
         error: true,
       });
     }
+    return res.status(204).json();
+  } catch (error) {
+    return res.json({
+      message: error.message,
+      data: undefined,
+      error: true,
+    });
   }
-  return res.status(404).json({
-    message: 'Invalid ID',
-    data: undefined,
-    error: true,
-  });
 };
 
 export default {
