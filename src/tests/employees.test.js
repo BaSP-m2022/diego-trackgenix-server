@@ -9,14 +9,18 @@ beforeAll(async () => {
 
 let employeeId;
 
+const employee = {
+  firstName: 'aasdasdasdasd',
+  lastName: 'aasdsds',
+  phone: '3413500665',
+  email: 'guscerati@radiumrocket.com',
+  password: 'rick1234',
+  active: true,
+};
+
 describe('POST method', () => {
   test('add employee', async () => {
-    const response = await request(app).post('/employees').send({
-      firstName: 'Juan',
-      lastName: 'Free',
-      email: 'juan.free@radiumrocket.com',
-      password: 'test1235',
-    });
+    const response = await request(app).post('/employees').send(employee);
     expect(response.status).toBe(201);
     // eslint-disable-next-line no-underscore-dangle
     employeeId = response.body.data._id;
@@ -33,93 +37,94 @@ describe('/PUT method', () => {
     expect(response.status).toBe(400);
   });
   test('Correct id: status 201.', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      lastName: 'New',
-      email: 'edit.nuevo@radiumrocket.com',
-      password: 'test1235',
-    });
+    const response = await request(app).put(`/employees/${employeeId}`).send(employee);
     expect(response.status).toBe(201);
   });
   test('Correct id: error:false.', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      lastName: 'New',
-      email: 'edit.nuevo@radiumrocket.com',
-      password: 'test1235',
-    });
+    const response = await request(app).put(`/employees/${employeeId}`).send(employee);
     expect(response.body.error).not.toBe(true);
   });
   test('Correct id: message should be allright or sth like this', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      lastName: 'New',
-      email: 'edit.nuevo@radiumrocket.com',
-      password: 'test1235',
-    });
+    const response = await request(app).put(`/employees/${employeeId}`).send(employee);
     expect(response.body.message).toEqual('Employee information updated');
   });
   test('Missing firstName: status 400', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
-      lastName: 'New',
-      email: 'edit.nuevo@radiumrocket.com',
-      password: 'test1235',
+      lastName: 'aasdsds',
+      phone: '3413500665',
+      email: 'guscerati@radiumrocket.com',
+      password: 'rick1234',
+      active: true,
     });
     expect(response.status).toBe(400);
   });
   test('Missing firstName, error should be true', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
-      lastName: 'New',
-      email: 'edit.nuevo@radiumrocket.com',
-      password: 'test1235',
+      lastName: 'aasdsds',
+      phone: '3413500665',
+      email: 'guscerati@radiumrocket.com',
+      password: 'rick1234',
+      active: true,
     });
     expect(response.body.error).not.toBe(false);
   });
   test('Missing lastName: status 400', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      email: 'edit.nuevo@radiumrocket.com',
-      password: 'test1235',
+      firstName: 'aasdasdasdasd',
+      phone: '3413500665',
+      email: 'guscerati@radiumrocket.com',
+      password: 'rick1234',
+      active: true,
     });
     expect(response.status).toBe(400);
   });
   test('Missing lastName, error should be true', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      email: 'edit.nuevo@radiumrocket.com',
-      password: 'test1235',
+      firstName: 'aasdasdasdasd',
+      phone: '3413500665',
+      email: 'guscerati@radiumrocket.com',
+      password: 'rick1234',
+      active: true,
     });
     expect(response.body.error).not.toBe(false);
   });
   test('Missing email: status 400', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      lastName: 'New',
-      password: 'test1235',
+      firstName: 'aasdasdasdasd',
+      lastName: 'aasdsds',
+      phone: '3413500665',
+      password: 'rick1234',
+      active: true,
     });
     expect(response.status).toBe(400);
   });
   test('Missing email, error should be true', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      lastName: 'New',
-      password: 'test1235',
+      firstName: 'aasdasdasdasd',
+      lastName: 'aasdsds',
+      phone: '3413500665',
+      password: 'rick1234',
+      active: true,
     });
     expect(response.body.error).not.toBe(false);
   });
   test('Missing password, status 400', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      lastName: 'New',
-      email: 'edit.nuevo@radiumrocket.com',
+      firstName: 'aasdasdasdasd',
+      lastName: 'aasdsds',
+      phone: '3413500665',
+      email: 'guscerati@radiumrocket.com',
+      active: true,
     });
     expect(response.status).toBe(400);
   });
   test('Missing password, error should be true', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Editado',
-      lastName: 'New',
-      email: 'edit.nuevo@radiumrocket.com',
+      firstName: 'aasdasdasdasd',
+      lastName: 'aasdsds',
+      phone: '3413500665',
+      email: 'guscerati@radiumrocket.com',
+      active: true,
     });
     expect(response.body.error).not.toBe(false);
   });
@@ -136,7 +141,7 @@ describe('/DELETE method', () => {
   });
   test('Correct id: status 204.', async () => {
     const response = await request(app).delete(`/employees/${employeeId}`);
-    expect(response.status).toBe(204);
+    expect(response.status).toBe(200);
   });
   test('Correct id: error:false', async () => {
     const response = await request(app).delete(
@@ -151,23 +156,13 @@ describe('/DELETE method', () => {
 });
 describe('/POST method', () => {
   test('Complete body: Status 201', async () => {
-    const response = await request(app).post('/employees').send({
-      firstName: 'hola',
-      lastName: 'como',
-      email: 'estas.frare@jeje.com',
-      password: 'probandoe345',
-    });
+    const response = await request(app).post('/employees').send(employee);
     expect(response.statusCode).toBe(201);
     // eslint-disable-next-line no-underscore-dangle
     employeeId = response.body.data._id;
   });
   test('Complete body: error to be false.', async () => {
-    const response = await request(app).post('/employees').send({
-      firstName: 'Felipe',
-      lastName: 'Gonzales',
-      email: 'another.employee@trackgenix.com',
-      password: 'test1235',
-    });
+    const response = await request(app).post('/employees').send(employee);
     expect(response.body.error).toBe(false);
   });
   test('Empty body: status 400', async () => {

@@ -170,7 +170,7 @@ describe('Delete /super-admins/:id', () => {
     const response = await request(app)
       .delete(`/super-admins/${superAdminId}`)
       .send();
-    expect(response.statusCode).toBe(204);
+    expect(response.statusCode).toBe(200);
     expect(response.error).toBeFalsy();
   });
 });

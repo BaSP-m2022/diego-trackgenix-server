@@ -1,18 +1,8 @@
 import Employee from '../models/employees';
 
-const Firebase = require('../helpers/firebase');
-
 const createEmployee = async (req, res) => {
-  let firebaseUid;
   try {
-    const newFirebaseUser = await Firebase.default.auth().createUser({
-      email: req.body.email,
-      password: req.body.password,
-    });
-    firebaseUid = newFirebaseUser.uid;
-    await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
     const employee = new Employee({
-      firebaseUid,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phone: req.body.phone,
@@ -24,14 +14,10 @@ const createEmployee = async (req, res) => {
     return res.status(201).json({
       message: 'Employee created',
       data: result,
-      firebase: firebaseUid,
       error: false,
     });
   } catch (error) {
-    if (firebaseUid) {
-      await Firebase.default.auth().deleteUser(firebaseUid);
-    }
-    return res.status(400).json({
+    return res.json({
       message: 'There has been an error',
       data: undefined,
       error: true,
@@ -64,84 +50,105 @@ const getAllEmployees = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
-  try {
-    if (!req.params) {
-      res.status(400).json({
-        message: 'Missing id parameter',
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      if (!req.params) {
+        res.status(400).json({
+          message: 'Missing id parameter',
+          data: undefined,
+          error: true,
+        });
+      }
+      const result = await Employee.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      });
+      if (!result) {
+        return res.status(404).json({
+          message: 'Employee not found',
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(201).json({
+        message: 'Employee information updated',
+        data: result,
+        error: false,
+      });
+    } catch (error) {
+      return res.json({
+        message: 'There has been an error',
         data: undefined,
         error: true,
       });
     }
-    const result = await Employee.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!result) {
-      return res.status(404).json({
-        message: 'Employee not found',
-        data: undefined,
-        error: true,
-      });
-    }
-    return res.status(201).json({
-      message: 'Employee information updated',
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: 'There has been an error',
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 const getEmployeesById = async (req, res) => {
-  try {
-    if (req.params.id) {
-      const employee = await Employee.findById(req.params.id);
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      const result = await Employee.findById(req.params.id);
+      if (!result) {
+        return res.status(404).json({
+          message: `There were no employees found with the id ${req.params.id}`,
+          data: undefined,
+          error: true,
+        });
+      }
       return res.status(200).json({
         message: 'Employee found',
-        data: employee,
+        data: result,
         error: false,
       });
-    }
-    return res.status(400).json({
-      message: 'Missing id parameter',
-      data: undefined,
-      error: true,
-    });
-  } catch (error) {
-    return res.json({
-      message: error.message,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const deleteEmployee = async (req, res) => {
-  try {
-    const result = await Employee.findByIdAndDelete(req.params.id);
-    if (!result) {
-      return res.status(404).json({
-        message: 'Employee not found',
+    } catch (error) {
+      return res.json({
+        message: error.message,
         data: undefined,
         error: true,
       });
     }
-    return res.status(204).json({
-      message: 'The employee has been deleted',
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(404).json({
-      message: error.message,
-      data: undefined,
-      error: true,
-    });
   }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
+};
+
+const deleteEmployee = async (req, res) => {
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    try {
+      const result = await Employee.findByIdAndDelete(req.params.id);
+      if (!result) {
+        return res.status(404).json({
+          message: 'Employee not found',
+          data: undefined,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'The employee has been deleted',
+        data: result,
+        error: false,
+      });
+    } catch (error) {
+      return res.status(404).json({
+        message: error.message,
+        data: undefined,
+        error: true,
+      });
+    }
+  }
+  return res.status(404).json({
+    message: 'Invalid ID',
+    data: undefined,
+    error: true,
+  });
 };
 
 export default {
