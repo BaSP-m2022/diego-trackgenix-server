@@ -16,9 +16,17 @@ const employeeSchema = new Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: Number,
+    required: false,
+  },
   password: {
     type: String,
     required: true,
+  },
+  active: {
+    type: Boolean,
+    required: false,
   },
 });
 

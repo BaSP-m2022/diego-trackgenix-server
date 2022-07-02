@@ -5,6 +5,8 @@ const contentValidation = (req, res, next) => {
     firstName: Joi.string().min(3).required(),
     lastName: Joi.string().min(3).required(),
     email: Joi.string().email().required(),
+    phone: Joi.number().min(10).required(),
+    active: Joi.boolean(),
     password: Joi.string().min(8).required(),
   });
   const validation = schemaConditions.validate(req.body);
