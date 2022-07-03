@@ -6,11 +6,15 @@ const employeeSchema = new Schema({
   firebaseUid: { type: String, required: true },
   firstName: {
     type: String,
-    required: true,
+    required: false,
   },
   lastName: {
     type: String,
-    required: true,
+    required: false,
+  },
+  phone: {
+    type: Number,
+    required: false,
   },
   email: {
     type: String,
@@ -19,6 +23,9 @@ const employeeSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  token: {
+    type: String,
   },
 });
 

@@ -5,16 +5,21 @@ async function getAllTasks(req, res) {
     const allTasks = await Task.find(req.body);
     if (allTasks.length === 0) {
       return res.status(404).json({
-        messages: 'Not found',
+        message: 'Not found',
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json({
-      message: 'found',
+      message: 'Tasks found',
       data: allTasks,
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'not found',
+      message: 'Error',
+      data: error,
+      error: true,
     });
   }
 }
@@ -26,11 +31,15 @@ const getTaskById = async (req, res) => {
       return res.status(200).json(employee);
     }
     return res.status(400).json({
-      msg: 'Missing id parameter',
+      message: 'Missing parameter',
+      data: undefined,
+      error: true,
     });
   } catch (error) {
     return res.json({
-      msg: error,
+      message: 'Error',
+      data: error,
+      error: true,
     });
   }
 };
@@ -44,13 +53,15 @@ const createTask = async (req, res) => {
     });
     const newTaskDone = await newTask.save();
     return res.status(200).json({
-      msg: 'Tasks has been created',
-      newTaskDone,
+      message: 'Task created',
+      data: newTaskDone,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      message: 'not valid',
-      error,
+      message: 'Error',
+      data: error,
+      error: true,
     });
   }
 };
@@ -59,7 +70,9 @@ const updateTask = async (req, res) => {
   try {
     if (!req.params) {
       res.status(400).json({
-        msg: 'Missing id parameter',
+        message: 'Missing params',
+        data: undefined,
+        error: true,
       });
     }
     const result = await Task.findByIdAndUpdate(req.params.id, req.body, {
@@ -67,14 +80,21 @@ const updateTask = async (req, res) => {
     });
     if (!result) {
       return res.status(404).json({
-        msg: 'Task not found',
+        message: 'Task not found',
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(200).json(result);
+    return res.status(200).json({
+      message: 'Task edited',
+      data: result,
+      error: false,
+    });
   } catch (error) {
     return res.json({
-      msg: 'There has been an error',
-      error: error.message,
+      message: 'Error',
+      data: error,
+      error: true,
     });
   }
 };
@@ -84,16 +104,21 @@ const deleteTask = async (req, res) => {
     const result = await Task.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        msg: 'Task not found',
+        message: 'Task not found',
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(204).json({
-      msg: 'Task has been deleted',
+    return res.status(200).json({
+      message: 'Task deleted',
+      data: result,
+      error: false,
     });
   } catch (error) {
     return res.json({
-      msg: 'There has been an error',
-      error: error.message,
+      message: 'Error',
+      data: error.message,
+      error: true,
     });
   }
 };

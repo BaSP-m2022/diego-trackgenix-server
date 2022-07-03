@@ -1,18 +1,19 @@
 import express from 'express';
 import employeesController from '../controllers/employees';
 import employeesValidations from '../validations/employees';
-// import controllers from '../controllers/auth';
+import authMiddleware from '../middlewares/authMiddleware';
 import validations from '../validations/auth';
 
 const router = express.Router();
-// const { register } = employeesController;
 
 router
-  .post('/register', validations.required, employeesController.createEmployee)
   .post('/', employeesValidations.contentValidation, employeesController.createEmployee)
-  .put('/:id', employeesValidations.contentValidation, employeesController.updateEmployee)
-  .get('/', employeesController.getAllEmployees)
-  .get('/:id', employeesController.getEmployeesById)
-  .delete('/:id', employeesController.deleteEmployee);
+  .put('/:id', authMiddleware, employeesValidations.contentValidation, employeesController.updateEmployee)
+  .get('/', authMiddleware, employeesController.getAllEmployees)
+  .get('/:id', authMiddleware, employeesController.getEmployeesById)
+  .delete('/:id', authMiddleware, employeesController.deleteEmployee)
+  .post('/register', validations.required, employeesController.createEmployee)
+  .post('/login', validations.required, employeesController.login)
+  .patch('/logout', authMiddleware, employeesController.logout);
 
 export default router;

@@ -1,4 +1,5 @@
 import Users from '../models/users';
+import employees from '../models/employees';
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -27,7 +28,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     // check email
-    const user = await Users.findOne({ email: req.body.email });
+    const user = await employees.findOne({ email: req.body.email });
     if (!user) {
       throw new Error('Invalid user credentials');
     }
@@ -47,7 +48,7 @@ const login = async (req, res) => {
         },
       );
       // save the token on the DB
-      const updateUser = await Users.findOneAndUpdate(
+      const updateUser = await employees.findOneAndUpdate(
         { email: req.body.email },
         { token },
         { new: true },

@@ -1,13 +1,18 @@
 import Employee from '../models/employees';
 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const Firebase = require('../helpers/firebase');
 
 const createEmployee = async (req, res) => {
   let firebaseUid;
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
     const newFirebaseUser = await Firebase.default.auth().createUser({
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
     });
     firebaseUid = newFirebaseUser.uid;
     await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
@@ -17,7 +22,7 @@ const createEmployee = async (req, res) => {
       lastName: req.body.lastName,
       phone: req.body.phone,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       active: req.body.active,
     });
     const result = await employee.save();
@@ -32,9 +37,84 @@ const createEmployee = async (req, res) => {
       await Firebase.default.auth().deleteUser(firebaseUid);
     }
     return res.status(400).json({
-      message: 'There has been an error',
-      data: undefined,
+      message: 'Error',
+      data: error,
       error: true,
+    });
+  }
+};
+const login = async (req, res) => {
+  try {
+    // check email
+    const user = await Employee.findOne({ email: req.body.email });
+    if (!user) {
+      throw new Error('Invalid user credentials');
+    }
+    // check passw match
+    const match = await bcrypt.compare(req.body.password, user.password);
+    if (match) {
+      // create new token
+      const token = jwt.sign(
+        {
+          email: user.email,
+          // eslint-disable-next-line no-underscore-dangle
+          userId: user._id,
+        },
+        process.env.JWT_KEY,
+        {
+          expiresIn: '1d',
+        },
+      );
+        // save the token on the DB
+      const updateUser = await Employee.findOneAndUpdate(
+        { email: req.body.email },
+        { token },
+        { new: true },
+      );
+      return res.status(200).json({
+        message: 'User Logged',
+        data: {
+          email: updateUser.email,
+          // eslint-disable-next-line no-underscore-dangle
+          _id: updateUser._id,
+          token: updateUser.token,
+        },
+      });
+    } // aca cierra el if del match
+    throw new Error('invalid credentials');
+  } catch (error) {
+    return res.status(400).json({
+      message: error.toString(),
+    });
+  }
+};
+
+const logout = async (req, res) => {
+  try {
+    // decodeo el token
+    const decoded = await jwt.verify(req.headers.token, process.env.JWT_KEY);
+    // busco el user
+    const user = await Employee.findById(decoded.userId);
+    if (!user) {
+      throw new Error('Invalid user credentials');
+    }
+    // remuevo el token
+    const updatedUser = await Employee.findByIdAndUpdate(
+      decoded.userId,
+      { token: '' },
+      { new: true },
+    );
+    return res.status(200).json({
+      message: 'Success logout',
+      data: {
+        email: updatedUser.email,
+        // eslint-disable-next-line no-underscore-dangle
+        _id: updatedUser._id,
+      },
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.toString(),
     });
   }
 };
@@ -146,6 +226,8 @@ const deleteEmployee = async (req, res) => {
 
 export default {
   createEmployee,
+  login,
+  logout,
   updateEmployee,
   getAllEmployees,
   getEmployeesById,

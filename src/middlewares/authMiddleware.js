@@ -1,4 +1,4 @@
-import Users from '../models/users';
+import Employee from '../models/employees';
 
 const jwt = require('jsonwebtoken');
 
@@ -7,7 +7,7 @@ const checkAuth = async (req, res, next) => {
     const { token } = req.headers;
     // lo decodeo
     const decoded = await jwt.verify(token, process.env.JWT_KEY);
-    const user = await Users.findById(decoded.userId);
+    const user = await Employee.findById(decoded.userId);
     // checkeo si matchea
     if (token !== user.token) {
       throw new Error('Invalid token');
