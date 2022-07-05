@@ -3,25 +3,45 @@ import employees from '../models/employees';
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Firebase = require('../helpers/firebase');
 
 const register = async (req, res) => {
+  let firebaseUid;
+
   try {
     // encrypting pass
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    // create user
-    const userCreated = new Users({
+    const newFirebaseUser = await Firebase.default.auth().createUser({
       email: req.body.email,
       password: hashedPassword,
     });
-    // save it
-    const userSaved = await userCreated.save();
-    // res
+    firebaseUid = newFirebaseUser.uid;
+    await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
+    const employee = new Users({
+      firebaseUid,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      phone: req.body.phone,
+      email: req.body.email,
+      password: hashedPassword,
+      active: req.body.active,
+    });
+    const result = await employee.save();
     return res.status(201).json({
-      message: 'User created',
-      data: userSaved,
+      message: 'Employee created',
+      data: result,
+      firebase: firebaseUid,
+      error: false,
     });
   } catch (error) {
-    return res.status(400).json({ message: error.toString() });
+    if (firebaseUid) {
+      await Firebase.default.auth().deleteUser(firebaseUid);
+    }
+    return res.status(400).json({
+      message: 'Error',
+      data: error,
+      error: true,
+    });
   }
 };
 

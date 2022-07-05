@@ -2,11 +2,11 @@ import Joi from 'joi';
 
 const adminValidationCreate = (req, res, next) => {
   const schemaConditions = Joi.object({
-    firstName: Joi.string().min(3).required(),
-    lastName: Joi.string().min(3).required(),
+    firstName: Joi.string().min(3),
+    lastName: Joi.string().min(3),
     email: Joi.string().email().required(),
-    gender: Joi.string().valid('male', 'female', 'polygender').required(),
-    active: Joi.boolean().required(),
+    gender: Joi.string().valid('male', 'female', 'polygender'),
+    active: Joi.boolean(),
     password: Joi.string().min(3).required(),
   });
   const validation = schemaConditions.validate(req.body);

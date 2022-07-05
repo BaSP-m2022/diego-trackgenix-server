@@ -7,11 +7,11 @@ const adminSchema = new Schema(
     firebaseUid: { type: String, required: true },
     firstName: {
       type: String,
-      required: true,
+      required: false,
     },
     lastName: {
       type: String,
-      required: true,
+      required: false,
     },
     email: {
       type: String,
@@ -19,11 +19,11 @@ const adminSchema = new Schema(
     },
     gender: {
       type: String,
-      required: true,
+      required: false,
     },
     active: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     password: {
       type: String,

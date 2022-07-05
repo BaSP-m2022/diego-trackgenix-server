@@ -1,5 +1,48 @@
 import SuperAdmin from '../models/super-admins';
 
+const bcrypt = require('bcrypt');
+
+const Firebase = require('../helpers/firebase');
+
+const createSuperAdmin = async (req, res) => {
+  let firebaseUid;
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const newFirebaseUser = await Firebase.default.auth().createUser({
+      email: req.body.email,
+      password: hashedPassword,
+    });
+    firebaseUid = newFirebaseUser.uid;
+    await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'SUPERADMIN' });
+    const newSuperAdmin = new SuperAdmin({
+      firebaseUid,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      phone: req.body.phone,
+      email: req.body.email,
+      password: hashedPassword,
+      active: req.body.active,
+    });
+    const result = await newSuperAdmin.save();
+    return res.status(201).json({
+      message: 'Super Admin created',
+      data: result,
+      firebase: firebaseUid,
+      error: false,
+    });
+  } catch (error) {
+    if (firebaseUid) {
+      await Firebase.default.auth().deleteUser(firebaseUid);
+    }
+    return res.status(400).json({
+      message: 'Error',
+      data: error,
+      error: true,
+    });
+  }
+};
+
 const getSuperAdmins = async (req, res) => {
   try {
     const allSuperAdmins = await SuperAdmin.find(req.body);
@@ -42,29 +85,6 @@ const getSuperAdminById = async (req, res) => {
   } catch (error) {
     return res.json({
       message: error.message,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const addSuperAdmin = async (req, res) => {
-  try {
-    const superAdmin = new SuperAdmin({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    const result = await superAdmin.save();
-    return res.status(201).json({
-      message: 'Super Admin created',
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: 'An error has ocurred',
       data: undefined,
       error: true,
     });
@@ -125,9 +145,9 @@ const deleteSuperAdmin = async (req, res) => {
 };
 
 export default {
+  createSuperAdmin,
   getSuperAdmins,
   getSuperAdminById,
-  addSuperAdmin,
   updateSuperAdmin,
   deleteSuperAdmin,
 };

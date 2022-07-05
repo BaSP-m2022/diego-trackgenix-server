@@ -12,8 +12,6 @@ router
   .get('/', authMiddleware, employeesController.getAllEmployees)
   .get('/:id', authMiddleware, employeesController.getEmployeesById)
   .delete('/:id', authMiddleware, employeesController.deleteEmployee)
-  .post('/register', validations.required, employeesController.createEmployee)
-  .post('/login', validations.required, employeesController.login)
-  .patch('/logout', authMiddleware, employeesController.logout);
+  .post('/register', validations.required, employeesController.createEmployee);
 
 export default router;
