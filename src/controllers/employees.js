@@ -13,8 +13,10 @@ const createEmployee = async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
     });
+
     firebaseUid = newFirebaseUser.uid;
     await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
+
     const newEmployee = new Employee({
       firebaseUid,
       firstName: req.body.firstName,
@@ -24,6 +26,7 @@ const createEmployee = async (req, res) => {
       password: hashedPassword,
       active: req.body.active,
     });
+
     const result = await newEmployee.save();
     return res.status(201).json({
       message: 'Employee created',

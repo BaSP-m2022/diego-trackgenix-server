@@ -6,11 +6,11 @@ const employeeSchema = new Schema({
   firebaseUid: { type: String, required: true },
   firstName: {
     type: String,
-    required: false,
+    required: true,
   },
   lastName: {
     type: String,
-    required: false,
+    required: true,
   },
   phone: {
     type: Number,
