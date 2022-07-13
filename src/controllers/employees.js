@@ -1,24 +1,22 @@
 import Employee from '../models/employees';
+import firebaseApp from '../helpers/firebase';
 
 const bcrypt = require('bcrypt');
 
-const Firebase = require('../helpers/firebase');
-
 const createEmployee = async (req, res) => {
-  let firebaseUid;
   try {
+    // encrypting pass
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    const newFirebaseUser = await Firebase.default.auth().createUser({
-      email: req.body.email,
-      password: hashedPassword,
+    // creating new user in firebase
+    const { email, password } = req.body;
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      password,
+      email,
     });
-
-    firebaseUid = newFirebaseUser.uid;
-    await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
-
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
+    // get the data
     const newEmployee = new Employee({
-      firebaseUid,
+      firebaseUid: newFirebaseUser.uid,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phone: req.body.phone,
@@ -26,23 +24,15 @@ const createEmployee = async (req, res) => {
       password: hashedPassword,
       active: req.body.active,
     });
-
+    // save the data
     const result = await newEmployee.save();
     return res.status(201).json({
       message: 'Employee created',
       data: result,
-      firebase: firebaseUid,
       error: false,
     });
-  } catch (error) {
-    if (firebaseUid) {
-      await Firebase.default.auth().deleteUser(firebaseUid);
-    }
-    return res.status(400).json({
-      message: 'Error',
-      data: error,
-      error: true,
-    });
+  } catch (err) {
+    return res.status(400).send(err);
   }
 };
 

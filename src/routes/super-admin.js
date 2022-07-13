@@ -1,15 +1,16 @@
 import express from 'express';
 import superAdminController from '../controllers/super-admins';
 import superAdminValidations from '../validations/super-admin';
-// import authMiddleware from '../middlewares/authMiddleware';
+import authValidation from '../middlewares/authMiddleware';
+import adminRoleValidation from '../middlewares/adminRoleValidation';
 
 const router = express.Router();
 
 router
-  .get('/', superAdminController.getSuperAdmins)
-  .get('/:id', superAdminController.getSuperAdminById)
-  .post('/', superAdminValidations.validateCreation, superAdminController.createSuperAdmin)
-  .put('/:id', superAdminValidations.validateCreation, superAdminController.updateSuperAdmin)
-  .delete('/:id', superAdminController.deleteSuperAdmin);
+  .get('/', adminRoleValidation, authValidation, superAdminController.getSuperAdmins)
+  .get('/:id', adminRoleValidation, authValidation, superAdminController.getSuperAdminById)
+  .post('/', adminRoleValidation, authValidation, superAdminValidations.validateCreation, superAdminController.createSuperAdmin)
+  .put('/:id', adminRoleValidation, authValidation, superAdminValidations.validateCreation, superAdminController.updateSuperAdmin)
+  .delete('/:id', adminRoleValidation, authValidation, superAdminController.deleteSuperAdmin);
 
 export default router;

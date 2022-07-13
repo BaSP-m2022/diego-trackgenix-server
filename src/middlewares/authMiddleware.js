@@ -1,24 +1,16 @@
-import Employee from '../models/employees';
+const firebase = require('../helpers/firebase');
 
-const jwt = require('jsonwebtoken');
-
-const checkAuth = async (req, res, next) => {
-  try {
-    const { token } = req.headers;
-    // lo decodeo
-    const decoded = await jwt.verify(token, process.env.JWT_KEY);
-    const user = await Employee.findById(decoded.userId);
-    // checkeo si matchea
-    if (token !== user.token) {
-      throw new Error('Invalid token');
-    }
-    next();
-  } catch (error) {
-    res.status(401).json({
-      message: 'Unauthorize',
-      data: error.toString(),
-    });
+const authValidation = (req, res, next) => {
+  const { token } = req.headers;
+  if (!token) {
+    return res.status(401).send({ message: 'Unauthorized. Provide a token' });
   }
+  return firebase.default.auth().verifyIdToken(token)
+    .then((decodedToken) => {
+      console.log(decodedToken);
+      req.user = decodedToken;
+      next();
+    }).catch((error) => res.status(401).send({ message: error.toString() }));
 };
 
-export default checkAuth;
+export default authValidation;
