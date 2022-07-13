@@ -1,4 +1,41 @@
 import Admin from '../models/admins';
+import firebaseApp from '../helpers/firebase';
+
+const bcrypt = require('bcrypt');
+
+const createAdmin = async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const { email, password } = req.body;
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      password,
+      email,
+    });
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'ADMIN' });
+
+    const newAdmin = new Admin({
+      firebaseUid: newFirebaseUser.uid,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: hashedPassword,
+    });
+    // save the data
+    const result = await newAdmin.save();
+    return res.status(201).json({
+      message: 'Admin created',
+      data: result,
+      error: false,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      message: 'Error',
+      data: err,
+      error: true,
+    });
+  }
+};
 
 const getAdmin = async (req, res) => {
   try {
@@ -42,31 +79,6 @@ const getAdminById = async (req, res) => {
   } catch (error) {
     return res.json({
       message: error.message,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const createAdmin = async (req, res) => {
-  try {
-    const newAdmin = new Admin({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      gender: req.body.gender,
-      active: req.body.active,
-      password: req.body.password,
-    });
-    const result = await newAdmin.save();
-    return res.status(201).json({
-      message: 'Admin Created',
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: 'There has been an error',
       data: undefined,
       error: true,
     });

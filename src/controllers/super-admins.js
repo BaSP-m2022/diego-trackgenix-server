@@ -1,4 +1,41 @@
 import SuperAdmin from '../models/super-admins';
+import firebaseApp from '../helpers/firebase';
+
+const bcrypt = require('bcrypt');
+
+const createSuperAdmin = async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const { email, password } = req.body;
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      password,
+      email,
+    });
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'SUPERADMIN' });
+
+    const newSuperAdmin = new SuperAdmin({
+      firebaseUid: newFirebaseUser.uid,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: hashedPassword,
+    });
+    // save the data
+    const result = await newSuperAdmin.save();
+    return res.status(201).json({
+      message: 'Admin created',
+      data: result,
+      error: false,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      message: 'Error',
+      data: err,
+      error: true,
+    });
+  }
+};
 
 const getSuperAdmins = async (req, res) => {
   try {
@@ -42,29 +79,6 @@ const getSuperAdminById = async (req, res) => {
   } catch (error) {
     return res.json({
       message: error.message,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const addSuperAdmin = async (req, res) => {
-  try {
-    const superAdmin = new SuperAdmin({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    const result = await superAdmin.save();
-    return res.status(201).json({
-      message: 'Super Admin created',
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: 'An error has ocurred',
       data: undefined,
       error: true,
     });
@@ -125,9 +139,9 @@ const deleteSuperAdmin = async (req, res) => {
 };
 
 export default {
+  createSuperAdmin,
   getSuperAdmins,
   getSuperAdminById,
-  addSuperAdmin,
   updateSuperAdmin,
   deleteSuperAdmin,
 };

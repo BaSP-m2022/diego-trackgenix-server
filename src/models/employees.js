@@ -12,6 +12,10 @@ const employeeSchema = new Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: Number,
+    required: false,
+  },
   email: {
     type: String,
     required: true,
@@ -19,6 +23,9 @@ const employeeSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  token: {
+    type: String,
   },
 });
 
