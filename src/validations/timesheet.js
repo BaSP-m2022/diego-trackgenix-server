@@ -3,13 +3,13 @@ import Joi from 'joi';
 const createOrEditTimesheetValidations = (req, res, next) => {
   const requirementsSchema = Joi.object({
     description: Joi.string().min(5).required(),
-    taskId: Joi.string().min(5).required(),
     validated: Joi.boolean().required(),
-    employeeId: Joi.string().min(5).required(),
-    projectId: Joi.string().min(5).required(),
     startDate: Joi.date().required(),
     endDate: Joi.date().required(),
     hours: Joi.number().required(),
+    employeeId: Joi.string().min(5).required(),
+    projectId: Joi.string().min(5).required(),
+    taskId: Joi.string().min(5).required(),
   });
   const validation = requirementsSchema.validate(req.body);
 

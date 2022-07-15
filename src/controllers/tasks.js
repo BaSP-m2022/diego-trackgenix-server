@@ -2,7 +2,9 @@ import Task from '../models/tasks';
 
 async function getAllTasks(req, res) {
   try {
-    const allTasks = await Task.find(req.body);
+    const allTasks = await Task.find({})
+      .populate('employeeId')
+      .populate('projectId');
     if (allTasks.length === 0) {
       return res.status(404).json({
         message: 'Not found',
@@ -50,6 +52,9 @@ const createTask = async (req, res) => {
       description: req.body.description,
       workedHours: req.body.workedHours,
       date: req.body.date,
+      done: req.body.date,
+      employeeId: req.body.employeeId,
+      projectId: req.body.projectId,
     });
     const newTaskDone = await newTask.save();
     return res.status(200).json({

@@ -2,7 +2,8 @@ import Members from '../models/members';
 
 const getMembers = async (req, res) => {
   try {
-    const allMembers = await Members.find(req.body);
+    const allMembers = await Members.find({})
+      .populate('employeeId');
     if (allMembers.length === 0) {
       return res.status(404).json({
         message: 'Not found',
