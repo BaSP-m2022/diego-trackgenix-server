@@ -52,7 +52,7 @@ const createTask = async (req, res) => {
       description: req.body.description,
       workedHours: req.body.workedHours,
       date: req.body.date,
-      done: req.body.date,
+      done: req.body.done,
       employeeId: req.body.employeeId,
       projectId: req.body.projectId,
     });
