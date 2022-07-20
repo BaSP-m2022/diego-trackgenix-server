@@ -28,7 +28,9 @@ const getProject = async (req, res) => {
 
 const getProjectById = async (req, res) => {
   try {
-    const project = await Project.findById(req.params.id);
+    const project = await Project.findById(req.params.id)
+      .populate('members')
+      .populate('tasks');
     if (project == null) {
       return res.status(404).json({
         message: 'Project not found',
@@ -62,9 +64,13 @@ const addProject = async (req, res) => {
       members: req.body.members,
     });
     const result = await project.save();
+    // eslint-disable-next-line no-underscore-dangle
+    const data = await Project.findById(result._id)
+      .populate('members')
+      .populate('tasks');
     return res.status(201).json({
       message: 'Project created',
-      data: result,
+      data,
       error: false,
     });
   } catch (error) {
@@ -87,7 +93,9 @@ const updateProject = async (req, res) => {
     }
     const result = await Project.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-    });
+    })
+      .populate('members')
+      .populate('tasks');
     if (!result) {
       return res.status(404).json({
         message: 'Project not found',
