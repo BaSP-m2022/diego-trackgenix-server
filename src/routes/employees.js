@@ -1,15 +1,15 @@
 import express from 'express';
 import employeesController from '../controllers/employees';
 import employeesValidations from '../validations/employees';
-import authValidation from '../middlewares/authMiddleware';
+import { authorized } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 
 router
-  .post('/', authValidation, employeesValidations.contentValidation, employeesController.createEmployee)
-  .put('/:id', authValidation, employeesValidations.contentValidation, employeesController.updateEmployee)
-  .get('/', authValidation, employeesController.getAllEmployees)
-  .get('/:id', authValidation, employeesController.getEmployeesById)
-  .delete('/:id', authValidation, employeesController.deleteEmployee);
+  .post('/', authorized, employeesValidations.contentValidation, employeesController.createEmployee)
+  .put('/:id', authorized, employeesValidations.contentValidation, employeesController.updateEmployee)
+  .get('/', authorized, employeesController.getAllEmployees)
+  .get('/:id', authorized, employeesController.getEmployeesById)
+  .delete('/:id', authorized, employeesController.deleteEmployee);
 
 export default router;

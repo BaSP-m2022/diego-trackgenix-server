@@ -1,15 +1,15 @@
 import express from 'express';
 import taskController from '../controllers/tasks';
 import taskValidation from '../validations/tasks';
-import authValidation from '../middlewares/authMiddleware';
+import { authorized } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 
 router
-  .post('/', authValidation, taskValidation.createTaskValid, taskController.createTask)
-  .get('/:id', authValidation, taskController.getTaskById)
-  .get('/', authValidation, taskController.getAllTasks)
-  .put('/:id', authValidation, taskValidation.createTaskValid, taskController.updateTask)
-  .delete('/:id', authValidation, taskController.deleteTask);
+  .post('/', authorized, taskValidation.createTaskValid, taskController.createTask)
+  .get('/:id', authorized, taskController.getTaskById)
+  .get('/', authorized, taskController.getAllTasks)
+  .put('/:id', authorized, taskValidation.createTaskValid, taskController.updateTask)
+  .delete('/:id', authorized, taskController.deleteTask);
 
 export default router;

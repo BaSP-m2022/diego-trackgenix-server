@@ -1,15 +1,15 @@
 import express from 'express';
 import memberController from '../controllers/members';
 import memberValidations from '../validations/members';
-import authMiddleware from '../middlewares/authMiddleware';
+import { authorized } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 
 router
-  .get('/', authMiddleware, memberController.getMembers)
-  .get('/:id', authMiddleware, memberController.getMemberById)
-  .post('/', authMiddleware, memberValidations.validateCreation, memberController.addMember)
-  .put('/:id', authMiddleware, memberValidations.validateCreation, memberController.updateMember)
-  .delete('/:id', authMiddleware, memberController.deleteMember);
+  .get('/', authorized, memberController.getMembers)
+  .get('/:id', authorized, memberController.getMemberById)
+  .post('/', authorized, memberValidations.validateCreation, memberController.addMember)
+  .put('/:id', authorized, memberValidations.validateCreation, memberController.updateMember)
+  .delete('/:id', authorized, memberController.deleteMember);
 
 export default router;

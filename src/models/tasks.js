@@ -14,6 +14,19 @@ const tasksSchema = new Schema(
     date: {
       type: Date,
     },
+    done: {
+      type: Boolean,
+    },
+    employeeId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'Employee',
+    },
+    projectId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'Projects',
+    },
 
   },
 );

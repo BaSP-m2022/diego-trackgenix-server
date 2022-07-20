@@ -10,6 +10,7 @@ const projectSchema = new Schema({
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   members: [{ memberId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Members' } }],
+  tasks: [{ taskId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Tasks' } }],
 });
 
 export default mongoose.model('Projects', projectSchema);

@@ -2,9 +2,9 @@ import Joi from 'joi';
 
 const validateCreation = (req, res, next) => {
   const memberValidation = Joi.object({
-    employeeId: Joi.string().min(5).required(),
     role: Joi.string().min(2).required(),
     rate: Joi.number().required(),
+    employeeId: Joi.string().min(5).required(),
   });
   const validation = memberValidation.validate(req.body);
   if (validation.error) {

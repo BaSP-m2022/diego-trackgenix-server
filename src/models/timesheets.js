@@ -8,24 +8,9 @@ const timesheet = new Schema(
       type: String,
       required: true,
     },
-    taskId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'Task',
-    },
     validated: {
       type: Boolean,
       required: true,
-    },
-    employeeId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'Employee',
-    },
-    projectId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'Projects',
     },
     startDate: {
       type: Date,
@@ -39,10 +24,23 @@ const timesheet = new Schema(
       type: Number,
       required: true,
     },
+    employeeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Employee',
+    },
+    projectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Projects',
+    },
+    taskId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Task',
+    },
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true },
 );
 
 export default mongoose.model('Timesheet', timesheet);

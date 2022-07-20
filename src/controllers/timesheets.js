@@ -2,7 +2,10 @@ import TimesheetModel from '../models/timesheets';
 
 const getAllTimesheet = async (req, res) => {
   try {
-    const filteredTimesheets = await TimesheetModel.find(req.body);
+    const filteredTimesheets = await TimesheetModel.find({})
+      .populate('employeeId')
+      .populate('projectId')
+      .populate('taskId');
     if (filteredTimesheets.length === 0) {
       return res.status(400).json({
         message: "Error on the search's criteria",
@@ -52,13 +55,13 @@ const createTimesheet = async (req, res) => {
   try {
     const newTimesheet = new TimesheetModel({
       description: req.body.description,
-      taskId: req.body.taskId,
       validated: req.body.validated,
-      employeeId: req.body.employeeId,
-      projectId: req.body.projectId,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
       hours: req.body.hours,
+      taskId: req.body.taskId,
+      employeeId: req.body.employeeId,
+      projectId: req.body.projectId,
     });
     const result = await newTimesheet.save();
     return res.status(201).json({
