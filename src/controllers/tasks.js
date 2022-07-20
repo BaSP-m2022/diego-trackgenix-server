@@ -29,7 +29,9 @@ async function getAllTasks(req, res) {
 const getTaskById = async (req, res) => {
   try {
     if (req.params.id) {
-      const employee = await Task.findById(req.params.id);
+      const employee = await Task.findById(req.params.id)
+        .populate('employeeId')
+        .populate('projectId');
       return res.status(200).json(employee);
     }
     return res.status(400).json({
@@ -57,9 +59,13 @@ const createTask = async (req, res) => {
       projectId: req.body.projectId,
     });
     const newTaskDone = await newTask.save();
+    // eslint-disable-next-line no-underscore-dangle
+    const data = await Task.findById(newTaskDone._id)
+      .populate('employeeId')
+      .populate('projectId');
     return res.status(200).json({
       message: 'Task created',
-      data: newTaskDone,
+      data,
       error: false,
     });
   } catch (error) {
@@ -82,7 +88,9 @@ const updateTask = async (req, res) => {
     }
     const result = await Task.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-    });
+    })
+      .populate('employeeId')
+      .populate('projectId');
     if (!result) {
       return res.status(404).json({
         message: 'Task not found',

@@ -27,7 +27,8 @@ const getMembers = async (req, res) => {
 
 const getMemberById = async (req, res) => {
   try {
-    const member = await Members.findById(req.params.id);
+    const member = await Members.findById(req.params.id)
+      .populate('employeeId');
     if (member == null) {
       return res.status(404).json({
         message: 'Member not found',
@@ -57,9 +58,12 @@ const addMember = async (req, res) => {
       rate: req.body.rate,
     });
     const result = await member.save();
+    // eslint-disable-next-line no-underscore-dangle
+    const data = await Members.findById(result._id)
+      .populate('employeeId');
     return res.status(201).json({
       message: 'Member created',
-      data: result,
+      data,
       error: false,
     });
   } catch (error) {
@@ -82,7 +86,8 @@ const updateMember = async (req, res) => {
     }
     const result = await Members.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-    });
+    })
+      .populate('employeeId');
     if (!result) {
       return res.status(404).json({
         message: 'Member not found',

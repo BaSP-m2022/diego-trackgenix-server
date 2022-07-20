@@ -29,7 +29,10 @@ const getAllTimesheet = async (req, res) => {
 
 const getTimesheetById = async (req, res) => {
   try {
-    const timesheet = await TimesheetModel.findById(req.params.id);
+    const timesheet = await TimesheetModel.findById(req.params.id)
+      .populate('employeeId')
+      .populate('projectId')
+      .populate('taskId');
     if (!timesheet) {
       return res.status(404).json({
         message: 'The id is wrong',
@@ -63,10 +66,16 @@ const createTimesheet = async (req, res) => {
       employeeId: req.body.employeeId,
       projectId: req.body.projectId,
     });
+
     const result = await newTimesheet.save();
+    // eslint-disable-next-line no-underscore-dangle
+    const data = await TimesheetModel.findById(result._id)
+      .populate('employeeId')
+      .populate('projectId')
+      .populate('taskId');
     return res.status(201).json({
       message: 'Request done',
-      data: result,
+      data,
       error: false,
     });
   } catch (error) {
@@ -94,7 +103,10 @@ const updateTimesheet = async (req, res) => {
       {
         new: true,
       },
-    );
+    )
+      .populate('employeeId')
+      .populate('projectId')
+      .populate('taskId');
     if (!result) {
       return res.status(404).json({
         message: 'Timesheet not found',
