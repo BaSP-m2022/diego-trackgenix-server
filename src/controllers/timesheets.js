@@ -3,9 +3,9 @@ import TimesheetModel from '../models/timesheets';
 const getAllTimesheet = async (req, res) => {
   try {
     const filteredTimesheets = await TimesheetModel.find({})
-      .populate('employeeId')
-      .populate('projectId')
-      .populate('taskId');
+      .populate('employee')
+      .populate('project')
+      .populate('task');
     if (filteredTimesheets.length === 0) {
       return res.status(400).json({
         message: "Error on the search's criteria",
@@ -30,9 +30,9 @@ const getAllTimesheet = async (req, res) => {
 const getTimesheetById = async (req, res) => {
   try {
     const timesheet = await TimesheetModel.findById(req.params.id)
-      .populate('employeeId')
-      .populate('projectId')
-      .populate('taskId');
+      .populate('employee')
+      .populate('project')
+      .populate('task');
     if (!timesheet) {
       return res.status(404).json({
         message: 'The id is wrong',
@@ -62,17 +62,17 @@ const createTimesheet = async (req, res) => {
       startDate: req.body.startDate,
       endDate: req.body.endDate,
       hours: req.body.hours,
-      taskId: req.body.taskId,
-      employeeId: req.body.employeeId,
-      projectId: req.body.projectId,
+      task: req.body.task,
+      employee: req.body.employee,
+      project: req.body.project,
     });
 
     const result = await newTimesheet.save();
     // eslint-disable-next-line no-underscore-dangle
     const data = await TimesheetModel.findById(result._id)
-      .populate('employeeId')
-      .populate('projectId')
-      .populate('taskId');
+      .populate('employee')
+      .populate('project')
+      .populate('task');
     return res.status(201).json({
       message: 'Request done',
       data,
@@ -104,9 +104,9 @@ const updateTimesheet = async (req, res) => {
         new: true,
       },
     )
-      .populate('employeeId')
-      .populate('projectId')
-      .populate('taskId');
+      .populate('employee')
+      .populate('project')
+      .populate('task');
     if (!result) {
       return res.status(404).json({
         message: 'Timesheet not found',

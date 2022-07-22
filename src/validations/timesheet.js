@@ -7,9 +7,9 @@ const createOrEditTimesheetValidations = (req, res, next) => {
     startDate: Joi.date().required(),
     endDate: Joi.date().required(),
     hours: Joi.number().required(),
-    employeeId: Joi.string().min(5).required(),
-    projectId: Joi.string().min(5).required(),
-    taskId: Joi.string().min(5).required(),
+    employee: Joi.string().min(5).required(),
+    project: Joi.string().min(5).required(),
+    task: Joi.string().min(5),
   });
   const validation = requirementsSchema.validate(req.body);
 
