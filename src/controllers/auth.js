@@ -28,14 +28,20 @@ const register = async (req, res) => {
     await firebaseApp.auth().updateUser(newFirebaseUser.uid, { displayName: `${req.body.firstName} ${req.body.lastName}` });
     // save the data
     const result = await newEmployee.save();
-    // return res.status(201).send({ uid });
-    return res.status(201).json({
-      message: 'Employee created',
-      data: result,
-      error: false,
+    // eslint-disable-next-line no-underscore-dangle
+    return res.status(201).json(
+      {
+        message: 'Employee created',
+        data: result,
+        error: false,
+      },
+    );
+  } catch (error) {
+    return res.status(400).json({
+      message: 'Error',
+      data: error,
+      error: true,
     });
-  } catch (err) {
-    return res.status(400).send(err);
   }
 };
 
@@ -51,7 +57,7 @@ const getEmployeeByEmail = async (req, res) => {
     }
     return res.status(200).json({
       message: 'Employee found',
-      data: employee[0].firstName,
+      data: employee,
       error: false,
     });
   } catch (error) {
@@ -62,70 +68,5 @@ const getEmployeeByEmail = async (req, res) => {
     });
   }
 };
-// const login = async (req, res) => {
-//   try {
-//     // check email
-//     const user = await employees.findOne({ email: req.body.email });
-//     if (!user) {
-//       throw new Error('Invalid user credentials');
-//     }
-//     // check passw match
-//     const match = await bcrypt.compare(req.body.password, user.password);
-//     if (match) {
-//       // create new token
-//       const { firebaseUid } = user;
-//       // save the token on the DB
-//       const updateUser = await employees.findOneAndUpdate(
-//         { email: req.body.email },
-//         { firebaseUid },
-//         { new: true },
-//       );
-//       return res.status(200).json({
-//         message: 'User Logged',
-//         data: {
-//           email: updateUser.email,
-//           // eslint-disable-next-line no-underscore-dangle
-//           _id: updateUser._id,
-//           firebaseUid: updateUser.firebaseUid,
-//         },
-//       });
-//     } // aca cierra el if del match
-//     throw new Error('invalid credentials');
-//   } catch (error) {
-//     return res.status(400).json({
-//       message: error.toString(),
-//     });
-//   }
-// };
-
-// const logout = async (req, res) => {
-//   try {
-//     // decodeo el token
-//     const decoded = await jwt.verify(req.headers.token, process.env.JWT_KEY);
-//     // busco el user
-//     const user = await Users.findById(decoded.userId);
-//     if (!user) {
-//       throw new Error('Invalid user credentials');
-//     }
-//     // remuevo el token
-//     const updatedUser = await Users.findByIdAndUpdate(
-//       decoded.userId,
-//       { token: '' },
-//       { new: true },
-//     );
-//     return res.status(200).json({
-//       message: 'Success logout',
-//       data: {
-//         email: updatedUser.email,
-//         // eslint-disable-next-line no-underscore-dangle
-//         _id: updatedUser._id,
-//       },
-//     });
-//   } catch (error) {
-//     return res.status(400).json({
-//       message: error.toString(),
-//     });
-//   }
-// };
 
 export default { register, getEmployeeByEmail };

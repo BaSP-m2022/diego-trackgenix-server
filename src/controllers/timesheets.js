@@ -160,10 +160,48 @@ const deleteTimesheet = async (req, res) => {
   }
 };
 
+const updateComment = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        message: "You've to specify an id",
+        data: res,
+        error: true,
+      });
+    }
+    const filter = { _id: req.params.id };
+    const update = { description: req.body.description };
+    // eslint-disable-next-line max-len
+    const result = await TimesheetModel.findOneAndUpdate(filter, update, { returnOriginal: false })
+      .populate('employee')
+      .populate('project')
+      .populate('task');
+    if (!result) {
+      return res.status(404).json({
+        message: 'Timesheet not found',
+        data: res,
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Request done',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.json({
+      message: error.message,
+      data: error,
+      error: true,
+    });
+  }
+};
+
 export default {
   createTimesheet,
   getAllTimesheet,
   getTimesheetById,
   updateTimesheet,
   deleteTimesheet,
+  updateComment,
 };
