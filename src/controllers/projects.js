@@ -3,7 +3,13 @@ import Project from '../models/projects';
 const getProject = async (req, res) => {
   try {
     const allProjects = await Project.find({})
-      .populate('members')
+      .populate({
+        path: 'members',
+        populate: {
+          path: 'memberId',
+          populate: { path: 'employeeId' },
+        },
+      })
       .populate('tasks');
     if (allProjects.length === 0) {
       return res.status(404).json({

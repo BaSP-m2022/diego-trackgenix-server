@@ -6,11 +6,11 @@ const timesheet = new Schema(
   {
     description: {
       type: String,
-      required: true,
+      required: false,
     },
     validated: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     startDate: {
       type: Date,

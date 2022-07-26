@@ -7,7 +7,6 @@ const adminRoleValidation = (req, res, next) => {
   }
   return firebase.default.auth().verifyIdToken(token)
     .then((decodedToken) => {
-      console.log(decodedToken);
       req.user = decodedToken;
       if (decodedToken.role === 'SUPERADMIN') {
         return next();
