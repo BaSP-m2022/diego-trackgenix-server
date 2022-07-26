@@ -5,8 +5,10 @@ const getProject = async (req, res) => {
     const allProjects = await Project.find({})
       .populate({
         path: 'members',
-        // Get friends of friends - populate the 'friends' array for every friend
-        populate: { path: 'memberId' },
+        populate: {
+          path: 'memberId',
+          populate: { path: 'employeeId' },
+        },
       })
       .populate('tasks');
     if (allProjects.length === 0) {

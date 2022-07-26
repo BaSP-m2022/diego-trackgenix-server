@@ -31,14 +31,14 @@ const register = async (req, res) => {
     // eslint-disable-next-line no-underscore-dangle
     return res.status(201).json(
       {
-        message: 'Employee created',
+        message: 'Employee successfully registered',
         data: result,
         error: false,
       },
     );
   } catch (error) {
     return res.status(400).json({
-      message: 'Error',
+      message: error.message,
       data: error,
       error: true,
     });
