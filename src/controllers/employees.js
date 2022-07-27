@@ -24,13 +24,17 @@ const createEmployee = async (req, res) => {
       password: hashedPassword,
       active: req.body.active,
     });
+    // seteamos el displayName
+    await firebaseApp.auth().updateUser(newFirebaseUser.uid, { displayName: `${req.body.firstName} ${req.body.lastName}` });
     // save the data
     const result = await newEmployee.save();
-    return res.status(201).json({
-      message: 'Employee created',
-      data: result,
-      error: false,
-    });
+    return res.status(201).json(
+      {
+        message: 'Employee successfully registered',
+        data: result,
+        error: false,
+      },
+    );
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -87,7 +91,7 @@ const updateEmployee = async (req, res) => {
   } catch (error) {
     return res.json({
       message: 'There has been an error',
-      data: undefined,
+      data: error,
       error: true,
     });
   }
