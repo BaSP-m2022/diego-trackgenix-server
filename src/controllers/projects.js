@@ -68,6 +68,7 @@ const addProject = async (req, res) => {
       startDate: req.body.startDate,
       endDate: req.body.endDate,
       members: req.body.members,
+      // active: req.body.active,
     });
     const result = await project.save();
     // eslint-disable-next-line no-underscore-dangle
@@ -82,7 +83,7 @@ const addProject = async (req, res) => {
   } catch (error) {
     return res.json({
       message: 'An error has ocurred',
-      data: undefined,
+      data: error,
       error: true,
     });
   }
@@ -140,7 +141,7 @@ const deleteProject = async (req, res) => {
         error: true,
       });
     }
-    return res.status(204).json({
+    return res.status(200).json({
       message: 'Project has been deleted',
       data: result,
       error: false,
