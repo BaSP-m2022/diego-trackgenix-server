@@ -9,7 +9,7 @@ const projectSchema = new Schema({
   client: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
-  members: [{ memberId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Members' } }],
+  members: [{ memberId: { type: mongoose.Schema.Types.ObjectId, required: false, ref: 'Members' } }],
   tasks: [{ taskId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Tasks' } }],
 });
 
